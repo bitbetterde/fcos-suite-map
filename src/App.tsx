@@ -1,24 +1,41 @@
-import React from "react";
-import type { LatLngExpression } from "leaflet";
-import { TileLayer, MapContainer, Marker, Popup } from "react-leaflet";
-import "./App.css";
-import { Sidebar } from "./Sidebar";
+import React, { useState } from 'react';
+import type { LatLngExpression } from 'leaflet';
+import { TileLayer, MapContainer, Marker, Popup } from 'react-leaflet';
+import './App.css';
+import SidebarListView from './Sidebar/SidebarListView';
+import data from './testData.json';
+import type { PointOfInterest } from './types/PointOfInterest';
+import SidebarSingleView from './Sidebar/SidebarSingleView';
 
-interface AppProps {
-}
+interface AppProps {}
 
 function App({}: AppProps) {
-  const hamburgCenter: LatLngExpression = [
-    53.55035993851227,
-    9.986701679608633
-  ];
+  const hamburgCenter: LatLngExpression = [53.550359, 9.986701];
+  const [selectedPoi, setSelectedPoi] = useState<null | PointOfInterest>(null);
+
+  const handlePoiClick = (id: number) => {
+    console.log('Selected', id);
+    const newPoi = (data as PointOfInterest[]).find((poi) => poi.id === id);
+    newPoi && setSelectedPoi(newPoi);
+  };
+
+  const handlePoiClose = () => {
+    console.log('Close');
+    setSelectedPoi(null);
+  };
+
   return (
-    <div className={"flex h-full"}>
-      <Sidebar style={{flex: 1}} />
+    <div className={'flex h-full'}>
+      {selectedPoi ? (
+        <SidebarSingleView style={{ flex: 1 }} value={selectedPoi} onClose={handlePoiClose} />
+      ) : (
+        <SidebarListView style={{ flex: 1 }} values={data as PointOfInterest[]} onClick={handlePoiClick} />
+      )}
+
       <MapContainer
-        id={"mapid"}
-        className={"h-full w-full"}
-        style={{flex: 3}}
+        id={'mapid'}
+        className={'h-full w-full'}
+        style={{ flex: 3 }}
         center={hamburgCenter}
         zoom={13}
         scrollWheelZoom={true}
