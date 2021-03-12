@@ -12,7 +12,11 @@ interface Props {
 const SidebarSingleView: React.FC<Props> = ({ value, onClose, ...restProps }) => {
   return (
     <SidebarContainer {...restProps}>
-      <CloseIcon className="inline-block cursor-pointer hover:bg-gray-200 rounded-full" onClick={onClose} />
+      <CloseIcon
+        size={32}
+        className="p-1 text-black text-opacity-50 inline-block cursor-pointer hover:bg-gray-200 rounded-full"
+        onClick={onClose}
+      />
 
       <img
         className="lg:h-48 md:h-36 w-full object-cover object-center"
