@@ -9,7 +9,7 @@ const SidebarContainer: React.FC<Props> = ({ style, className, children }) => {
   return (
     <div
       style={style}
-      className={`p-4 flex flex-col shadow-2xl border-r-2 border-black border-opacity-20 ${className ? className : ''}`}
+      className={`flex flex-col shadow-2xl border-r-2 border-black border-opacity-20 ${className ? className : ''}`}
     >
       {children}
     </div>

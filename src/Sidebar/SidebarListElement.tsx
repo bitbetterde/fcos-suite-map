@@ -10,7 +10,7 @@ const SidebarListElement: React.FC<Props> = ({ value, ...restProps }) => {
     value && (
       <div
         {...restProps}
-        className="border-2 border-black border-opacity-20 hover:border-opacity-40 cursor-pointer rounded-lg overflow-hidden mb-3"
+        className="border-2 border-black border-opacity-20 hover:border-opacity-40 cursor-pointer rounded-lg overflow-hidden m-4"
       >
         <div className="p-6">
           <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{value.category}</h2>

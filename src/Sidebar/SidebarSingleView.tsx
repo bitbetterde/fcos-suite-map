@@ -11,16 +11,16 @@ interface Props {
 
 const SidebarSingleView: React.FC<Props> = ({ value, onClose, ...restProps }) => {
   return (
-    <SidebarContainer {...restProps}>
+    <SidebarContainer className="relative p-0" {...restProps}>
       <CloseIcon
         size={32}
-        className="p-1 text-black text-opacity-50 inline-block cursor-pointer hover:bg-gray-200 rounded-full"
+        className="absolute left-5 top-5 p-1 text-gray-500 inline-block cursor-pointer hover:bg-gray-300 hover:bg-opacity-50 rounded-full"
         onClick={onClose}
       />
 
       <img
         className="lg:h-48 md:h-36 w-full object-cover object-center"
-        src="https://dummyimage.com/720x400"
+        src="https://picsum.photos/720/400"
         alt="blog"
       />
       <div className="p-6">
