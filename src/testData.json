@@ -1,34 +1,57 @@
 [
   {
-    id: 1,
-    latlng: [],
-    name: 'test',
-    description: 'test',
-    address: 'test123 22022 Hamburg',
-    category: 'WERKSTATT'
+    "id": 1,
+    "latlng": [
+      53.550359,
+      9.986701
+    ],
+    "name": "Welcome Werkstatt e. V.",
+    "description": "Eine offene Stadtteilwerkstatt in Barmbek-Süd. Hier kann mit Holz, Metall und Elektronik gearbeitet werden.",
+    "address": "Bachstr. 98, 22083 Hamburg",
+    "category": "OFFENE WERKSTATT"
   },
   {
-    id: 1,
-    latlng: [],
-    name: 'test',
-    description: 'test',
-    address: 'test123 22022 Hamburg',
-    category: 'WERKSTATT'
+    "id": 2,
+    "latlng": [
+      53.560359,
+      9.976701
+    ],
+    "name": "Fabulous St. Pauli",
+    "description": "Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.",
+    "address": "Mozartstr. 8, 22081 Hamburg",
+    "category": "OFFENE WERKSTATT"
   },
   {
-    id: 1,
-    latlng: [],
-    name: 'test',
-    description: 'test',
-    address: 'test123 22022 Hamburg',
-    category: 'WERKSTATT'
+    "id": 3,
+    "latlng": [
+      53.540359,
+      9.996701
+    ],
+    "name": "HoFaLab Wilhelmsburg",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
+    "address": "Langer-Straßen-Name. 128, 22089 Hamburg",
+    "category": "OFFENE WERKSTATT"
   },
   {
-    id: 1,
-    latlng: [],
-    name: 'test',
-    description: 'test',
-    address: 'test123 22022 Hamburg',
-    category: 'WERKSTATT'
+    "id": 4,
+    "latlng": [
+      53.550359,
+      9.986701
+    ],
+    "name": "Fab City Haus",
+    "description": "Eine offene Stadtteilwerkstatt in Barmbek-Süd. Hier kann mit Holz, Metall und Elektronik gearbeitet werden.",
+    "address": "Jungfernstieg 1, 22083 Hamburg",
+    "category": "OFFENE WERKSTATT"
+  },
+  {
+    "id": 5,
+    "latlng": [
+      53.530359,
+      9.966701
+    ],
+    "name": "Haus Drei e. V.",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
+    "address": "Hein-Hoyer-Allee 36, 22083 Hamburg",
+    "category": "OFFENE WERKSTATT"
   }
 ]
