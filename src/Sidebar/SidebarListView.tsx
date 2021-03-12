@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react';
+import React, { CSSProperties } from 'react';
 import SidebarContainer from './SidebarContainer';
 import SidebarListElement from './SidebarListElement';
 import type { PointOfInterest } from '../types/PointOfInterest';
