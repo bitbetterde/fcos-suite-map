@@ -1,0 +1,34 @@
+[
+  {
+    id: 1,
+    latlng: [],
+    name: 'test',
+    description: 'test',
+    address: 'test123 22022 Hamburg',
+    category: 'WERKSTATT'
+  },
+  {
+    id: 1,
+    latlng: [],
+    name: 'test',
+    description: 'test',
+    address: 'test123 22022 Hamburg',
+    category: 'WERKSTATT'
+  },
+  {
+    id: 1,
+    latlng: [],
+    name: 'test',
+    description: 'test',
+    address: 'test123 22022 Hamburg',
+    category: 'WERKSTATT'
+  },
+  {
+    id: 1,
+    latlng: [],
+    name: 'test',
+    description: 'test',
+    address: 'test123 22022 Hamburg',
+    category: 'WERKSTATT'
+  }
+]
