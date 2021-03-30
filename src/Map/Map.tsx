@@ -8,6 +8,9 @@ interface Props {
   values: PointOfInterest[];
   onSelect: (id: number) => void;
   selectedEntry?: PointOfInterest | null;
+  hoveredPoiId?: number | null;
+  onMouseEnter?: (id: number) => void;
+  onMouseLeave?: () => void;
 }
 
 const DEFAULT_CENTER: LatLngExpression = [53.550359, 9.986701];
@@ -35,7 +38,20 @@ export const Map: React.FC<Props> = (props) => {
       {!!props.selectedEntry && <Marker position={props.selectedEntry.latlng} />}
       {!props.selectedEntry &&
         props.values.map((poi) => (
-          <Marker key={poi.id} position={poi.latlng} eventHandlers={{ click: () => props.onSelect(poi.id) }} />
+          <Marker
+            opacity={props.hoveredPoiId === poi.id ? 1 : 0.7}
+            key={poi.id}
+            position={poi.latlng}
+            eventHandlers={{
+              click: () => props.onSelect(poi.id),
+              mouseover: () => {
+                props.onMouseEnter && props.onMouseEnter(poi.id);
+              },
+              mouseout: () => {
+                props.onMouseLeave && props.onMouseLeave();
+              },
+            }}
+          />
         ))}
     </MapContainer>
   );

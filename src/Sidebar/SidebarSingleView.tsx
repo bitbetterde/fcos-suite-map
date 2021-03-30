@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 import SidebarContainer from './SidebarContainer';
 import type { PointOfInterest } from '../types/PointOfInterest';
-import { X as CloseIcon } from 'heroicons-react';
+import { X as CloseIcon, HomeOutline as HomeIcon } from 'heroicons-react';
 
 interface Props {
   style?: CSSProperties;
@@ -27,6 +27,14 @@ const SidebarSingleView: React.FC<Props> = ({ value, onClose, ...restProps }) =>
         <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{value.category}</h2>
         <h1 className="title-font text-lg font-medium text-gray-900 mb-3">{value.name}</h1>
         <p className="leading-relaxed mb-3">{value.description}</p>
+        {value.website && (
+          <div className={'flex items-center'}>
+            <HomeIcon size={20} className={'text-gray-500 mr-2'} />
+            <a className={'hover:underline'} href={value.website}>
+              {value.website.replace(/(^\w+:|^)\/\//, '')}
+            </a>
+          </div>
+        )}
       </div>
     </SidebarContainer>
   );
