@@ -8,6 +8,7 @@ export interface PointOfInterest {
   address: string;
   category: string;
   website?: string;
+  image: string;
 }
 
 interface Map {
