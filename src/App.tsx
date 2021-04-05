@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
 import SidebarListView from './Sidebar/SidebarListView';
 import data from './testData.json';
 import type { PointOfInterest } from './types/PointOfInterest';

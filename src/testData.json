@@ -28,7 +28,7 @@
   },
   {
     "id": 4,
-    "latlng": [53.550359, 9.986701],
+    "latlng": [53.570359, 9.986701],
     "name": "Fab City Haus",
     "description": "Eine offene Stadtteilwerkstatt in Barmbek-Süd. Hier kann mit Holz, Metall und Elektronik gearbeitet werden.",
     "address": "Jungfernstieg 1, 22083 Hamburg",
@@ -36,7 +36,7 @@
   },
   {
     "id": 5,
-    "latlng": [53.530359, 9.966701],
+    "latlng": [53.565359, 9.966701],
     "name": "Haus Drei e. V.",
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
     "address": "Hein-Hoyer-Allee 36, 22083 Hamburg",
