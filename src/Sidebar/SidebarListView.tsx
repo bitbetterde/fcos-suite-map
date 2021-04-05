@@ -7,15 +7,23 @@ interface Props {
   style?: CSSProperties;
   values: PointOfInterest[];
   onClick?: (id: number) => void;
+  onMouseEnter?: (id: number) => void;
+  onMouseLeave?: () => void;
 }
 
-const SidebarListView: React.FC<Props> = ({ values, onClick, ...restProps }) => {
+const SidebarListView: React.FC<Props> = ({ values, onMouseEnter, onMouseLeave, onClick, ...restProps }) => {
   return (
     values && (
       <SidebarContainer {...restProps}>
         <h1 className="text-xl font-medium title-font m-4 text-gray-900 mb-2">{values.length} Orte:</h1>
         {values.map((poi) => (
-          <SidebarListElement key={poi.id} {...(onClick ? { onClick: () => onClick(poi.id) } : {})} value={poi} />
+          <SidebarListElement
+            key={poi.id}
+            {...(onMouseLeave ? { onMouseLeave: () => onMouseLeave() } : {})}
+            {...(onMouseEnter ? { onMouseEnter: () => onMouseEnter(poi.id) } : {})}
+            {...(onClick ? { onClick: () => onClick(poi.id) } : {})}
+            value={poi}
+          />
         ))}
       </SidebarContainer>
     )

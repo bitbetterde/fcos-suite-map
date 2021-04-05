@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
 import SidebarListView from './Sidebar/SidebarListView';
 import data from './testData.json';
 import type { PointOfInterest } from './types/PointOfInterest';
@@ -10,27 +9,47 @@ interface AppProps {}
 
 function App({}: AppProps) {
   const [selectedPoi, setSelectedPoi] = useState<null | PointOfInterest>(null);
+  const [hoveredPoiId, setHoveredPoiId] = useState<null | number>(null);
 
   const handlePoiClick = (id: number) => {
-    console.log('Selected', id);
     const newPoi = (data as PointOfInterest[]).find((poi) => poi.id === id);
     newPoi && setSelectedPoi(newPoi);
   };
 
   const handlePoiClose = () => {
-    console.log('Close');
     setSelectedPoi(null);
+  };
+
+  const handlePoiHoverOn = (poiId: number) => {
+    setHoveredPoiId(poiId);
+  };
+
+  const handlePoiHoverOff = () => {
+    setHoveredPoiId(null);
   };
 
   return (
     <div className={'flex h-full'}>
       {selectedPoi ? (
-        <SidebarSingleView style={{ flex: 1 }} value={selectedPoi} onClose={handlePoiClose} />
+        <SidebarSingleView style={{ flex: 1, minWidth: '250px' }} value={selectedPoi} onClose={handlePoiClose} />
       ) : (
-        <SidebarListView style={{ flex: 1 }} values={data as PointOfInterest[]} onClick={handlePoiClick} />
+        <SidebarListView
+          onMouseEnter={handlePoiHoverOn}
+          onMouseLeave={handlePoiHoverOff}
+          style={{ flex: 1, minWidth: '250px' }}
+          values={data as PointOfInterest[]}
+          onClick={handlePoiClick}
+        />
       )}
 
-      <Map values={data as PointOfInterest[]} onSelect={handlePoiClick} selectedEntry={selectedPoi} />
+      <Map
+        onMouseEnter={handlePoiHoverOn}
+        onMouseLeave={handlePoiHoverOff}
+        hoveredPoiId={hoveredPoiId}
+        values={data as PointOfInterest[]}
+        onSelect={handlePoiClick}
+        selectedEntry={selectedPoi}
+      />
     </div>
   );
 }
