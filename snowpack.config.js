@@ -9,6 +9,7 @@ module.exports = {
     '@snowpack/plugin-dotenv',
     '@snowpack/plugin-typescript',
     '@snowpack/plugin-postcss',
+    '@snowpack/plugin-dotenv',
   ],
   routes: [
     /* Enable an SPA Fallback in development: */
