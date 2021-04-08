@@ -23,3 +23,25 @@ code {
 .marker {
   color: var(--fabcity-red);
 }
+
+.sidebar {
+  flex: 3;
+  overflow-y: scroll;
+  max-height: 50vh;
+}
+
+.leaflet-control-container {
+  display: none;
+}
+
+@screen md {
+  .sidebar {
+    flex: 1;
+    min-width: 250px;
+    max-height: initial;
+  }
+
+  .leaflet-control-container {
+    display: initial;
+  }
+}
