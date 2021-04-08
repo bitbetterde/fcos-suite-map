@@ -9,6 +9,7 @@ interface Props {
   onClick?: (id: number) => void;
   onMouseEnter?: (id: number) => void;
   onMouseLeave?: () => void;
+  className?: string;
 }
 
 const SidebarListView: React.FC<Props> = ({ values, onMouseEnter, onMouseLeave, onClick, ...restProps }) => {

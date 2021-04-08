@@ -29,19 +29,7 @@ function App({}: AppProps) {
   };
 
   return (
-    <div className={'flex h-full'}>
-      {selectedPoi ? (
-        <SidebarSingleView style={{ flex: 1, minWidth: '250px' }} value={selectedPoi} onClose={handlePoiClose} />
-      ) : (
-        <SidebarListView
-          onMouseEnter={handlePoiHoverOn}
-          onMouseLeave={handlePoiHoverOff}
-          style={{ flex: 1, minWidth: '250px' }}
-          values={data as PointOfInterest[]}
-          onClick={handlePoiClick}
-        />
-      )}
-
+    <div className={'flex md:flex-row-reverse flex-col h-full'}>
       <Map
         onMouseEnter={handlePoiHoverOn}
         onMouseLeave={handlePoiHoverOff}
@@ -50,6 +38,17 @@ function App({}: AppProps) {
         onSelect={handlePoiClick}
         selectedEntry={selectedPoi}
       />
+      {selectedPoi ? (
+        <SidebarSingleView className="sidebar" value={selectedPoi} onClose={handlePoiClose} />
+      ) : (
+        <SidebarListView
+          onMouseEnter={handlePoiHoverOn}
+          onMouseLeave={handlePoiHoverOff}
+          className="sidebar"
+          values={data as PointOfInterest[]}
+          onClick={handlePoiClick}
+        />
+      )}
     </div>
   );
 }
