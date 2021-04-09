@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import SidebarListView from './Sidebar/SidebarListView';
-import data from './testData.json';
+// import mockData from './testData.json';
 import type { PointOfInterest } from './types/PointOfInterest';
 import SidebarSingleView from './Sidebar/SidebarSingleView';
 import Map from './Map/Map';
 
-interface AppProps {}
-
-function App({}: AppProps) {
+function App() {
+  const [poiData, setPoiData] = useState<PointOfInterest[]>([]);
   const [selectedPoi, setSelectedPoi] = useState<null | PointOfInterest>(null);
   const [hoveredPoiId, setHoveredPoiId] = useState<null | number>(null);
 
   const handlePoiClick = (id: number) => {
-    const newPoi = (data as PointOfInterest[]).find((poi) => poi.id === id);
+    const newPoi = poiData.find((poi) => poi.id === id);
     newPoi && setSelectedPoi(newPoi);
   };
 
@@ -28,13 +28,37 @@ function App({}: AppProps) {
     setHoveredPoiId(null);
   };
 
+  const { data, error } = useSWR(
+    `{
+      pois {
+        id
+        name
+        description
+        website
+        lat
+        lng
+        pathToBanner
+      }
+    }
+    `,
+  );
+
+  useEffect(() => {
+    data && console.log('Fetched new data', data);
+    data && data.pois && setPoiData(data.pois);
+  }, [data]);
+
+  useEffect(() => {
+    error && console.error('Error while fetching', error);
+  }, [error]);
+
   return (
     <div className={'flex md:flex-row-reverse flex-col h-full'}>
       <Map
         onMouseEnter={handlePoiHoverOn}
         onMouseLeave={handlePoiHoverOff}
         hoveredPoiId={hoveredPoiId}
-        values={data as PointOfInterest[]}
+        values={poiData}
         onSelect={handlePoiClick}
         selectedEntry={selectedPoi}
       />
@@ -45,7 +69,7 @@ function App({}: AppProps) {
           onMouseEnter={handlePoiHoverOn}
           onMouseLeave={handlePoiHoverOff}
           className="sidebar"
-          values={data as PointOfInterest[]}
+          values={poiData}
           onClick={handlePoiClick}
         />
       )}

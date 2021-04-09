@@ -17,15 +17,16 @@ const SidebarListView: React.FC<Props> = ({ values, onMouseEnter, onMouseLeave, 
     values && (
       <SidebarContainer {...restProps}>
         <h1 className="text-xl font-medium title-font m-4 text-gray-900 mb-2">{values.length} Orte:</h1>
-        {values.map((poi) => (
-          <SidebarListElement
-            key={poi.id}
-            {...(onMouseLeave ? { onMouseLeave: () => onMouseLeave() } : {})}
-            {...(onMouseEnter ? { onMouseEnter: () => onMouseEnter(poi.id) } : {})}
-            {...(onClick ? { onClick: () => onClick(poi.id) } : {})}
-            value={poi}
-          />
-        ))}
+        {values &&
+          values.map((poi) => (
+            <SidebarListElement
+              key={poi.id}
+              {...(onMouseLeave ? { onMouseLeave: () => onMouseLeave() } : {})}
+              {...(onMouseEnter ? { onMouseEnter: () => onMouseEnter(poi.id) } : {})}
+              {...(onClick ? { onClick: () => onClick(poi.id) } : {})}
+              value={poi}
+            />
+          ))}
       </SidebarContainer>
     )
   );

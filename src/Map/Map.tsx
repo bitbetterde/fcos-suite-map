@@ -26,6 +26,9 @@ export const Map: React.FC<Props> = (props) => {
   };
   const icon = useMemo(() => divIcon(iconProps), [iconProps]);
   const largeIcon = useMemo(() => divIcon({ ...iconProps, iconSize: [30, 40], iconAnchor: [15, 40] }), [iconProps]);
+  const selectedLatlng: LatLngExpression | undefined = props.selectedEntry
+    ? [props.selectedEntry?.lat, props.selectedEntry?.lng]
+    : undefined;
 
   return (
     <MapContainer
@@ -45,28 +48,32 @@ export const Map: React.FC<Props> = (props) => {
         zoomOffset={-1}
         maxZoom={18}
       />
-      <MapViewController center={props.selectedEntry?.latlng ?? DEFAULT_CENTER} zoom={13} />
+      <MapViewController center={selectedLatlng ?? DEFAULT_CENTER} zoom={13} />
       {/* Single marker when POI is selected */}
-      {!!props.selectedEntry && <Marker icon={largeIcon} position={props.selectedEntry.latlng} />}
+      {!!(props.selectedEntry && selectedLatlng) && <Marker icon={largeIcon} position={selectedLatlng} />}
       {/* Multiple markers, when no POI is selected */}
       {!props.selectedEntry &&
-        props.values.map((poi) => (
-          <Marker
-            icon={props.hoveredPoiId === poi.id ? largeIcon : icon}
-            opacity={props.hoveredPoiId === poi.id ? 1 : 0.7}
-            key={poi.id}
-            position={poi.latlng}
-            eventHandlers={{
-              click: () => props.onSelect(poi.id),
-              mouseover: () => {
-                props.onMouseEnter && props.onMouseEnter(poi.id);
-              },
-              mouseout: () => {
-                props.onMouseLeave && props.onMouseLeave();
-              },
-            }}
-          />
-        ))}
+        props.values &&
+        props.values.map((poi) => {
+          const poiLatLng: LatLngExpression = [poi.lat, poi.lng];
+          return (
+            <Marker
+              icon={props.hoveredPoiId === poi.id ? largeIcon : icon}
+              opacity={props.hoveredPoiId === poi.id ? 1 : 0.7}
+              key={poi.id}
+              position={poiLatLng}
+              eventHandlers={{
+                click: () => props.onSelect(poi.id),
+                mouseover: () => {
+                  props.onMouseEnter && props.onMouseEnter(poi.id);
+                },
+                mouseout: () => {
+                  props.onMouseLeave && props.onMouseLeave();
+                },
+              }}
+            />
+          );
+        })}
     </MapContainer>
   );
 };
