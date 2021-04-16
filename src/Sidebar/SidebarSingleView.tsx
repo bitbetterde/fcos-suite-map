@@ -14,20 +14,22 @@ const SidebarSingleView: React.FC<Props> = ({ value, onClose, className, ...rest
   const strippedUrl = value?.website?.replace(/(^\w+:|^)\/\//, '');
   return (
     <SidebarContainer className={`relative p-0 ${className || ''}`} {...restProps}>
-      <div className={`${value.pathToBanner ? '' : 'pl-5 pt-5'}`}>
+      <div className={`${value.image ? '' : 'pl-5 pt-5'}`}>
         <CloseIcon
           size={32}
           className={`${
-            value.pathToBanner ? 'absolute left-5 top-5 ' : ''
+            value.image ? 'absolute left-5 top-5 ' : ''
           }p-1 text-gray-500 inline-block cursor-pointer hover:bg-gray-300 hover:bg-opacity-50 rounded-full`}
           onClick={onClose}
         />
       </div>
-      {value.pathToBanner && (
-        <img className="lg:h-48 md:h-36 w-full object-cover object-center" src={value.pathToBanner} alt="blog" />
+      {value.image && (
+        <img className="lg:h-48 md:h-36 w-full object-cover object-center" src={value.image} alt="blog" />
       )}
       <div className="p-6">
-        <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">OFFENE WERKSTATT</h2>
+        <h2 className="tracking-widest uppercase text-xs title-font font-medium text-gray-400 mb-1">
+          {value.category}
+        </h2>
         <h1 className="title-font text-lg font-medium text-gray-900 mb-3">{value.name}</h1>
         <p className="leading-relaxed mb-6">{value.description}</p>
         {value.website && (

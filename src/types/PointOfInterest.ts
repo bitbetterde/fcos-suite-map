@@ -9,5 +9,5 @@ export interface PointOfInterest {
   address: string;
   website: string;
   category?: string;
-  pathToBanner?: string;
+  image?: string;
 }

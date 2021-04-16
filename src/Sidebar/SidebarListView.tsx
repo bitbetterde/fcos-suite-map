@@ -10,9 +10,17 @@ interface Props {
   onMouseEnter?: (id: number) => void;
   onMouseLeave?: () => void;
   className?: string;
+  hoveredPoiId?: number | null;
 }
 
-const SidebarListView: React.FC<Props> = ({ values, onMouseEnter, onMouseLeave, onClick, ...restProps }) => {
+const SidebarListView: React.FC<Props> = ({
+  values,
+  onMouseEnter,
+  onMouseLeave,
+  onClick,
+  hoveredPoiId,
+  ...restProps
+}) => {
   return (
     values && (
       <SidebarContainer {...restProps}>
@@ -25,6 +33,7 @@ const SidebarListView: React.FC<Props> = ({ values, onMouseEnter, onMouseLeave, 
               {...(onMouseEnter ? { onMouseEnter: () => onMouseEnter(poi.id) } : {})}
               {...(onClick ? { onClick: () => onClick(poi.id) } : {})}
               value={poi}
+              hovered={hoveredPoiId === poi.id}
             />
           ))}
       </SidebarContainer>

@@ -37,9 +37,11 @@ function App() {
         name
         description
         website
+        address
         lat
         lng
-        pathToBanner
+        image
+        category
       }
     }
     `,
@@ -51,8 +53,10 @@ function App() {
   }, [data]);
 
   useEffect(() => {
-    error && console.error('Error while fetching', error);
-    setShowErrorModal(true);
+    if (error) {
+      console.error('Error while fetching', error);
+      setShowErrorModal(true);
+    }
   }, [error]);
 
   return (
@@ -77,6 +81,7 @@ function App() {
           <SidebarSingleView className="sidebar" value={selectedPoi} onClose={handlePoiClose} />
         ) : (
           <SidebarListView
+            hoveredPoiId={hoveredPoiId}
             onMouseEnter={handlePoiHoverOn}
             onMouseLeave={handlePoiHoverOff}
             className="sidebar"
