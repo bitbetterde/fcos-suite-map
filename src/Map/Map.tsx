@@ -33,7 +33,7 @@ export const Map: React.FC<Props> = (props) => {
   return (
     <MapContainer
       id={'mapid'}
-      className={'h-full w-full'}
+      className={'h-full w-full z-0'}
       style={{ flex: 3 }}
       center={DEFAULT_CENTER}
       zoom={13}
