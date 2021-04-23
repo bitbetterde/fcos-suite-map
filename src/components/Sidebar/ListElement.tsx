@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import type { PointOfInterest } from 'src/types/PointOfInterest';
 
 interface Props {
   value: PointOfInterest;
   hovered?: boolean;
+  onMouseEnter: (event: SyntheticEvent) => void;
+  onMouseLeave: (event: SyntheticEvent) => void;
+  onClick: (event: SyntheticEvent) => void;
 }
 
-const SidebarListElement: React.FC<Props> = ({ value, hovered, ...restProps }) => {
+const ListElement: React.FC<Props> = ({ value, hovered, ...restProps }) => {
   return (
     value && (
       <div
@@ -26,4 +29,4 @@ const SidebarListElement: React.FC<Props> = ({ value, hovered, ...restProps }) =
   );
 };
 
-export default SidebarListElement;
+export default ListElement;
