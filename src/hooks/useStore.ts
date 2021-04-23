@@ -1,0 +1,46 @@
+import type { Error } from 'src/types/Error';
+import type { PointOfInterest } from 'src/types/PointOfInterest';
+import create, { GetState, SetState, State, StateCreator, StoreApi } from 'zustand';
+
+interface Store extends State {
+  selectedPoi: PointOfInterest | null;
+  setSelectedPoi: (poi: PointOfInterest | null) => void;
+  hoveredPoi: PointOfInterest | null;
+  setHoveredPoi: (poi: PointOfInterest | null) => void;
+  error: Error | null;
+  setError: (error: Error | null) => void;
+}
+
+const log = (config: StateCreator<Store>) => (set: SetState<Store>, get: GetState<Store>, api: StoreApi<Store>) =>
+  config(
+    (args) => {
+      console.group('Global state changed');
+      console.log('%cAction:', 'color: #00A7F7; font-weight: 700;', args);
+      set(args);
+      console.log('%cNext State:', 'color: #47B04B; font-weight: 700;', get());
+      console.groupEnd();
+    },
+    get,
+    api,
+  );
+
+export const useStore = create<Store>(
+  log((set) => ({
+    selectedPoi: null,
+    setSelectedPoi: (poi) => {
+      set({
+        selectedPoi: poi,
+      });
+    },
+    hoveredPoi: null,
+    setHoveredPoi: (poi) => {
+      set({
+        hoveredPoi: poi,
+      });
+    },
+    error: null,
+    setError: (error) => {
+      set({ error });
+    },
+  })),
+);
