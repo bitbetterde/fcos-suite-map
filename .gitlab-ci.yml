@@ -10,6 +10,7 @@ before_script:
   - mkdir -p ~/.ssh
   - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
   - echo "$FRONTEND_ENV" >> .env
+  - ls -la
 
 npm build:
   stage: build
