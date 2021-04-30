@@ -5,9 +5,9 @@ import fetcher from '../../util/fetcher';
 import TextInput from './TextInput';
 import FileInput from './FileInput';
 import TextAreaInput from './TextAreaInput';
-import { CheckCircleOutline as CheckIcon } from 'heroicons-react';
 import { useStore } from '../../hooks';
 import { useHistory } from 'react-router-dom';
+import CheckboxInput from './CheckboxInput';
 
 interface Props {}
 
@@ -115,11 +115,7 @@ const AddPoiForm: React.FC<Props> = () => {
 
   return (
     <form className="flex flex-col" onSubmit={handleSubmit} ref={formRef}>
-      <p className="flex items-center leading-relaxed mb-5 text-gray-600">
-        <CheckIcon className={`${draftPoi ? 'text-indigo-500' : 'text-gray-400'} mr-2`} />
-        Bitte einen Pin auf der Karte setzen.
-      </p>
-
+      <CheckboxInput name="draft" label={'Bitte einen Pin auf der Karte setzen.'} value={Boolean(draftPoi)} required />
       <TextInput label={'Name des Orts'} name={'name'} value={formData.name} onChange={handleInputChange} required />
       <TextInput
         label={'Kategorie'}
