@@ -10,10 +10,11 @@ module.exports = {
     '@snowpack/plugin-typescript',
     '@snowpack/plugin-postcss',
     '@snowpack/plugin-dotenv',
+    '@jadex/snowpack-plugin-tailwindcss-jit',
   ],
   routes: [
     /* Enable an SPA Fallback in development: */
-    // {"match": "routes", "src": ".*", "dest": "/index.html"},
+    { match: 'routes', src: '.*', dest: '/index.html' },
   ],
   optimize: {
     /* Example: Bundle your final build: */
