@@ -35,8 +35,26 @@ const AddPoiForm: React.FC<Props> = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const validateFile = (file: File, allowedSize = 5000000, allowedExtensions = ['jpg', 'png']) => {
+    const { name: fileName, size: fileSize } = file;
+
+    const fileExtension = fileName.split('.').pop();
+    if (fileExtension && !allowedExtensions.includes(fileExtension)) {
+      return false;
+    } else if (fileSize > allowedSize) {
+      return false;
+    }
+    return true;
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e?.target?.files?.length) setFormData({ ...formData, [e.target.name]: e?.target?.files[0] });
+    if (e?.target?.files?.length) {
+      const isFileValid = validateFile(e?.target?.files[0]);
+      console.log('File valid?', isFileValid);
+      if (isFileValid) {
+        setFormData({ ...formData, [e.target.name]: e?.target?.files[0] });
+      }
+    }
   };
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
