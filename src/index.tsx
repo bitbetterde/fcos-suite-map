@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import App from './components/App';
-import SwrWrapper from './components/SwrWrapper';
+import App from './App';
+import { SWRConfig } from 'swr';
+import { request } from 'graphql-request';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SwrWrapper>
-      <Router>
-        <App />
-      </Router>
-    </SwrWrapper>
+    <SWRConfig value={{ fetcher: (query: string) => request(import.meta.env.SNOWPACK_PUBLIC_API_URL, query) }}>
+      <App />
+    </SWRConfig>
   </React.StrictMode>,
   document.getElementById('root'),
 );

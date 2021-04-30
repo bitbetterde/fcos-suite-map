@@ -1,0 +1,55 @@
+[
+  {
+    "id": 1,
+    "lat": 53.550359,
+    "lng": 9.986701,
+    "name": "Welcome Werkstatt e. V.",
+    "description": "Eine offene Stadtteilwerkstatt in Barmbek-Süd. Hier kann mit Holz, Metall und Elektronik gearbeitet werden.",
+    "address": "Bachstr. 98, 22083 Hamburg",
+    "category": "OFFENE WERKSTATT",
+    "website": "https://www.welcome-werkstatt.de/",
+    "image": "https://picsum.photos/720/400?random=1"
+  },
+  {
+    "id": 2,
+    "lat": 53.560359,
+    "lng": 9.976701,
+    "name": "Fabulous St. Pauli",
+    "description": "Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.",
+    "address": "Mozartstr. 8, 22081 Hamburg",
+    "category": "OFFENE WERKSTATT",
+    "website": "http://www.fablab-hamburg.org/",
+    "image": "https://picsum.photos/720/400?random=2"
+  },
+  {
+    "id": 3,
+    "lat": 53.540359,
+    "lng": 9.996701,
+    "name": "HoFaLab Wilhelmsburg",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
+    "address": "Langer-Straßen-Name. 128, 22089 Hamburg",
+    "category": "OFFENE WERKSTATT",
+    "website": "https://hofalab.de/de/home-de/",
+    "image": "https://picsum.photos/720/400?random=3"
+  },
+  {
+    "id": 4,
+    "lat": 53.570359,
+    "lng": 9.986701,
+    "name": "Fab City Haus",
+    "description": "Eine offene Stadtteilwerkstatt in Barmbek-Süd. Hier kann mit Holz, Metall und Elektronik gearbeitet werden.",
+    "address": "Jungfernstieg 1, 22083 Hamburg",
+    "category": "OFFENE WERKSTATT",
+    "image": "https://picsum.photos/720/400?random=4"
+  },
+  {
+    "id": 5,
+    "lat": 53.565359,
+    "lng": 9.966701,
+    "name": "Haus Drei e. V.",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
+    "address": "Hein-Hoyer-Allee 36, 22083 Hamburg",
+    "category": "OFFENE WERKSTATT",
+    "image": "https://picsum.photos/720/400?random=5"
+  }
+]

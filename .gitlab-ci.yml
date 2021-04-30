@@ -9,7 +9,7 @@ before_script:
   - apk add --no-cache lftp openssh
   - mkdir -p ~/.ssh
   - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
-  - echo "$FRONTEND_ENV" > .env
+  - echo "$FRONTEND_ENV" >> .env
 
 npm build:
   stage: build

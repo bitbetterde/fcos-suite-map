@@ -1,3 +1,5 @@
+import type { LatLngExpression } from 'leaflet';
+
 export interface PointOfInterest {
   id: number;
   lat: number;
@@ -8,15 +10,4 @@ export interface PointOfInterest {
   website: string;
   category?: string;
   image?: string;
-  tags: Tag[];
-}
-
-export interface Tag {
-  id: string;
-  displayName: string;
-  color: string;
-}
-
-export interface PointsOfInterestDTO {
-  pois: PointOfInterest[];
 }
