@@ -7,6 +7,7 @@ interface Props {}
 
 const SwrWrapper: React.FC<Props> = ({ children }) => {
   const setError = useStore((state) => state.setError);
+  const error = useStore((state) => state.error);
   return (
     <SWRConfig
       value={{
@@ -18,6 +19,10 @@ const SwrWrapper: React.FC<Props> = ({ children }) => {
             icon: 'alert',
           });
           console.error('Error while fetching', error);
+        },
+        onSuccess: () => {
+          // Reset error modal
+          if (error) setError(null);
         },
       }}
     >

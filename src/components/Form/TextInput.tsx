@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from 'react';
+import React, { MutableRefObject, useRef } from 'react';
 
 interface Props {
   label: string;
@@ -7,10 +7,9 @@ interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
   type?: string;
-  ref?: MutableRefObject<HTMLInputElement>;
 }
 
-const TextInput: React.FC<Props> = ({ name, label, value, onChange, ref, type = 'text', ...inputProps }) => {
+const TextInput: React.FC<Props> = ({ name, label, value, onChange, type = 'text', ...inputProps }) => {
   return (
     <label className="block mb-4">
       {!!label && (
@@ -19,15 +18,7 @@ const TextInput: React.FC<Props> = ({ name, label, value, onChange, ref, type = 
           {inputProps?.required && `*`}
         </span>
       )}
-      <input
-        ref={ref}
-        type={type}
-        name={name}
-        value={value}
-        className="form-input"
-        onChange={onChange}
-        {...inputProps}
-      />
+      <input type={type} name={name} value={value} className="form-input" onChange={onChange} {...inputProps} />
     </label>
   );
 };

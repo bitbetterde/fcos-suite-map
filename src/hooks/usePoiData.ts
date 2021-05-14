@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import type { PointsOfInterestDTO } from 'src/types/PointOfInterest';
 import useSWR from 'swr';
 
@@ -25,10 +24,6 @@ export const usePoiData = () => {
     }
     `,
   );
-
-  useEffect(() => {
-    console.log('Got data', data);
-  }, [data]);
 
   return { data: data?.pois };
 };

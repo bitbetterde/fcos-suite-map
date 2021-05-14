@@ -17,7 +17,7 @@ const FileInput: React.FC<Props> = ({ name, label, value, onChange, ...inputProp
         {inputProps?.required && `*`}
       </span>
       <label
-        className={`flex items-center rounded-lg border-2 border-black mb-6 w-full p-2 text-center focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 cursor-pointer${
+        className={`mt-1 flex items-center rounded-lg border-2 border-black mb-6 w-full p-2 text-center focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 cursor-pointer${
           value
             ? ' bg-white text-black border-opacity-20 hover:border-opacity-40 truncate text-sm text-opacity-40'
             : ' bg-indigo-500 text-white border-opacity-0 hover:bg-indigo-600 text-md'
