@@ -1,7 +1,7 @@
-import type { LatLngExpression, LatLngTuple } from 'leaflet';
+import type { LatLngTuple } from 'leaflet';
 import { divIcon, DivIconOptions } from 'leaflet';
 import React, { useMemo } from 'react';
-import { MapContainer, Marker, TileLayer, useMapEvent } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { usePoiData, useStore } from '../../hooks';
 import MapViewController from './MapViewController';
 
@@ -34,14 +34,7 @@ export const Map: React.FC<Props> = ({ createMode }) => {
   const selectedLatlng: LatLngTuple | undefined = selectedPoi ? [selectedPoi?.lat, selectedPoi?.lng] : undefined;
 
   return (
-    <MapContainer
-      id={'mapid'}
-      className={'h-full w-full z-0'}
-      style={{ flex: 3 }}
-      center={DEFAULT_CENTER}
-      zoom={13}
-      scrollWheelZoom={true}
-    >
+    <MapContainer id={'mapid'} className={'h-full w-full z-0'} center={DEFAULT_CENTER} zoom={13} scrollWheelZoom={true}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"

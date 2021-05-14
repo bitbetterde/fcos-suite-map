@@ -33,9 +33,9 @@ code {
 }
 
 .sidebar {
-  flex: 3;
+  flex-basis: 40%;
   overflow-y: auto;
-  max-height: 50vh;
+  flex-shrink: 0;
 }
 
 .leaflet-control-container {
@@ -44,8 +44,9 @@ code {
 
 @screen md {
   .sidebar {
-    flex: 1;
-    min-width: 250px;
+    flex-basis: 30vw;
+    min-width: 300px;
+    max-width: 500px;
     max-height: initial;
   }
 
@@ -59,5 +60,19 @@ code {
 }
 
 .form-label {
-  @apply leading-7 text-sm text-gray-600;
+  @apply leading-none text-sm text-gray-600;
+}
+
+.form-button {
+  @apply mt-2 flex justify-center items-center text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-lg text-lg disabled:opacity-50 disabled:cursor-default disabled:hover:bg-indigo-500;
+}
+
+.input-chevron {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  -webkit-print-color-adjust: exact;
+  color-adjust: exact;
 }

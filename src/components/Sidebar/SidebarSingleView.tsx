@@ -2,7 +2,7 @@ import { HomeOutline as HomeIcon, LocationMarkerOutline as AddressIcon, X as Clo
 import React from 'react';
 import { useStore } from '../../hooks';
 import SidebarContainer from './SidebarContainer';
-import Tag from './Tag';
+import Tag from '../Tag';
 
 interface Props {}
 
@@ -23,7 +23,11 @@ const SidebarSingleView: React.FC<Props> = () => {
         />
       </div>
       {selectedPoi?.image && (
-        <img className="lg:h-48 md:h-36 w-full object-cover object-center" src={selectedPoi?.image} alt="blog" />
+        <img
+          className="lg:h-48 md:h-36 w-full object-cover object-center"
+          src={selectedPoi?.image}
+          alt={selectedPoi?.name}
+        />
       )}
       <div className="p-6">
         <h2 className="tracking-widest uppercase text-xs title-font font-medium text-gray-400 mb-1">
@@ -46,7 +50,7 @@ const SidebarSingleView: React.FC<Props> = () => {
           </div>
         )}
         {!!selectedPoi?.tags?.length && (
-          <div className={'flex items-center mt-3'}>
+          <div className={'flex items-center mt-3 flex-wrap'}>
             {selectedPoi?.tags.map((tag) => (
               <Tag key={tag.id} color={tag.color}>
                 {tag.displayName}

@@ -1,13 +1,17 @@
-import { gql } from 'graphql-request';
 import React, { useEffect, useRef, useState } from 'react';
-import type { PointOfInterestFormData } from '../../types/PointOfInterest';
+import type { PointOfInterestFormData, Tag } from '../../types/PointOfInterest';
 import fetcher from '../../util/fetcher';
+import { validateFile } from '../../util/file';
 import TextInput from './TextInput';
 import FileInput from './FileInput';
 import TextAreaInput from './TextAreaInput';
-import { useStore } from '../../hooks';
+import { useStore, usePoiData } from '../../hooks';
 import { useHistory } from 'react-router-dom';
-import CheckboxInput from './CheckboxInput';
+import CoordinateInput from './CoordinateInput';
+import TagInput from './TagInput';
+import { removeDuplicateObjects } from '../../util/array';
+import { createPoi, createTags } from '../../graphql/mutations';
+import Spinner from '../Spinner';
 
 interface Props {}
 
@@ -22,35 +26,25 @@ const AddPoiForm: React.FC<Props> = () => {
     website: '',
     category: '',
     image: null,
-    tags: '',
+    tags: [],
   });
   const [isValid, setIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const draftPoi = useStore((state) => state.draftPoi);
   const formRef = useRef<HTMLFormElement>(null);
   const history = useHistory();
+  const { data } = usePoiData();
+  const [tagOptions, setTagOptions] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const setNotification = useStore((state) => state.setNotification);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const validateFile = (file: File, allowedSize = 5000000, allowedExtensions = ['jpg', 'png']) => {
-    const { name: fileName, size: fileSize } = file;
-
-    const fileExtension = fileName.split('.').pop();
-    if (fileExtension && !allowedExtensions.includes(fileExtension)) {
-      return false;
-    } else if (fileSize > allowedSize) {
-      return false;
-    }
-    return true;
-  };
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e?.target?.files?.length) {
       const isFileValid = validateFile(e?.target?.files[0]);
-      console.log('File valid?', isFileValid);
       if (isFileValid) {
         setFormData({ ...formData, [e.target.name]: e?.target?.files[0] });
       }
@@ -61,43 +55,35 @@ const AddPoiForm: React.FC<Props> = () => {
     e.preventDefault();
     formRef.current?.reportValidity();
 
-    const mutation = gql`
-      mutation createPoiMutation(
-        $name: String!
-        $email: String!
-        $lat: Float!
-        $lng: Float!
-        $website: String
-        $description: String
-        $address: String!
-        $category: String!
-        $image: Upload!
-      ) {
-        createPoi(
-          poi: {
-            name: $name
-            email: $email
-            lat: $lat
-            lng: $lng
-            website: $website
-            description: $description
-            address: $address
-            category: $category
-            image: $image
-          }
-        )
-      }
-    `;
-
     setIsLoading(true);
     try {
-      const res = await fetcher(mutation, formData);
+      let newTags: Tag[] = [];
+      let newTagIdsResponse: number[] = [];
+      let oldTags: Tag[] = [];
+      selectedTags.forEach((tag) => (tag.id === 'draft' ? newTags.push(tag) : oldTags.push(tag)));
+
+      if (newTags.length) {
+        const tagsRes = await fetcher(createTags, {
+          tags: newTags.map(({ displayName, color }) => ({
+            displayName,
+            color,
+          })),
+        });
+        if (tagsRes.createTags.length > 0) {
+          tagsRes.createTags.map((newTagResponse: { id: string }) => {
+            newTagIdsResponse.push(Number(newTagResponse.id));
+          });
+        }
+      }
+      const finalData = { ...formData, tagIds: [...newTagIdsResponse, ...oldTags.map((oldTag) => Number(oldTag.id))] };
+
+      const res = await fetcher(createPoi, finalData);
 
       if (res.createPoi) {
         setNotification({
           title: 'Ort hinzugefügt',
           text:
-            'Ort wurde erfolgreich hinzugefügt. Bitte überprüfe deine E-Mails und klicke auf den Link um den Eintrag zu verifizieren.',
+            'Ort wurde erfolgreich hinzugefügt. Bitte überprüfe deine E-Mails und klicke dort auf den Link um deine Mail-Adresse zu verifizieren.',
           type: 'success',
         });
         history.push('/');
@@ -105,7 +91,8 @@ const AddPoiForm: React.FC<Props> = () => {
         setIsLoading(false);
         throw new Error();
       }
-    } catch {
+    } catch (error) {
+      console.error(error);
       setIsLoading(false);
       setNotification({
         title: 'Fehler beim Hinzufügen',
@@ -115,8 +102,19 @@ const AddPoiForm: React.FC<Props> = () => {
     }
   };
 
+  // Aggregate all tags from all POIs and remove duplicates
   useEffect(() => {
-    // Validation
+    if (data) {
+      const tagsWithDuplicates = data.flatMap((poi) => {
+        return poi.tags;
+      });
+      const tags = removeDuplicateObjects(tagsWithDuplicates, 'id');
+      setTagOptions(tags);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    // Validation of native HTML input constraints
     const htmlValid = formRef.current?.checkValidity();
 
     if (draftPoi && htmlValid) {
@@ -131,63 +129,66 @@ const AddPoiForm: React.FC<Props> = () => {
     if (draftPoi) setFormData({ ...formData, lat: draftPoi[0], lng: draftPoi[1] });
   }, [draftPoi]);
 
-  return (
-    <form className="flex flex-col" onSubmit={handleSubmit} ref={formRef}>
-      <CheckboxInput name="draft" label={'Bitte einen Pin auf der Karte setzen.'} value={Boolean(draftPoi)} required />
-      <TextInput label={'Name des Orts'} name={'name'} value={formData.name} onChange={handleInputChange} required />
-      <TextInput
-        label={'Kategorie'}
-        name={'category'}
-        value={formData.category}
-        onChange={handleInputChange}
-        required
-      />
-      <TextInput label={'Anschrift'} name={'address'} value={formData.address} onChange={handleInputChange} required />
-      <TextInput
-        label={'E-Mail (wird nicht veröffentlicht)'}
-        name={'email'}
-        value={formData.email}
-        onChange={handleInputChange}
-        type="email"
-        required
-      />
-      <TextInput
-        type="url"
-        label={'Webseite'}
-        name={'website'}
-        value={formData.website}
-        onChange={handleInputChange}
-        required
-      />
-      <TextAreaInput
-        label={'Beschreibung'}
-        name={'description'}
-        value={formData.description}
-        onChange={handleInputChange}
-        required
-      />
+  useEffect(() => {
+    console.log('Form Data', formData);
+  }, [formData]);
 
-      <FileInput value={formData.image} onChange={handleFileChange} name={'image'} label={'Bild'} required />
-      <button
-        disabled={!isValid || isLoading}
-        type="submit"
-        className="mt-2 flex justify-center items-center text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded-lg text-lg disabled:opacity-50 disabled:cursor-default disabled:hover:bg-indigo-500"
-      >
-        {isLoading && (
-          <svg
-            className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            ></path>
-          </svg>
-        )}
+  return (
+    <form className="flex-1 flex flex-col justify-between" onSubmit={handleSubmit} ref={formRef}>
+      <div className="flex flex-col">
+        <CoordinateInput
+          label={'Koordinaten'}
+          text="Bitte Pin auf Karte setzen."
+          value={[formData.lat, formData.lng]}
+          required
+        />
+        <TagInput label={'Tags'} tags={selectedTags} options={tagOptions} onTagsChange={setSelectedTags} />
+        <TextInput label={'Name des Orts'} name={'name'} value={formData.name} onChange={handleInputChange} required />
+        <TextInput
+          label={'Kategorie'}
+          name={'category'}
+          value={formData.category}
+          onChange={handleInputChange}
+          required
+        />
+        <TextInput
+          label={'Anschrift'}
+          name={'address'}
+          value={formData.address}
+          onChange={handleInputChange}
+          required
+        />
+        <TextInput
+          label={'E-Mail (wird nicht veröffentlicht)'}
+          name={'email'}
+          value={formData.email}
+          onChange={(event) => {
+            // event.target.setCustomValidity('Custom message');
+            handleInputChange(event);
+          }}
+          type="email"
+          required
+        />
+        <TextInput
+          type="url"
+          label={'Webseite'}
+          name={'website'}
+          value={formData.website}
+          onChange={handleInputChange}
+          required
+        />
+        <TextAreaInput
+          label={'Beschreibung'}
+          name={'description'}
+          value={formData.description}
+          onChange={handleInputChange}
+          required
+        />
+
+        <FileInput value={formData.image} onChange={handleFileChange} name={'image'} label={'Bild'} required />
+      </div>
+      <button disabled={isLoading} type="submit" className="form-button">
+        {isLoading && <Spinner />}
         Hinzufügen
       </button>
     </form>

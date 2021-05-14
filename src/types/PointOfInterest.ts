@@ -16,7 +16,7 @@ export interface PointOfInterest extends PointOfInterestBase {
 export interface PointOfInterestFormData extends PointOfInterestBase {
   email: string;
   image: File | null;
-  tags: string;
+  tags: number[];
 }
 
 export interface Tag {
