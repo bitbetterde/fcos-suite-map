@@ -11,7 +11,7 @@ interface Props {
   required?: boolean;
 }
 
-const TagInput = ({ label, tags, options, onTagsChange, required }: Props) => {
+const TagInput: React.FC = ({ label, tags, options, onTagsChange, required }: Props) => {
   // const [allTags, setAllTags] = useState<TagType[]>([]);
   // All options
   const [tagOptions, setTagOptions] = useState<TagType[]>([]);
@@ -117,7 +117,7 @@ const TagInput = ({ label, tags, options, onTagsChange, required }: Props) => {
             return (
               <li
                 key={`${option.id}`}
-                onMouseDown={(e) => {
+                onMouseDown={() => {
                   handleSelectTag(option);
                 }}
                 className="w-full p-1 hover:bg-gray-100"

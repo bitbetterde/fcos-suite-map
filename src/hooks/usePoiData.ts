@@ -1,7 +1,11 @@
-import type { PointsOfInterestDTO } from 'src/types/PointOfInterest';
+import type { PointOfInterest, PointsOfInterestDTO } from 'src/types/PointOfInterest';
 import useSWR from 'swr';
 
-export const usePoiData = () => {
+interface poiData {
+  data: PointOfInterest[] | undefined;
+}
+
+export const usePoiData = (): poiData => {
   const { data } = useSWR<PointsOfInterestDTO>(
     `{
       pois {

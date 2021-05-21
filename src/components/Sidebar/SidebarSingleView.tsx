@@ -4,9 +4,7 @@ import { useStore } from '../../hooks';
 import SidebarContainer from './SidebarContainer';
 import Tag from '../Tag';
 
-interface Props {}
-
-const SidebarSingleView: React.FC<Props> = () => {
+const SidebarSingleView: React.FC = () => {
   const selectedPoi = useStore((state) => state.selectedPoi);
   const setSelectedPoi = useStore((state) => state.setSelectedPoi);
   const strippedUrl = selectedPoi?.website?.replace(/(^\w+:|^)\/\//, '');

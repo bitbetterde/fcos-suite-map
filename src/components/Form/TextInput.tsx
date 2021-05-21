@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useRef } from 'react';
+import React from 'react';
 
 interface Props {
   label: string;

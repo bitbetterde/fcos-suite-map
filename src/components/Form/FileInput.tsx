@@ -23,7 +23,7 @@ const FileInput: React.FC<Props> = ({ name, label, value, onChange, ...inputProp
             : ' bg-indigo-500 text-white border-opacity-0 hover:bg-indigo-600 text-md'
         }`}
       >
-        {!!value ? (
+        {value ? (
           <>
             <PaperClipIcon size={18} className="flex-shrink-0 mr-2" />
             {value.name}

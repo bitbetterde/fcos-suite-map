@@ -13,9 +13,7 @@ import { removeDuplicateObjects } from '../../util/array';
 import { createPoi, createTags } from '../../graphql/mutations';
 import Spinner from '../Spinner';
 
-interface Props {}
-
-const AddPoiForm: React.FC<Props> = () => {
+const AddPoiForm: React.FC = () => {
   const [formData, setFormData] = useState<PointOfInterestFormData>({
     lat: 0,
     lng: 0,
@@ -57,9 +55,9 @@ const AddPoiForm: React.FC<Props> = () => {
 
     setIsLoading(true);
     try {
-      let newTags: Tag[] = [];
-      let newTagIdsResponse: number[] = [];
-      let oldTags: Tag[] = [];
+      const newTags: Tag[] = [];
+      const newTagIdsResponse: number[] = [];
+      const oldTags: Tag[] = [];
       selectedTags.forEach((tag) => (tag.id === 'draft' ? newTags.push(tag) : oldTags.push(tag)));
 
       if (newTags.length) {

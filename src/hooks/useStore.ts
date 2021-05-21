@@ -2,7 +2,7 @@ import type { Error } from 'src/types/Error';
 import type { PointOfInterest } from 'src/types/PointOfInterest';
 import type { Notification } from 'src/types/Notification';
 import type { LatLngTuple } from 'leaflet';
-import create, { GetState, SetState, State, StateCreator, StoreApi } from 'zustand';
+import create, { State } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 interface Store extends State {

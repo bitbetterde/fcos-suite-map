@@ -3,9 +3,7 @@ import { usePoiData, useStore } from '../../hooks';
 import ListElement from './ListElement';
 import SidebarContainer from './SidebarContainer';
 
-interface Props {}
-
-const SidebarListView: React.FC<Props> = () => {
+const SidebarListView: React.FC = () => {
   const { data } = usePoiData();
   const hoveredPoi = useStore((state) => state.hoveredPoi);
   const setHoveredPoi = useStore((state) => state.setHoveredPoi);

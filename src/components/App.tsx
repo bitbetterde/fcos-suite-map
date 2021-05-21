@@ -8,7 +8,7 @@ import SidebarCreateView from './Sidebar/SidebarCreateView';
 import SidebarListView from './Sidebar/SidebarListView';
 import SidebarSingleView from './Sidebar/SidebarSingleView';
 
-const App = () => {
+const App: React.FC = () => {
   const selectedPoi = useStore((state) => state.selectedPoi);
 
   return (
@@ -16,7 +16,7 @@ const App = () => {
       <ErrorModal />
       <Notification />
       <div className={'flex md:flex-row-reverse flex-col h-full'}>
-        <Route path="/add" children={({ match }) => <Map createMode={!!match} />} />
+        <Route path="/add">{({ match }) => <Map createMode={!!match} />}</Route>
         <Switch>
           <Route exact path="/add">
             <SidebarCreateView />

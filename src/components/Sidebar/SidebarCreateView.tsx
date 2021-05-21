@@ -4,9 +4,7 @@ import { useHistory } from 'react-router-dom';
 import AddPoiForm from '../Form/AddPoiForm';
 import SidebarContainer from './SidebarContainer';
 
-interface Props {}
-
-const SidebarCreateView: React.FC<Props> = () => {
+const SidebarCreateView: React.FC = () => {
   const history = useHistory();
   return (
     <SidebarContainer className="p-5">
