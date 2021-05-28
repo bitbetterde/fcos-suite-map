@@ -12,6 +12,7 @@ import TagInput from './TagInput';
 import { removeDuplicateObjects } from '../../util/array';
 import { createPoi, createTags } from '../../graphql/mutations';
 import Spinner from '../Spinner';
+import type { CreatePoiMutationMutationVariables, Mutation } from '../../generated/graphql';
 
 const AddPoiForm: React.FC = () => {
   const [formData, setFormData] = useState<PointOfInterestFormData>({
@@ -56,32 +57,36 @@ const AddPoiForm: React.FC = () => {
     setIsLoading(true);
     try {
       const newTags: Tag[] = [];
-      const newTagIdsResponse: number[] = [];
+      let newTagIdsResponse: string[] = [];
       const oldTags: Tag[] = [];
       selectedTags.forEach((tag) => (tag.id === 'draft' ? newTags.push(tag) : oldTags.push(tag)));
 
       if (newTags.length) {
-        const tagsRes = await fetcher(createTags, {
+        const tagsRes: Mutation = await fetcher(createTags, {
           tags: newTags.map(({ displayName, color }) => ({
             displayName,
             color,
           })),
         });
-        if (tagsRes.createTags.length > 0) {
-          tagsRes.createTags.map((newTagResponse: { id: string }) => {
-            newTagIdsResponse.push(Number(newTagResponse.id));
-          });
+        if (tagsRes.createTags && tagsRes.createTags.length > 0) {
+          newTagIdsResponse = tagsRes.createTags
+            .filter((newTagResponse) => newTagResponse?.id)
+            .map((newTagResponse) => {
+              return (newTagResponse as Tag).id;
+            });
         }
       }
-      const finalData = { ...formData, tagIds: [...newTagIdsResponse, ...oldTags.map((oldTag) => Number(oldTag.id))] };
+      const finalData: CreatePoiMutationMutationVariables = {
+        ...formData,
+        tagIds: [...newTagIdsResponse, ...oldTags.map((oldTag) => oldTag.id)],
+      };
 
-      const res = await fetcher(createPoi, finalData);
+      const res: Mutation = await fetcher(createPoi, finalData);
 
       if (res.createPoi) {
         setNotification({
           title: 'Ort hinzugefügt',
-          text:
-            'Ort wurde erfolgreich hinzugefügt. Bitte überprüfe deine E-Mails und klicke dort auf den Link um deine Mail-Adresse zu verifizieren.',
+          text: 'Ort wurde erfolgreich hinzugefügt. Bitte überprüfe deine E-Mails und klicke dort auf den Link um deine Mail-Adresse zu verifizieren.',
           type: 'success',
         });
         history.push('/');
@@ -126,10 +131,6 @@ const AddPoiForm: React.FC = () => {
     // Set lat/lng in Form when PIN is dropped on map
     if (draftPoi) setFormData({ ...formData, lat: draftPoi[0], lng: draftPoi[1] });
   }, [draftPoi]);
-
-  useEffect(() => {
-    console.log('Form Data', formData);
-  }, [formData]);
 
   return (
     <form className="flex-1 flex flex-col justify-between" onSubmit={handleSubmit} ref={formRef}>
