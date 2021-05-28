@@ -2,34 +2,39 @@ import React from 'react';
 import { usePoiData, useStore } from '../../hooks';
 import ListElement from './ListElement';
 import SidebarContainer from './SidebarContainer';
-import Select from 'react-select';
+import { removeDuplicateObjects } from '../../util/array';
+import { useFilteredPoiData } from '../../hooks/useFilteredPoiData';
+import type { Tag } from '../../types/PointOfInterest';
+import MultiSelect from '../MultiSelect';
 
 const SidebarListView: React.FC = () => {
+  const tagsToSelectOptions = (tags?: Tag[]) => tags?.map((tag) => ({ label: tag.displayName, value: tag }));
+
   const { data } = usePoiData();
+  const { data: filteredData, filterTags, setFilterTags } = useFilteredPoiData();
   const hoveredPoi = useStore((state) => state.hoveredPoi);
   const setHoveredPoi = useStore((state) => state.setHoveredPoi);
   const setSelectedPoi = useStore((state) => state.setSelectedPoi);
 
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
+  const tags =
+    data &&
+    removeDuplicateObjects(
+      data?.flatMap((poi) => poi.tags),
+      'id',
+    );
+  const options = tagsToSelectOptions(tags);
 
   return (
     <SidebarContainer>
       <div className="p-4">
-        <Select
-          defaultValue={[options[2], options[3]]}
-          isMulti
-          name="pois"
+        <MultiSelect
           options={options}
-          className="basic-multi-select"
-          classNamePrefix="select"
+          value={filterTags && tagsToSelectOptions(filterTags)}
+          onChange={(selectedOptions) => setFilterTags(selectedOptions.map((opt) => opt.value))}
         />
       </div>
-      <h1 className="text-xl font-medium title-font m-4 text-gray-900 mb-2">{data?.length} Orte:</h1>
-      {data?.map((poi) => (
+      <h1 className="text-xl font-medium title-font m-4 text-gray-900 mb-2">{filteredData?.length} Orte:</h1>
+      {filteredData?.map((poi) => (
         <ListElement
           key={poi.id}
           onMouseEnter={() => setHoveredPoi(poi)}

@@ -1,7 +1,7 @@
 import type { PointOfInterest, PointsOfInterestDTO } from 'src/types/PointOfInterest';
 import useSWR from 'swr';
 
-interface poiData {
+export interface poiData {
   data: PointOfInterest[] | undefined;
 }
 

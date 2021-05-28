@@ -2,8 +2,10 @@ import type { LatLngTuple } from 'leaflet';
 import { divIcon, DivIconOptions } from 'leaflet';
 import React, { useMemo } from 'react';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
-import { usePoiData, useStore } from '../../hooks';
+import { useStore } from '../../hooks';
 import MapViewController from './MapViewController';
+import { useFilteredPoiData } from '../../hooks/useFilteredPoiData';
+import MapLayerControl from './MapLayerControl';
 
 interface Props {
   createMode?: boolean;
@@ -25,7 +27,7 @@ export const Map: React.FC<Props> = ({ createMode }) => {
     () => divIcon({ ...iconProps, iconSize: [30, 40], iconAnchor: [15, 40], className: 'marker-green' }),
     [iconProps],
   );
-  const { data } = usePoiData();
+  const { data } = useFilteredPoiData();
   const draftPoi = useStore((state) => state.draftPoi);
   const hoveredPoi = useStore((state) => state.hoveredPoi);
   const setHoveredPoi = useStore((state) => state.setHoveredPoi);
@@ -34,45 +36,54 @@ export const Map: React.FC<Props> = ({ createMode }) => {
   const selectedLatlng: LatLngTuple | undefined = selectedPoi ? [selectedPoi?.lat, selectedPoi?.lng] : undefined;
 
   return (
-    <MapContainer id={'mapid'} className={'h-full w-full z-0'} center={DEFAULT_CENTER} zoom={13} scrollWheelZoom={true}>
-      <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
-        id="mapbox/streets-v11"
-        tileSize={512}
-        accessToken={import.meta.env.SNOWPACK_PUBLIC_MAPBOX_TOKEN}
-        zoomOffset={-1}
-        maxZoom={18}
-      />
-      <MapViewController center={selectedLatlng ?? DEFAULT_CENTER} zoom={13} createPoiMode={createMode} />
-      {/* Single marker when creating a new POI */}
-      {!!(createMode && draftPoi) && <Marker icon={greenLargeIcon} position={draftPoi} />}
-      {/* Single marker when POI is selected */}
-      {!!(selectedPoi && selectedLatlng && !createMode) && <Marker icon={largeIcon} position={selectedLatlng} />}
-      {/* Multiple markers, when no POI is selected */}
-      {!selectedPoi &&
-        !createMode &&
-        data?.map((poi) => {
-          const poiLatLng: LatLngTuple = [poi.lat, poi.lng];
-          return (
-            <Marker
-              icon={hoveredPoi?.id === poi.id ? largeIcon : icon}
-              opacity={hoveredPoi?.id === poi.id ? 1 : 0.7}
-              key={poi.id}
-              position={poiLatLng}
-              eventHandlers={{
-                click: () => setSelectedPoi(poi),
-                mouseover: () => {
-                  setHoveredPoi(poi);
-                },
-                mouseout: () => {
-                  setHoveredPoi(null);
-                },
-              }}
-            />
-          );
-        })}
-    </MapContainer>
+    <div className="relative h-full w-full z-0">
+      <MapLayerControl />
+      <MapContainer
+        id={'mapid'}
+        className={'h-full w-full z-0'}
+        center={DEFAULT_CENTER}
+        zoom={13}
+        scrollWheelZoom={true}
+      >
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
+          id="mapbox/streets-v11"
+          tileSize={512}
+          accessToken={import.meta.env.SNOWPACK_PUBLIC_MAPBOX_TOKEN}
+          zoomOffset={-1}
+          maxZoom={18}
+        />
+        <MapViewController center={selectedLatlng ?? DEFAULT_CENTER} zoom={13} createPoiMode={createMode} />
+        {/* Single marker when creating a new POI */}
+        {!!(createMode && draftPoi) && <Marker icon={greenLargeIcon} position={draftPoi} />}
+        {/* Single marker when POI is selected */}
+        {!!(selectedPoi && selectedLatlng && !createMode) && <Marker icon={largeIcon} position={selectedLatlng} />}
+        {/* Multiple markers, when no POI is selected */}
+        {!selectedPoi &&
+          !createMode &&
+          data?.map((poi) => {
+            const poiLatLng: LatLngTuple = [poi.lat, poi.lng];
+            return (
+              <Marker
+                icon={hoveredPoi?.id === poi.id ? largeIcon : icon}
+                opacity={hoveredPoi?.id === poi.id ? 1 : 0.7}
+                key={poi.id}
+                position={poiLatLng}
+                eventHandlers={{
+                  click: () => setSelectedPoi(poi),
+                  mouseover: () => {
+                    setHoveredPoi(poi);
+                  },
+                  mouseout: () => {
+                    setHoveredPoi(null);
+                  },
+                }}
+              />
+            );
+          })}
+      </MapContainer>
+    </div>
   );
 };
 
