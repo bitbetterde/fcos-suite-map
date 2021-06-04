@@ -5,6 +5,7 @@ import Tag from './Tag';
 
 const Option = ({ children, data, ...rest }: { children: any; data: any }) => {
   return (
+    // @ts-expect-error: Not typed yet
     <components.Option {...rest}>
       <Tag color={data.value.color}>{children}</Tag>
     </components.Option>
@@ -16,6 +17,7 @@ const Select = <OptionType, isMulti extends boolean>(props: NamedProps<OptionTyp
     control: (provided) => ({ ...provided, border: '0', borderRadius: '0.5em' }),
     multiValue: (provided, state) => ({
       ...provided,
+      // @ts-expect-error: Not typed yet
       backgroundColor: state?.data?.value?.color || 'grey',
       borderRadius: '999px',
       padding: '0 3px',
