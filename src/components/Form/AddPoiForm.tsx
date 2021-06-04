@@ -15,7 +15,7 @@ import Spinner from '../Spinner';
 import type { CreatePoiMutationMutationVariables, Mutation } from '../../generated/graphql';
 import SelectInput from './SelectInput';
 
-type RelationStatusOption = { label: string; value: string };
+type StringSelectOption = { label: string; value: string };
 
 const AddPoiForm: React.FC = () => {
   const [formData, setFormData] = useState<PointOfInterestFormData>({
@@ -38,7 +38,8 @@ const AddPoiForm: React.FC = () => {
   const history = useHistory();
   const { data } = usePoiData();
   const [tagOptions, setTagOptions] = useState<Tag[]>([]);
-  const [relationStatusOptions, setRelationStatusOptions] = useState<RelationStatusOption[]>([]);
+  const [categoryOptions, setCatgeoryOptions] = useState<StringSelectOption[]>([]);
+  const [relationStatusOptions, setRelationStatusOptions] = useState<StringSelectOption[]>([]);
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const setNotification = useStore((state) => state.setNotification);
 
@@ -123,6 +124,10 @@ const AddPoiForm: React.FC = () => {
         .filter((poi) => !!poi.relationStatus)
         .map((poi) => ({ label: poi.relationStatus, value: poi.relationStatus }));
       setRelationStatusOptions(relationStatuses);
+      const categories = removeDuplicateObjects(data, 'category')
+        .filter((poi) => !!poi.category)
+        .map((poi) => ({ label: poi.category, value: poi.category }));
+      setCatgeoryOptions(categories);
     }
   }, [data]);
 
@@ -153,21 +158,27 @@ const AddPoiForm: React.FC = () => {
         />
         <TagInput label={'Tags'} tags={selectedTags} options={tagOptions} onTagsChange={setSelectedTags} />
         <TextInput label={'Name des Orts'} name={'name'} value={formData.name} onChange={handleInputChange} required />
-        <TextInput
+        <SelectInput
           label={'Kategorie'}
-          name={'category'}
-          value={formData.category}
-          onChange={handleInputChange}
           required
+          name={'category'}
+          options={categoryOptions}
+          onChange={(selectedOption) =>
+            setFormData((prev) => ({
+              ...prev,
+              category: selectedOption ? (selectedOption as StringSelectOption).value : '',
+            }))
+          }
         />
         <SelectInput
           label={'Verhältnis zum Fab City Hamburg e.V.'}
+          required
           name={'relationStatus'}
           options={relationStatusOptions}
           onChange={(selectedOption) =>
             setFormData((prev) => ({
               ...prev,
-              relationStatus: selectedOption ? (selectedOption as RelationStatusOption).value : '',
+              relationStatus: selectedOption ? (selectedOption as StringSelectOption).value : '',
             }))
           }
         />
