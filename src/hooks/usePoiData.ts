@@ -18,6 +18,7 @@ export const usePoiData = (): poiData => {
         lng
         image
         category
+        relationStatus
         tags {
           id
           displayName
