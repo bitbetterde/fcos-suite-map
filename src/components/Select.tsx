@@ -24,6 +24,7 @@ const Select = <OptionType, isMulti extends boolean>(props: NamedProps<OptionTyp
           primary25: '#C7D2FE',
         },
       })}
+      placeholder={'Tags auswählen...'}
       styles={customStyles}
       name="pois"
       className="hover:border-opacity-40 rounded-lg w-full border-2 border-black border-opacity-20 focus-within:border-indigo-300 focus-within:ring focus-within:ring-indigo-200 focus-within:ring-opacity-50 mt-1"

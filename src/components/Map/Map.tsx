@@ -6,6 +6,7 @@ import { useStore } from '../../hooks';
 import MapViewController from './MapViewController';
 import { useFilteredPoiData } from '../../hooks/useFilteredPoiData';
 import MapLayerControl from './MapLayerControl';
+import { useHistory } from 'react-router-dom';
 
 interface Props {
   createMode?: boolean;
@@ -32,7 +33,7 @@ export const Map: React.FC<Props> = ({ createMode }) => {
   const hoveredPoi = useStore((state) => state.hoveredPoi);
   const setHoveredPoi = useStore((state) => state.setHoveredPoi);
   const selectedPoi = useStore((state) => state.selectedPoi);
-  const setSelectedPoi = useStore((state) => state.setSelectedPoi);
+  const history = useHistory();
   const selectedLatlng: LatLngTuple | undefined = selectedPoi ? [selectedPoi?.lat, selectedPoi?.lng] : undefined;
 
   return (
@@ -71,7 +72,9 @@ export const Map: React.FC<Props> = ({ createMode }) => {
                 key={poi.id}
                 position={poiLatLng}
                 eventHandlers={{
-                  click: () => setSelectedPoi(poi),
+                  click: () => {
+                    history.push(`/poi/${String(poi.id)}`);
+                  },
                   mouseover: () => {
                     setHoveredPoi(poi);
                   },
