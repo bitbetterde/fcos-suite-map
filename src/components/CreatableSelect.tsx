@@ -5,7 +5,12 @@ import Creatable from 'react-select/creatable';
 
 const CreatableSelect = <OptionType, isMulti extends boolean>(props: NamedProps<OptionType, isMulti>): JSX.Element => {
   const customStyles: StylesConfig<OptionType, isMulti> = {
-    control: (provided) => ({ ...provided, border: '0', borderRadius: '0.5em' }),
+    control: (provided) => ({
+      ...provided,
+      border: '0',
+      borderRadius: '0.5em',
+      boxShadow: 'none',
+    }),
     multiValue: (provided) => ({ ...provided, borderRadius: '999px', padding: '0 3px' }),
     multiValueRemove: (provided) => ({
       ...provided,

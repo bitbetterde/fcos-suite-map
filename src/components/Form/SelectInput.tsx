@@ -26,7 +26,7 @@ const SelectInput = <OptionType, isMulti extends boolean>({
       <CreatableSelect
         name={name}
         value={value}
-        className="form-input form-input-custom"
+        className="p-0 form-input form-input-custom"
         onChange={onChange}
         {...inputProps}
       />

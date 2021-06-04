@@ -161,6 +161,7 @@ const AddPoiForm: React.FC = () => {
         <SelectInput
           label={'Kategorie'}
           required
+          placeholder={'Auswählen...'}
           name={'category'}
           options={categoryOptions}
           onChange={(selectedOption) =>
@@ -174,6 +175,7 @@ const AddPoiForm: React.FC = () => {
           label={'Verhältnis zum Fab City Hamburg e.V.'}
           required
           name={'relationStatus'}
+          placeholder={'Auswählen...'}
           options={relationStatusOptions}
           onChange={(selectedOption) =>
             setFormData((prev) => ({
