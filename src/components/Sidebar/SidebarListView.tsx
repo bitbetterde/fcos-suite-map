@@ -5,7 +5,7 @@ import SidebarContainer from './SidebarContainer';
 import { removeDuplicateObjects } from '../../util/array';
 import { useFilteredPoiData } from '../../hooks/useFilteredPoiData';
 import type { Tag } from '../../types/PointOfInterest';
-import MultiSelect from '../MultiSelect';
+import Select from '../Select';
 
 const SidebarListView: React.FC = () => {
   const tagsToSelectOptions = (tags?: Tag[]) => tags?.map((tag) => ({ label: tag.displayName, value: tag }));
@@ -27,8 +27,9 @@ const SidebarListView: React.FC = () => {
   return (
     <SidebarContainer>
       <div className="p-4">
-        <MultiSelect
+        <Select
           options={options}
+          isMulti={true}
           value={filterTags && tagsToSelectOptions(filterTags)}
           onChange={(selectedOptions) => setFilterTags(selectedOptions.map((opt) => opt.value))}
         />

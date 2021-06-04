@@ -10,6 +10,7 @@ export const createPoi = gql`
     $description: String
     $address: String!
     $category: String!
+    $relationStatus: String!
     $image: Upload!
     $tagIds: [ID]
   ) {
@@ -23,6 +24,7 @@ export const createPoi = gql`
         description: $description
         address: $address
         category: $category
+        relationStatus: $relationStatus
         image: $image
         tagIds: $tagIds
       }

@@ -50,6 +50,7 @@ export type Poi = {
   address: Scalars['String'];
   image: Scalars['String'];
   category: Scalars['String'];
+  relationStatus: Scalars['String'];
   tags?: Maybe<Array<Maybe<Tag>>>;
   created_at?: Maybe<Scalars['DateTime']>;
   updated_at?: Maybe<Scalars['DateTime']>;
@@ -64,6 +65,7 @@ export type PoiInput = {
   description?: Maybe<Scalars['String']>;
   address: Scalars['String'];
   category: Scalars['String'];
+  relationStatus: Scalars['String'];
   image: Scalars['Upload'];
   tagIds?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
@@ -154,6 +156,7 @@ export type CreatePoiMutationMutationVariables = Exact<{
   description?: Maybe<Scalars['String']>;
   address: Scalars['String'];
   category: Scalars['String'];
+  relationStatus: Scalars['String'];
   image: Scalars['Upload'];
   tagIds?: Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>;
 }>;
@@ -179,9 +182,9 @@ export type CreateTagsMutationMutation = (
 
 
 export const CreatePoiMutationDocument = gql`
-    mutation createPoiMutation($name: String!, $email: String!, $lat: Float!, $lng: Float!, $website: String, $description: String, $address: String!, $category: String!, $image: Upload!, $tagIds: [ID]) {
+    mutation createPoiMutation($name: String!, $email: String!, $lat: Float!, $lng: Float!, $website: String, $description: String, $address: String!, $category: String!, $relationStatus: String!, $image: Upload!, $tagIds: [ID]) {
   createPoi(
-    poi: {name: $name, email: $email, lat: $lat, lng: $lng, website: $website, description: $description, address: $address, category: $category, image: $image, tagIds: $tagIds}
+    poi: {name: $name, email: $email, lat: $lat, lng: $lng, website: $website, description: $description, address: $address, category: $category, relationStatus: $relationStatus, image: $image, tagIds: $tagIds}
   )
 }
     `;
