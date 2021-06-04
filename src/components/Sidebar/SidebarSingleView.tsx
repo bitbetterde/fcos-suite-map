@@ -1,4 +1,8 @@
-import { HomeOutline as HomeIcon, LocationMarkerOutline as AddressIcon } from 'heroicons-react';
+import {
+  HomeOutline as HomeIcon,
+  LocationMarkerOutline as AddressIcon,
+  UserGroupOutline as RealtionStatusIcon,
+} from 'heroicons-react';
 import React from 'react';
 import { useStore } from '../../hooks';
 import SidebarContainer from './SidebarContainer';
@@ -51,6 +55,12 @@ const SidebarSingleView: React.FC = () => {
           <div className={'flex items-center mt-3'}>
             <AddressIcon size={18} className={'text-gray-500 mr-2'} />
             <div className="text-sm text-gray-500">{selectedPoi?.address}</div>
+          </div>
+        )}
+        {selectedPoi?.relationStatus && (
+          <div className={'flex items-center mt-3'}>
+            <RealtionStatusIcon size={18} className={'text-gray-500 mr-2'} />
+            <div className="text-sm text-gray-500">{selectedPoi?.relationStatus}</div>
           </div>
         )}
         {!!selectedPoi?.tags?.length && (
