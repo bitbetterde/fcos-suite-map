@@ -7,6 +7,7 @@ import Map from './Map/Map';
 import SidebarCreateView from './Sidebar/SidebarCreateView';
 import SidebarListView from './Sidebar/SidebarListView';
 import SidebarSingleView from './Sidebar/SidebarSingleView';
+import PoiLoader from './PoiLoader';
 
 const App: React.FC = () => {
   const selectedPoi = useStore((state) => state.selectedPoi);
@@ -17,6 +18,10 @@ const App: React.FC = () => {
       <Notification />
       <div className={'flex md:flex-row-reverse flex-col h-full'}>
         <Route path="/add">{({ match }) => <Map createMode={!!match} />}</Route>
+        <Route path="/poi/:poiId">{({ match }) => <PoiLoader poiId={match?.params?.poiId as string} />}</Route>
+        <Route exact path="/">
+          <PoiLoader poiId={null} />
+        </Route>
         <Switch>
           <Route exact path="/add">
             <SidebarCreateView />

@@ -1,23 +1,24 @@
-import { HomeOutline as HomeIcon, LocationMarkerOutline as AddressIcon, X as CloseIcon } from 'heroicons-react';
+import { HomeOutline as HomeIcon, LocationMarkerOutline as AddressIcon } from 'heroicons-react';
 import React from 'react';
 import { useStore } from '../../hooks';
 import SidebarContainer from './SidebarContainer';
 import Tag from '../Tag';
+import CloseButton from './CloseButton';
+import { useHistory } from 'react-router-dom';
 
 const SidebarSingleView: React.FC = () => {
   const selectedPoi = useStore((state) => state.selectedPoi);
-  const setSelectedPoi = useStore((state) => state.setSelectedPoi);
   const strippedUrl = selectedPoi?.website?.replace(/(^\w+:|^)\/\//, '');
+  const history = useHistory();
 
   return (
     <SidebarContainer className={`relative p-0`}>
       <div className={`${selectedPoi?.image ? '' : 'pl-5 pt-5 '}`}>
-        <CloseIcon
-          size={32}
-          className={`${
-            selectedPoi?.image ? 'absolute left-5 top-5 ' : ''
-          }p-1 text-gray-500 inline-block cursor-pointer hover:bg-gray-300 hover:bg-opacity-50 rounded-full`}
-          onClick={() => setSelectedPoi(null)}
+        <CloseButton
+          absolute
+          onClick={() => {
+            history.push('/');
+          }}
         />
       </div>
       {selectedPoi?.image && (
@@ -36,7 +37,12 @@ const SidebarSingleView: React.FC = () => {
         {selectedPoi?.website && (
           <div className={'flex items-center'}>
             <HomeIcon size={18} className={'text-gray-500 mr-2'} />
-            <a className={'text-sm text-gray-500 hover:underline'} href={selectedPoi?.website}>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              className={'text-sm text-gray-500 hover:underline'}
+              href={selectedPoi?.website}
+            >
               {strippedUrl}
             </a>
           </div>
