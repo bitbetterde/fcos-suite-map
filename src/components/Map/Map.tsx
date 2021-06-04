@@ -38,7 +38,7 @@ export const Map: React.FC<Props> = ({ createMode }) => {
 
   return (
     <div className="relative h-full w-full z-0">
-      <MapLayerControl />
+      {!createMode && <MapLayerControl />}
       <MapContainer
         id={'mapid'}
         className={'h-full w-full z-0'}
