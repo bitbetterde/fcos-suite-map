@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useRef } from 'react';
+import React from 'react';
 
 interface Props {
   label: string;
@@ -18,7 +18,14 @@ const TextInput: React.FC<Props> = ({ name, label, value, onChange, type = 'text
           {inputProps?.required && `*`}
         </span>
       )}
-      <input type={type} name={name} value={value} className="form-input" onChange={onChange} {...inputProps} />
+      <input
+        type={type}
+        name={name}
+        value={value}
+        className="form-input form-input-custom"
+        onChange={onChange}
+        {...inputProps}
+      />
     </label>
   );
 };

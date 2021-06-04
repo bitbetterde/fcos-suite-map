@@ -20,7 +20,7 @@ const TextAreaInput: React.FC<Props> = ({ name, label, value, onChange, ...textA
       <textarea
         name={name}
         value={value}
-        className="form-input"
+        className="form-textarea form-input-custom"
         rows={3}
         onChange={onChange}
         {...textAreaProps}

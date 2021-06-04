@@ -5,17 +5,19 @@ import { validateFile } from '../../util/file';
 import TextInput from './TextInput';
 import FileInput from './FileInput';
 import TextAreaInput from './TextAreaInput';
-import { useStore, usePoiData } from '../../hooks';
+import { usePoiData, useStore } from '../../hooks';
 import { useHistory } from 'react-router-dom';
 import CoordinateInput from './CoordinateInput';
 import TagInput from './TagInput';
 import { removeDuplicateObjects } from '../../util/array';
 import { createPoi, createTags } from '../../graphql/mutations';
 import Spinner from '../Spinner';
+import type { CreatePoiMutationMutationVariables, Mutation } from '../../generated/graphql';
+import SelectInput from './SelectInput';
 
-interface Props {}
+type StringSelectOption = { label: string; value: string };
 
-const AddPoiForm: React.FC<Props> = () => {
+const AddPoiForm: React.FC = () => {
   const [formData, setFormData] = useState<PointOfInterestFormData>({
     lat: 0,
     lng: 0,
@@ -25,6 +27,7 @@ const AddPoiForm: React.FC<Props> = () => {
     description: '',
     website: '',
     category: '',
+    relationStatus: '',
     image: null,
     tags: [],
   });
@@ -35,6 +38,8 @@ const AddPoiForm: React.FC<Props> = () => {
   const history = useHistory();
   const { data } = usePoiData();
   const [tagOptions, setTagOptions] = useState<Tag[]>([]);
+  const [categoryOptions, setCatgeoryOptions] = useState<StringSelectOption[]>([]);
+  const [relationStatusOptions, setRelationStatusOptions] = useState<StringSelectOption[]>([]);
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const setNotification = useStore((state) => state.setNotification);
 
@@ -57,33 +62,37 @@ const AddPoiForm: React.FC<Props> = () => {
 
     setIsLoading(true);
     try {
-      let newTags: Tag[] = [];
-      let newTagIdsResponse: number[] = [];
-      let oldTags: Tag[] = [];
+      const newTags: Tag[] = [];
+      let newTagIdsResponse: string[] = [];
+      const oldTags: Tag[] = [];
       selectedTags.forEach((tag) => (tag.id === 'draft' ? newTags.push(tag) : oldTags.push(tag)));
 
       if (newTags.length) {
-        const tagsRes = await fetcher(createTags, {
+        const tagsRes: Mutation = await fetcher(createTags, {
           tags: newTags.map(({ displayName, color }) => ({
             displayName,
             color,
           })),
         });
-        if (tagsRes.createTags.length > 0) {
-          tagsRes.createTags.map((newTagResponse: { id: string }) => {
-            newTagIdsResponse.push(Number(newTagResponse.id));
-          });
+        if (tagsRes.createTags && tagsRes.createTags.length > 0) {
+          newTagIdsResponse = tagsRes.createTags
+            .filter((newTagResponse) => newTagResponse?.id)
+            .map((newTagResponse) => {
+              return (newTagResponse as Tag).id;
+            });
         }
       }
-      const finalData = { ...formData, tagIds: [...newTagIdsResponse, ...oldTags.map((oldTag) => Number(oldTag.id))] };
+      const finalData: CreatePoiMutationMutationVariables = {
+        ...formData,
+        tagIds: [...newTagIdsResponse, ...oldTags.map((oldTag) => oldTag.id)],
+      };
 
-      const res = await fetcher(createPoi, finalData);
+      const res: Mutation = await fetcher(createPoi, finalData);
 
       if (res.createPoi) {
         setNotification({
           title: 'Ort hinzugefügt',
-          text:
-            'Ort wurde erfolgreich hinzugefügt. Bitte überprüfe deine E-Mails und klicke dort auf den Link um deine Mail-Adresse zu verifizieren.',
+          text: 'Ort wurde erfolgreich hinzugefügt. Bitte überprüfe deine E-Mails und klicke dort auf den Link um deine Mail-Adresse zu verifizieren.',
           type: 'success',
         });
         history.push('/');
@@ -110,6 +119,15 @@ const AddPoiForm: React.FC<Props> = () => {
       });
       const tags = removeDuplicateObjects(tagsWithDuplicates, 'id');
       setTagOptions(tags);
+
+      const relationStatuses = removeDuplicateObjects(data, 'relationStatus')
+        .filter((poi) => !!poi.relationStatus)
+        .map((poi) => ({ label: poi.relationStatus, value: poi.relationStatus }));
+      setRelationStatusOptions(relationStatuses);
+      const categories = removeDuplicateObjects(data, 'category')
+        .filter((poi) => !!poi.category)
+        .map((poi) => ({ label: poi.category, value: poi.category }));
+      setCatgeoryOptions(categories);
     }
   }, [data]);
 
@@ -129,10 +147,6 @@ const AddPoiForm: React.FC<Props> = () => {
     if (draftPoi) setFormData({ ...formData, lat: draftPoi[0], lng: draftPoi[1] });
   }, [draftPoi]);
 
-  useEffect(() => {
-    console.log('Form Data', formData);
-  }, [formData]);
-
   return (
     <form className="flex-1 flex flex-col justify-between" onSubmit={handleSubmit} ref={formRef}>
       <div className="flex flex-col">
@@ -144,12 +158,31 @@ const AddPoiForm: React.FC<Props> = () => {
         />
         <TagInput label={'Tags'} tags={selectedTags} options={tagOptions} onTagsChange={setSelectedTags} />
         <TextInput label={'Name des Orts'} name={'name'} value={formData.name} onChange={handleInputChange} required />
-        <TextInput
+        <SelectInput
           label={'Kategorie'}
-          name={'category'}
-          value={formData.category}
-          onChange={handleInputChange}
           required
+          placeholder={'Auswählen...'}
+          name={'category'}
+          options={categoryOptions}
+          onChange={(selectedOption) =>
+            setFormData((prev) => ({
+              ...prev,
+              category: selectedOption ? (selectedOption as StringSelectOption).value : '',
+            }))
+          }
+        />
+        <SelectInput
+          label={'Verhältnis zum Fab City Hamburg e.V.'}
+          required
+          name={'relationStatus'}
+          placeholder={'Auswählen...'}
+          options={relationStatusOptions}
+          onChange={(selectedOption) =>
+            setFormData((prev) => ({
+              ...prev,
+              relationStatus: selectedOption ? (selectedOption as StringSelectOption).value : '',
+            }))
+          }
         />
         <TextInput
           label={'Anschrift'}

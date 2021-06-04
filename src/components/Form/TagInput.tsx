@@ -11,8 +11,7 @@ interface Props {
   required?: boolean;
 }
 
-const TagInput = ({ label, tags, options, onTagsChange, required }: Props) => {
-  // const [allTags, setAllTags] = useState<TagType[]>([]);
+const TagInput: React.FC<Props> = ({ label, tags, options, onTagsChange, required }: Props) => {
   // All options
   const [tagOptions, setTagOptions] = useState<TagType[]>([]);
   // The text input
@@ -100,7 +99,7 @@ const TagInput = ({ label, tags, options, onTagsChange, required }: Props) => {
             }}
             type={'text'}
             value={draftEntry}
-            className={`w-16 block p-0 flex-1 rounded-lg border-0 focus:outline-none focus:ring-0 ${
+            className={`form-input w-16 block p-0 flex-1 rounded-lg border-0 focus:outline-none focus:ring-0 ${
               tags.length ? '' : 'px-3'
             }`}
           />
@@ -117,7 +116,7 @@ const TagInput = ({ label, tags, options, onTagsChange, required }: Props) => {
             return (
               <li
                 key={`${option.id}`}
-                onMouseDown={(e) => {
+                onMouseDown={() => {
                   handleSelectTag(option);
                 }}
                 className="w-full p-1 hover:bg-gray-100"

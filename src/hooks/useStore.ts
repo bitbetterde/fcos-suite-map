@@ -1,8 +1,8 @@
 import type { Error } from 'src/types/Error';
-import type { PointOfInterest } from 'src/types/PointOfInterest';
+import type { PointOfInterest, Tag } from 'src/types/PointOfInterest';
 import type { Notification } from 'src/types/Notification';
 import type { LatLngTuple } from 'leaflet';
-import create, { GetState, SetState, State, StateCreator, StoreApi } from 'zustand';
+import create, { State } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 interface Store extends State {
@@ -16,6 +16,10 @@ interface Store extends State {
   setDraftPoi: (latLng: LatLngTuple | null) => void;
   notification: Notification | null;
   setNotification: (notification: Notification | null) => void;
+  filterTags: Tag[];
+  setFilterTags: (tags: Tag[]) => void;
+  filterCategories: string[];
+  setFilterCategories: (categories: string[]) => void;
 }
 
 // const log = (config: StateCreator<Store>) => (set: SetState<Store>, get: GetState<Store>, api: StoreApi<Store>) =>
@@ -58,6 +62,14 @@ export const useStore = create<Store>(
     notification: null,
     setNotification: (notification) => {
       set({ notification });
+    },
+    filterTags: [],
+    setFilterTags: (tags) => {
+      set({ filterTags: tags });
+    },
+    filterCategories: [],
+    setFilterCategories: (categories) => {
+      set({ filterCategories: categories });
     },
   })),
 );

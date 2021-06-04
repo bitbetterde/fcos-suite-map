@@ -6,6 +6,7 @@ export interface PointOfInterestBase {
   address: string;
   website: string;
   category: string;
+  relationStatus: string;
 }
 export interface PointOfInterest extends PointOfInterestBase {
   id: number;

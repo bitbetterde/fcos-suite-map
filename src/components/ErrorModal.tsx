@@ -3,9 +3,7 @@ import React from 'react';
 import { useStore } from '../hooks';
 import Modal from './Modal';
 
-interface Props {}
-
-const ErrorModal: React.FC<Props> = () => {
+const ErrorModal: React.FC = () => {
   const error = useStore((state) => state.error);
   const icons: { [index: string]: JSX.Element } = {
     alert: <AlertIcon className="h-6 w-6 text-red-600" />,

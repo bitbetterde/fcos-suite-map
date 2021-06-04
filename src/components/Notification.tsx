@@ -2,9 +2,7 @@ import React from 'react';
 import { CheckCircleOutline as CheckIcon, X as XIcon, ExclamationOutline as AlertIcon } from 'heroicons-react';
 import { useStore } from '../hooks';
 
-interface Props {}
-
-const Notification: React.FC<Props> = () => {
+const Notification: React.FC = () => {
   const notification = useStore((state) => state.notification);
   const setNotification = useStore((state) => state.setNotification);
 

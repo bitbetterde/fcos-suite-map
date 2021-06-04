@@ -10,7 +10,6 @@ module.exports = {
     '@snowpack/plugin-typescript',
     '@snowpack/plugin-postcss',
     '@snowpack/plugin-dotenv',
-    '@jadex/snowpack-plugin-tailwindcss-jit',
   ],
   routes: [
     /* Enable an SPA Fallback in development: */
@@ -24,7 +23,7 @@ module.exports = {
     /* ... */
   },
   devOptions: {
-    /* ... */
+    tailwindConfig: './tailwind.config.js',
   },
   buildOptions: {
     /* ... */
