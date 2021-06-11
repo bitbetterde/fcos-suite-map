@@ -18,7 +18,7 @@ const MapLayerControl: React.FC = () => {
   };
 
   return (
-    <div className="border-2 border-black w-48 border-opacity-20 rounded-lg absolute right-0 bottom-0 mb-4 mr-4 bg-white p-4 z-10">
+    <div className="border-2 border-black w-52 border-opacity-20 rounded-lg absolute right-0 bottom-0 mb-4 mr-4 bg-white p-4 z-10">
       <div className={`flex justify-between cursor-pointer ${isOpen ? 'mb-2' : ''}`} onClick={() => setIsOpen(!isOpen)}>
         <h3 className="text-base font-semibold text-gray-900">Kategorien:</h3>
         <DownIcon
@@ -28,7 +28,7 @@ const MapLayerControl: React.FC = () => {
       {isOpen &&
         layers.map((layer) => {
           return (
-            <div key={layer}>
+            <div key={layer} className="my-2">
               <label className="inline-flex items-center">
                 <input
                   type="checkbox"

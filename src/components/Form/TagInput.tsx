@@ -80,7 +80,7 @@ const TagInput: React.FC<Props> = ({ label, tags, options, onTagsChange, require
         <div className="flex flex-wrap items-center flex-1 p-2">
           {tags.map((selectedTag) => (
             <Tag
-              key={`selected${selectedTag.id}`}
+              key={`selected${selectedTag.color}`}
               onClickDelete={() => handleClickDeleteTag(selectedTag)}
               color={selectedTag.color}
             >

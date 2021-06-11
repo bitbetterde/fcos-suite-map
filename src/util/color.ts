@@ -1,6 +1,6 @@
-export function generateRandomHslColor(saturation = 100, lightness = 50): string {
-  const randomHue = getRandomIntInclusive(0, 360);
-  const color = `hsl(${randomHue},${saturation}%,${lightness}%)`;
+export function generateRandomHslColor(saturation = 100, lightness = 50, distinctValues = 20): string {
+  const randomColorIndex = getRandomIntInclusive(0, distinctValues);
+  const color = `hsl(${Math.floor(randomColorIndex * (360 / distinctValues))},${saturation}%,${lightness}%)`;
   return color;
 }
 
