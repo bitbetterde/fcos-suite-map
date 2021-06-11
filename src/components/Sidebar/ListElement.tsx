@@ -16,7 +16,7 @@ const ListElement: React.FC<Props> = ({ value, hovered, ...restProps }) => {
         {...restProps}
         className={`border-2 border-black border-opacity-20 ${
           hovered ? 'border-opacity-40' : 'hover:border-opacity-40'
-        } cursor-pointer rounded-lg md:overflow-hidden mx-4 my-2`}
+        } cursor-pointer rounded-lg mx-4 my-2`}
       >
         <div className="p-3">
           <h2 className="tracking-widest text-xs uppercase title-font font-medium text-gray-400 mb-1">
