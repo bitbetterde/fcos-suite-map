@@ -4,12 +4,11 @@ import { useMap, useMapEvent } from 'react-leaflet';
 import { useStore } from '../../hooks';
 
 interface Props {
-  center: LatLngTuple;
-  zoom: number;
+  bounds: Array<LatLngTuple>;
   createPoiMode?: boolean;
 }
 
-const MapViewController: React.FC<Props> = ({ center, zoom, createPoiMode }) => {
+const MapViewController: React.FC<Props> = ({ bounds, createPoiMode }) => {
   const setDraftPoi = useStore((state) => state.setDraftPoi);
   const map = useMap();
 
@@ -20,8 +19,8 @@ const MapViewController: React.FC<Props> = ({ center, zoom, createPoiMode }) => 
   });
 
   useEffect(() => {
-    map.setView(center, zoom);
-  }, [center, zoom]);
+    map.fitBounds(bounds, { maxZoom: 16 });
+  }, [bounds]);
 
   return <></>;
 };

@@ -1,6 +1,6 @@
 import type { LatLngTuple } from 'leaflet';
 import { divIcon, DivIconOptions } from 'leaflet';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { useStore } from '../../hooks';
 import MapViewController from './MapViewController';
@@ -30,22 +30,27 @@ export const Map: React.FC<Props> = ({ createMode }) => {
   );
   const { data } = useFilteredPoiData();
   const draftPoi = useStore((state) => state.draftPoi);
+  const [mapBounds, setMapBounds] = useState<Array<LatLngTuple>>([DEFAULT_CENTER]);
   const hoveredPoi = useStore((state) => state.hoveredPoi);
   const setHoveredPoi = useStore((state) => state.setHoveredPoi);
   const selectedPoi = useStore((state) => state.selectedPoi);
   const history = useHistory();
   const selectedLatlng: LatLngTuple | undefined = selectedPoi ? [selectedPoi?.lat, selectedPoi?.lng] : undefined;
 
+  useEffect(() => {
+    let newBounds = [DEFAULT_CENTER];
+    if (selectedPoi) {
+      newBounds = [[selectedPoi.lat, selectedPoi.lng] as LatLngTuple];
+    } else if (data?.length) {
+      newBounds = data?.map((poi) => [poi.lat, poi.lng] as LatLngTuple) || [];
+    }
+    setMapBounds(newBounds);
+  }, [data, selectedPoi]);
+
   return (
     <div className="relative h-full w-full z-0">
       {!createMode && <MapLayerControl />}
-      <MapContainer
-        id={'mapid'}
-        className={'h-full w-full z-0'}
-        center={DEFAULT_CENTER}
-        zoom={13}
-        scrollWheelZoom={true}
-      >
+      <MapContainer id={'mapid'} className={'h-full w-full z-0'} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
@@ -55,7 +60,7 @@ export const Map: React.FC<Props> = ({ createMode }) => {
           zoomOffset={-1}
           maxZoom={18}
         />
-        <MapViewController center={selectedLatlng ?? DEFAULT_CENTER} zoom={13} createPoiMode={createMode} />
+        <MapViewController bounds={mapBounds} createPoiMode={createMode} />
         {/* Single marker when creating a new POI */}
         {!!(createMode && draftPoi) && <Marker icon={greenLargeIcon} position={draftPoi} />}
         {/* Single marker when POI is selected */}
