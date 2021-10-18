@@ -28,4 +28,4 @@ lftp deploy:
   only:
     - main
   script:
-    - lftp -e "set net:timeout 5; set net:max-retries 3; set net:reconnect-interval-base 5; open sftp://$SFTP_HOST; user $SFTP_USER $SFTP_PASSWORD; mirror -X .* -X .*/ --reverse --verbose build/ live/; bye"
+    - lftp -e "set net:timeout 5; set net:max-retries 3; set net:reconnect-interval-base 5; set ftp:ssl-allow no; ftp://$FTPS_USER:$FTPS_PASSWORD@$FTPS_HOST; mirror -X .* -X .*/ --reverse --verbose build/ live/; bye"
