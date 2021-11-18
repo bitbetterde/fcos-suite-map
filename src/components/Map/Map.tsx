@@ -49,7 +49,7 @@ export const Map: React.FC<Props> = ({ createMode }) => {
 
   return (
     <div className="relative h-full w-full z-0">
-      {!createMode && <MapLayerControl />}
+      {!createMode && !selectedPoi && <MapLayerControl />}
       <MapContainer id={'mapid'} className={'h-full w-full z-0'} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
