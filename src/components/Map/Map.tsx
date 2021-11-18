@@ -45,7 +45,7 @@ export const Map: React.FC<Props> = ({ createMode }) => {
       newBounds = data?.map((poi) => [poi.lat, poi.lng] as LatLngTuple) || [];
     }
     setMapBounds(newBounds);
-  }, [data, selectedPoi]);
+  }, [JSON.stringify(data), selectedPoi]);
 
   return (
     <div className="relative h-full w-full z-0">
