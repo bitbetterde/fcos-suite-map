@@ -56,7 +56,7 @@ export const Map: React.FC<Props> = ({ createMode }) => {
           url="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
           id="mapbox/streets-v11"
           tileSize={512}
-          accessToken={import.meta.env.SNOWPACK_PUBLIC_MAPBOX_TOKEN}
+          accessToken={import.meta.env.VITE_PUBLIC_MAPBOX_TOKEN}
           zoomOffset={-1}
           maxZoom={18}
         />
