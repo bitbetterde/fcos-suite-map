@@ -4,7 +4,6 @@ import { useStore } from '../hooks';
 import ErrorModal from './ErrorModal';
 import Notification from './Notification';
 import Map from './Map/Map';
-// import SidebarCreateView from './Sidebar/SidebarCreateView';
 import SidebarListView from './Sidebar/SidebarListView';
 import SidebarSingleView from './Sidebar/SidebarSingleView';
 import PoiLoader from './PoiLoader';
@@ -23,9 +22,6 @@ const App: React.FC = () => {
           <PoiLoader poiId={null} />
         </Route>
         <Switch>
-          {/* <Route exact path="/add">
-            <SidebarCreateView />
-          </Route> */}
           <Route>{selectedPoi ? <SidebarSingleView /> : <SidebarListView />}</Route>
         </Switch>
       </div>

@@ -1,17 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './components/App';
-import SwrWrapper from './components/SwrWrapper';
+// import 'leaflet/index.css';
 import './index.css';
 
-ReactDOM.render(
+const container = document.getElementById('app');
+const root = createRoot(container!);
+
+root.render(
   <React.StrictMode>
-    <SwrWrapper>
-      <Router>
-        <App />
-      </Router>
-    </SwrWrapper>
+    <Router>
+      <App />
+    </Router>
   </React.StrictMode>,
-  document.getElementById('root'),
 );
