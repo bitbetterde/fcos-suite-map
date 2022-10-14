@@ -2,10 +2,10 @@ import type { Error } from 'src/types/Error';
 import type { PointOfInterest, Tag } from 'src/types/PointOfInterest';
 import type { Notification } from 'src/types/Notification';
 import type { LatLngTuple } from 'leaflet';
-import create, { State } from 'zustand';
+import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-interface Store extends State {
+interface Store {
   selectedPoi: PointOfInterest | null;
   setSelectedPoi: (poi: PointOfInterest | null) => void;
   hoveredPoi: PointOfInterest | null;
@@ -22,20 +22,7 @@ interface Store extends State {
   setFilterCategories: (categories: string[]) => void;
 }
 
-// const log = (config: StateCreator<Store>) => (set: SetState<Store>, get: GetState<Store>, api: StoreApi<Store>) =>
-//   config(
-//     (args) => {
-//       console.group('Global state changed');
-//       console.log('%cAction:', 'color: #00A7F7; font-weight: 700;', args);
-//       set(args);
-//       console.log('%cNext State:', 'color: #47B04B; font-weight: 700;', get());
-//       console.groupEnd();
-//     },
-//     get,
-//     api,
-//   );
-
-export const useStore = create<Store>(
+export const useStore = create<Store>()(
   devtools((set) => ({
     selectedPoi: null,
     setSelectedPoi: (poi) => {

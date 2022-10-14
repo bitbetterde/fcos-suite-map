@@ -12,9 +12,11 @@ const PoiLoader: React.FC<Props> = ({ poiId }) => {
   useEffect(() => {
     if (data && poiId !== undefined) {
       const poi = poiId ? data.find((poi) => String(poi.id) === poiId) : null;
-      if (poi !== undefined) setSelectedPoi(poi);
+      if (poi !== undefined) {
+        setSelectedPoi(poi);
+      }
     }
-  }, [data, poiId]);
+  }, [poiId]);
   return <></>;
 };
 

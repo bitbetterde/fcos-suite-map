@@ -62,9 +62,9 @@ export const Map: React.FC<Props> = ({ createMode }) => {
         />
         <MapViewController bounds={mapBounds} createPoiMode={createMode} />
         {/* Single marker when creating a new POI */}
-        {!!(createMode && draftPoi) && <Marker icon={greenLargeIcon} position={draftPoi} />}
+        {Boolean(createMode && draftPoi) && <Marker icon={greenLargeIcon} position={draftPoi} />}
         {/* Single marker when POI is selected */}
-        {!!(selectedPoi && selectedLatlng && !createMode) && <Marker icon={largeIcon} position={selectedLatlng} />}
+        {Boolean(selectedPoi && selectedLatlng && !createMode) && <Marker icon={largeIcon} position={selectedLatlng} />}
         {/* Multiple markers, when no POI is selected */}
         {!selectedPoi &&
           !createMode &&
@@ -81,7 +81,7 @@ export const Map: React.FC<Props> = ({ createMode }) => {
                     history.push(`/poi/${String(poi.id)}`);
                   },
                   mouseover: () => {
-                    setHoveredPoi(poi);
+                    if (hoveredPoi?.id != poi.id) setHoveredPoi(poi);
                   },
                   mouseout: () => {
                     setHoveredPoi(null);
