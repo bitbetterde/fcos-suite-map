@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { usePoiData, useStore } from '../hooks';
+import { useStore } from '../hooks';
 
 interface Props {
   poiId: string | null;
 }
 
 const PoiLoader: React.FC<Props> = ({ poiId }) => {
-  const { data } = usePoiData();
+  const data = useStore((state) => state.poiData);
   const setSelectedPoi = useStore((state) => state.setSelectedPoi);
 
   useEffect(() => {

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useFilteredPoiData } from '../../hooks/useFilteredPoiData';
-import { usePoiData } from '../../hooks';
 import { ChevronDownOutline as DownIcon } from 'heroicons-react';
+import { useStore } from '../../hooks';
 
 const MapLayerControl: React.FC = () => {
-  const { data } = usePoiData();
+  const data = useStore((state) => state.poiData);
   const { filterCategories, setFilterCategories } = useFilteredPoiData();
   const layers = Array.from(new Set(data?.map((poi) => poi.category)));
   const [isOpen, setIsOpen] = useState(false);
