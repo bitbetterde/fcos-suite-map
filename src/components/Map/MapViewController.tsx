@@ -1,5 +1,5 @@
 import type { LatLngTuple } from 'leaflet';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useMap, useMapEvent } from 'react-leaflet';
 import { useStore } from '../../hooks';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useStore } from '../../hooks';
 import ListElement from './ListElement';
 import SidebarContainer from './SidebarContainer';

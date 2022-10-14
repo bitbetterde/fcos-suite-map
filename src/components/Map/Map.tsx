@@ -1,6 +1,6 @@
 import type { LatLngTuple } from 'leaflet';
 import { divIcon, DivIconOptions } from 'leaflet';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { useStore } from '../../hooks';
 import MapViewController from './MapViewController';

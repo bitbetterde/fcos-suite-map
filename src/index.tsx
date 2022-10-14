@@ -1,18 +1,13 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router } from 'react-router-dom';
-import App from './components/App';
-import 'leaflet/dist/leaflet.css';
-import 'leaflet/dist/leaflet.js';
-import './index.css';
+import FabCityMap from './components/FabCityMap';
+import data from "./data.json"
 
 const container = document.getElementById('app');
 const root = createRoot(container!);
 
 root.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <FabCityMap data={data}/>
   </React.StrictMode>,
 );

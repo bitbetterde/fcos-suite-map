@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react';
+import type { SyntheticEvent } from 'react';
 import type { PointOfInterest } from 'src/types/PointOfInterest';
 
 interface Props {

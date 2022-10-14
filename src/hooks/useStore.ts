@@ -4,10 +4,10 @@ import type { Notification } from 'src/types/Notification';
 import type { LatLngTuple } from 'leaflet';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
-import jsonData from "../data.json";
 
 interface Store {
   poiData: PointOfInterest[] | null;
+  setPoiData: (data: PointOfInterest[] | null) => void;
   selectedPoi: PointOfInterest | null;
   setSelectedPoi: (poi: PointOfInterest | null) => void;
   hoveredPoi: PointOfInterest | null;
@@ -26,7 +26,12 @@ interface Store {
 
 export const useStore = create<Store>()(
   devtools((set) => ({
-    poiData: jsonData,
+    poiData: null,
+    setPoiData: (data) => {
+      set({
+        poiData: data,
+      });
+    },
     selectedPoi: null,
     setSelectedPoi: (poi) => {
       set({

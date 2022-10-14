@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useFilteredPoiData } from '../../hooks/useFilteredPoiData';
 import { ChevronDownOutline as DownIcon } from 'heroicons-react';
 import { useStore } from '../../hooks';

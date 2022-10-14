@@ -1,4 +1,3 @@
-import React from 'react';
 import { X as CloseIcon } from 'heroicons-react';
 
 interface Props {

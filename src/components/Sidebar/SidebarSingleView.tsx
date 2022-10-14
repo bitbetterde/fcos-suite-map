@@ -3,7 +3,6 @@ import {
   LocationMarkerOutline as AddressIcon,
   UserGroupOutline as RealtionStatusIcon,
 } from 'heroicons-react';
-import React from 'react';
 import { useStore } from '../../hooks';
 import SidebarContainer from './SidebarContainer';
 import Tag from '../Tag';

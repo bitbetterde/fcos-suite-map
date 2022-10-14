@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Theme } from 'react-select';
 import ReactSelect, { NamedProps, StylesConfig, components } from 'react-select';
 import Tag from './Tag';
