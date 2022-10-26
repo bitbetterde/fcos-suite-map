@@ -1,2 +1,2 @@
-export * from './usePoiData';
 export * from './useStore';
+export * from './useFilteredPoiData';

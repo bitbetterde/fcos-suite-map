@@ -9,7 +9,7 @@ export interface PointOfInterestBase {
   relationStatus: string;
 }
 export interface PointOfInterest extends PointOfInterestBase {
-  id: number;
+  id: string;
   image?: string;
   tags: Tag[];
 }

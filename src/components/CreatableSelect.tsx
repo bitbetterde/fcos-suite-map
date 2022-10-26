@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Theme } from 'react-select';
 import type { NamedProps, StylesConfig } from 'react-select';
 import Creatable from 'react-select/creatable';

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { usePoiData, useStore } from '../../hooks';
+import { useState } from 'react';
+import { useStore } from '../../hooks';
 import ListElement from './ListElement';
 import SidebarContainer from './SidebarContainer';
 import { removeDuplicateObjects } from '../../util/array';
@@ -13,7 +13,7 @@ const SidebarListView: React.FC = () => {
   const tagsToSelectOptions = (tags?: Tag[]) => tags?.map((tag) => ({ label: tag.displayName, value: tag }));
   const history = useHistory();
 
-  const { data } = usePoiData();
+  const data = useStore((state) => state.poiData);
   const { data: filteredData, filterTags, setFilterTags } = useFilteredPoiData();
   const hoveredPoi = useStore((state) => state.hoveredPoi);
   const setHoveredPoi = useStore((state) => state.setHoveredPoi);

@@ -1,4 +1,3 @@
-import React from 'react';
 import { CheckCircleOutline as CheckIcon, X as XIcon, ExclamationOutline as AlertIcon } from 'heroicons-react';
 import { useStore } from '../hooks';
 

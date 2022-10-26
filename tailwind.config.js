@@ -1,16 +1,17 @@
 module.exports = {
-  mode: 'jit',
-  purge: ['./src/**/*.html', './src/**/*.tsx'],
-  darkMode: false, // or 'media' or 'class'
-  theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
-  },
+  content: ['./src/**/*.{html,js,jsx,tsx,md,mdx,astro}'],
   plugins: [
     require('@tailwindcss/forms')({
       strategy: 'class',
     }),
   ],
+  theme: {
+    extend: {
+      colors: {
+        'fabcity-red': '#ee2f45',
+        'fabcity-green': '#08aa64',
+        'fabcity-blue': '#19459c',
+      },
+    },
+  },
 };

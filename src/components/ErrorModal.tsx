@@ -1,5 +1,4 @@
 import { ExclamationOutline as AlertIcon } from 'heroicons-react';
-import React from 'react';
 import { useStore } from '../hooks';
 import Modal from './Modal';
 
