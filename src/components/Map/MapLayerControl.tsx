@@ -32,11 +32,10 @@ const MapLayerControl: React.FC = () => {
               <label className="inline-flex items-center">
                 <input
                   type="checkbox"
-                  className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
                   checked={!!filterCategories?.find((cat) => cat === layer)}
                   onChange={(e) => onChangeCheckbox(e.target.checked, layer)}
                 />
-                <span className="ml-2">{layer}</span>
+                <span className="ml-2 text-black text-sm">{layer}</span>
               </label>
             </div>
           );

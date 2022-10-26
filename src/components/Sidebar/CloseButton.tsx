@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react';
+import type { SyntheticEvent } from 'react';
 import { X as CloseIcon } from 'heroicons-react';
 interface Props {
   onClick: (event: SyntheticEvent) => void;

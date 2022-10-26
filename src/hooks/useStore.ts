@@ -1,7 +1,6 @@
 import type { Error } from 'src/types/Error';
 import type { PointOfInterest, Tag } from 'src/types/PointOfInterest';
 import type { Notification } from 'src/types/Notification';
-import type { LatLngTuple } from 'leaflet';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -14,8 +13,6 @@ interface Store {
   setHoveredPoi: (poi: PointOfInterest | null) => void;
   error: Error | null;
   setError: (error: Error | null) => void;
-  draftPoi: LatLngTuple | null;
-  setDraftPoi: (latLng: LatLngTuple | null) => void;
   notification: Notification | null;
   setNotification: (notification: Notification | null) => void;
   filterTags: Tag[];
@@ -47,12 +44,6 @@ export const useStore = create<Store>()(
     error: null,
     setError: (error) => {
       set({ error });
-    },
-    draftPoi: null,
-    setDraftPoi: (latLng) => {
-      set({
-        draftPoi: latLng,
-      });
     },
     notification: null,
     setNotification: (notification) => {
