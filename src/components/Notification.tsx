@@ -6,32 +6,32 @@ const Notification: React.FC = () => {
   const setNotification = useStore((state) => state.setNotification);
 
   const icon: Record<string, JSX.Element> = {
-    alert: <AlertIcon className="h-6 w-6 text-red-600" />,
-    success: <CheckIcon className="h-6 w-6 text-green-400" />,
+    alert: <AlertIcon className="fcmap-h-6 fcmap-w-6 fcmap-text-red-600" />,
+    success: <CheckIcon className="fcmap-h-6 fcmap-w-6 fcmap-text-green-400" />,
   };
   return (
     notification && (
       <div
         aria-live="assertive"
-        className="z-10 fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start"
+        className="fcmap-z-10 fcmap-fixed fcmap-inset-0 fcmap-flex fcmap-items-end fcmap-px-4 fcmap-py-6 fcmap-pointer-events-none sm:fcmap-p-6 sm:fcmap-items-start"
       >
-        <div className="w-full flex flex-col items-center space-y-4 sm:items-end">
-          <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
-            <div className="p-4">
-              <div className="flex items-start">
-                <div className="flex-shrink-0">{icon[notification.type]}</div>
-                <div className="ml-3 w-0 flex-1 pt-0.5">
-                  <p className="text-sm font-medium text-gray-900">{notification.title}</p>
-                  <p className="mt-1 text-sm text-gray-500">{notification.text}</p>
+        <div className="fcmap-w-full fcmap-flex fcmap-flex-col fcmap-items-center fcmap-space-y-4 sm:fcmap-items-end">
+          <div className="fcmap-max-w-sm fcmap-w-full fcmap-bg-white fcmap-shadow-lg fcmap-rounded-lg fcmap-pointer-events-auto fcmap-ring-1 fcmap-ring-black fcmap-ring-opacity-5 fcmap-overflow-hidden">
+            <div className="fcmap-p-4">
+              <div className="fcmap-flex fcmap-items-start">
+                <div className="fcmap-flex-shrink-0">{icon[notification.type]}</div>
+                <div className="fcmap-ml-3 fcmap-w-0 fcmap-flex-1 fcmap-pt-0.5">
+                  <p className="fcmap-text-sm fcmap-font-medium fcmap-text-gray-900">{notification.title}</p>
+                  <p className="fcmap-mt-1 fcmap-text-sm fcmap-text-gray-500">{notification.text}</p>
                 </div>
 
-                <div className="ml-4 flex-shrink-0 flex">
+                <div className="fcmap-ml-4 fcmap-flex-shrink-0 fcmap-flex">
                   <button
-                    className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="fcmap-bg-white fcmap-rounded-md fcmap-inline-flex fcmap-text-gray-400 hover:fcmap-text-gray-500 focus:fcmap-outline-none focus:fcmap-ring-2 focus:fcmap-ring-offset-2 focus:fcmap-ring-indigo-500"
                     onClick={() => setNotification(null)}
                   >
-                    <span className="sr-only">Close</span>
-                    <XIcon className="h-5 w-5" />
+                    <span className="fcmap-sr-only">Close</span>
+                    <XIcon className="fcmap-h-5 fcmap-w-5" />
                   </button>
                 </div>
               </div>

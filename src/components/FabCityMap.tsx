@@ -30,7 +30,7 @@ const FabCityMap: React.FC<Props> = ({ data, mapboxToken, className }) => {
       <Router>
         <ErrorModal />
         <Notification />
-        <div className={`flex md:flex-row-reverse flex-col h-full bg-white ${className || ''}`}>
+        <div className={`fcmap-flex md:fcmap-flex-row-reverse fcmap-flex-col fcmap-h-full fcmap-bg-white ${className || ''}`}>
           <Route path="/">
             <Map mapboxToken={mapboxToken} />
           </Route>

@@ -10,8 +10,8 @@ const CloseButton: React.FC<Props> = ({ onClick, absolute = false }) => {
     <CloseIcon
       size={32}
       className={`${
-        absolute ? 'absolute left-5 top-5' : ''
-      } p-1 text-gray-600 inline-block cursor-pointer bg-gray-200 bg-opacity-30 hover:bg-opacity-80 rounded-full`}
+        absolute ? 'fcmap-absolute fcmap-left-5 fcmap-top-5' : ''
+      } fcmap-p-1 fcmap-text-gray-600 fcmap-inline-block fcmap-cursor-pointer fcmap-bg-gray-200 fcmap-bg-opacity-30 hover:fcmap-bg-opacity-80 fcmap-rounded-full`}
       onClick={onClick}
     />
   );

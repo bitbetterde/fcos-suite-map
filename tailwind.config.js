@@ -1,5 +1,6 @@
 module.exports = {
   content: ['./src/**/*.{html,js,jsx,tsx,md,mdx,astro}'],
+  prefix: 'fcmap-',
   plugins: [
     require('@tailwindcss/forms')({
       strategy: 'class',

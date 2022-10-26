@@ -12,15 +12,15 @@ const Tag: React.FC<Props> = ({ children, onClick, onClickDelete, color = 'pink'
     <div
       onClick={onClick}
       className={`${
-        onClick ? 'cursor-pointer ' : ''
-      }inline-flex flex-nowrap items-center px-2 py-0.5 m-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 mr-2 whitespace-nowrap`}
+        onClick ? 'fcmap-cursor-pointer ' : ''
+      }fcmap-inline-flex fcmap-flex-nowrap fcmap-items-center fcmap-px-2 fcmap-py-0.5 fcmap-m-0.5 fcmap-rounded-full fcmap-text-sm fcmap-font-medium fcmap-bg-indigo-100 fcmap-text-indigo-800 fcmap-mr-2 fcmap-whitespace-nowrap`}
       style={color ? { backgroundColor: color } : {}}
     >
       {children}
       {onClickDelete && (
         <CloseIcon
           onClick={onClickDelete}
-          className="ml-0.5 inline-block cursor-pointer text-gray-600 hover:text-gray-800"
+          className="fcmap-ml-0.5 fcmap-inline-block fcmap-cursor-pointer fcmap-text-gray-600 hover:fcmap-text-gray-800"
           size={12}
         />
       )}
