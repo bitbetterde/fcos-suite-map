@@ -1,7 +1,6 @@
 {
-  "name": "fabcity-map",
+  "name": "@fchh/fabcity-map",
   "version": "0.0.1",
-  "private": true,
   "main": "dist/fabcity-map.mjs",
   "scripts": {
     "dev": "vite",
@@ -9,8 +8,24 @@
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "prettier:lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
-    "eslint": "eslint \"src/**/*.{js,jsx,ts,tsx}\""
+    "eslint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+    "prepublishOnly": "npm install && npm run build"
   },
+  "keywords": [
+    "React",
+    "Tailwind",
+    "Map",
+    "Mapbox",
+    "FCHH",
+    "Fab",
+    "City",
+    "Interfacer"
+  ],
+  "files": [
+    "dist/**/*",
+    "README.md"
+  ],
+  "author": "Moritz Stueckler<moritz@bitbetter.de>",
   "peerDependencies": {
     "react": ">=18.2.0",
     "react-dom": ">=18.2.0"
