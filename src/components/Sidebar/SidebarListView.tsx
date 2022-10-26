@@ -29,17 +29,17 @@ const SidebarListView: React.FC = () => {
 
   return (
     <SidebarContainer>
-      <div className="flex-col m-4 mb-2 pb-2 border-black border-opacity-20 border-b-2">
-        <div className="flex justify-between items-center">
-          <h1 className="text-xl font-medium title-font text-gray-900">{filteredData?.length} Orte:</h1>
+      <div className="fcmap-flex-col fcmap-m-4 fcmap-mb-2 fcmap-pb-2 fcmap-border-black fcmap-border-opacity-20 fcmap-border-b-2">
+        <div className="fcmap-flex fcmap-justify-between fcmap-items-center">
+          <h1 className="fcmap-text-xl fcmap-font-medium fcmap-title-font fcmap-text-gray-900">{filteredData?.length} Orte:</h1>
           <FilterIcon
             onClick={() => setFilterInputIsOpen(!filterInputIsOpen)}
-            className="text-black text-opacity-20 hover:text-opacity-60 w-5 h-5 cursor-pointer"
+            className="fcmap-text-black fcmap-text-opacity-20 hover:fcmap-text-opacity-60 fcmap-w-5 fcmap-h-5 fcmap-cursor-pointer"
           />
         </div>
 
         {filterInputIsOpen && (
-          <div className="py-2">
+          <div className="fcmap-py-2">
             <Select
               options={options}
               isMulti={true}

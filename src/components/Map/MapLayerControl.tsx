@@ -18,24 +18,24 @@ const MapLayerControl: React.FC = () => {
   };
 
   return (
-    <div className="border-2 border-black w-52 border-opacity-20 rounded-lg absolute right-0 bottom-0 mb-4 mr-4 bg-white p-4 z-10">
-      <div className={`flex justify-between cursor-pointer ${isOpen ? 'mb-2' : ''}`} onClick={() => setIsOpen(!isOpen)}>
-        <h3 className="text-base font-semibold text-gray-900">Kategorien:</h3>
+    <div className="fcmap-border-2 fcmap-border-black fcmap-w-52 fcmap-border-opacity-20 fcmap-rounded-lg fcmap-absolute fcmap-right-0 fcmap-bottom-0 fcmap-mb-4 fcmap-mr-4 fcmap-bg-white fcmap-p-4 fcmap-z-10">
+      <div className={`fcmap-flex fcmap-justify-between fcmap-cursor-pointer ${isOpen ? 'fcmap-mb-2' : ''}`} onClick={() => setIsOpen(!isOpen)}>
+        <h3 className="fcmap-text-base fcmap-font-semibold fcmap-text-gray-900">Kategorien:</h3>
         <DownIcon
-          className={`w-6 h-6 text-gray-400 transform transition duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
+          className={`fcmap-w-6 fcmap-h-6 fcmap-text-gray-400 fcmap-transform fcmap-transition fcmap-duration-300 ${isOpen ? 'fcmap-rotate-180' : 'fcmap-rotate-0'}`}
         />
       </div>
       {isOpen &&
         layers.map((layer) => {
           return (
-            <div key={layer} className="my-2">
-              <label className="inline-flex items-center">
+            <div key={layer} className="fcmap-my-2">
+              <label className="fcmap-inline-flex fcmap-items-center">
                 <input
                   type="checkbox"
                   checked={!!filterCategories?.find((cat) => cat === layer)}
                   onChange={(e) => onChangeCheckbox(e.target.checked, layer)}
                 />
-                <span className="ml-2 text-black text-sm">{layer}</span>
+                <span className="fcmap-ml-2 fcmap-text-black fcmap-text-sm">{layer}</span>
               </label>
             </div>
           );

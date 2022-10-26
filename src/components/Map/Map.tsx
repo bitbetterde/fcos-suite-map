@@ -1,7 +1,7 @@
 import type React from 'react';
 import { useEffect } from 'react';
 import { useStore, useFilteredPoiData } from '../../hooks';
-import Map, { Marker, useMap, AttributionControl } from 'react-map-gl';
+import ReactMapGl, { Marker, useMap, AttributionControl } from 'react-map-gl';
 import { useHistory } from 'react-router-dom';
 import MapLayerControl from './MapLayerControl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -25,7 +25,7 @@ const MarkerSvg: React.FC<MarkerProps> = ({ className }) => {
   );
 };
 
-export const MapGl: React.FC<Props> = ({ mapboxToken }) => {
+const Map: React.FC<Props> = ({ mapboxToken }) => {
   const history = useHistory();
   const data = useStore((state) => state.poiData);
   const selectedPoi = useStore((state) => state.selectedPoi);
@@ -39,7 +39,7 @@ export const MapGl: React.FC<Props> = ({ mapboxToken }) => {
   }, [selectedPoi]);
 
   return (
-    <Map
+    <ReactMapGl
       initialViewState={{
         latitude: DEFAULT_CENTER[1],
         longitude: DEFAULT_CENTER[0],
@@ -52,11 +52,11 @@ export const MapGl: React.FC<Props> = ({ mapboxToken }) => {
       id="fcmap"
       attributionControl={false}
     >
-      <AttributionControl position='top-right' />
+      <AttributionControl position="top-right" />
       <MapLayerControl />
       {selectedPoi ? (
         <Marker key={selectedPoi.id} longitude={selectedPoi.lng} latitude={selectedPoi.lat} anchor="bottom">
-          <MarkerSvg className="w-8 h-8 opacity-100 scale-125 text-fabcity-red" />
+          <MarkerSvg className="fcmap-w-8 fcmap-h-8 fcmap-opacity-100 fcmap-scale-125 fcmap-text-fabcity-red" />
         </Marker>
       ) : (
         (filteredData || data)?.map((poi) => {
@@ -72,16 +72,16 @@ export const MapGl: React.FC<Props> = ({ mapboxToken }) => {
               }}
             >
               <MarkerSvg
-                className={`transition ease-in-out w-8 h-8 hover:scale-125 opacity-70 hover:opacity-100 hover:cursor-pointer text-fabcity-red ${
-                  isHovered ? 'scale-125 opacity-100' : ''
+                className={`fcmap-transition fcmap-ease-in-out fcmap-w-8 fcmap-h-8 hover:fcmap-scale-125 fcmap-opacity-70 hover:fcmap-opacity-100 hover:fcmap-cursor-pointer fcmap-text-fabcity-red ${
+                  isHovered ? 'fcmap-scale-125 fcmap-opacity-100' : ''
                 }`}
               />
             </Marker>
           );
         })
       )}
-    </Map>
+    </ReactMapGl>
   );
 };
 
-export default MapGl;
+export default Map;

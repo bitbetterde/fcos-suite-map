@@ -45,7 +45,7 @@ const Select = <OptionType, isMulti extends boolean>(props: NamedProps<OptionTyp
       placeholder={'Tags auswählen...'}
       styles={customStyles}
       name="pois"
-      className="hover:border-opacity-40 rounded-lg w-full border-2 border-black border-opacity-20 focus-within:border-indigo-300 focus-within:ring focus-within:ring-indigo-200 focus-within:ring-opacity-50 mt-1"
+      className="hover:fcmap-border-opacity-40 fcmap-rounded-lg fcmap-w-full fcmap-border-2 fcmap-border-black fcmap-border-opacity-20 focus-within:fcmap-border-indigo-300 focus-within:fcmap-ring focus-within:fcmap-ring-indigo-200 focus-within:fcmap-ring-opacity-50 fcmap-mt-1"
       {...props}
     />
   );
