@@ -15,9 +15,10 @@ interface Props {
   data: any;
   mapboxToken: string;
   className?: string;
+  baseUrl?: string;
 }
 
-const FabCityMap: React.FC<Props> = ({ data, mapboxToken, className }) => {
+const FabCityMap: React.FC<Props> = ({ data, mapboxToken, className, baseUrl }) => {
   const selectedPoi = useStore((state) => state.selectedPoi);
   const setPoiData = useStore((state) => state.setPoiData);
 
@@ -27,10 +28,14 @@ const FabCityMap: React.FC<Props> = ({ data, mapboxToken, className }) => {
 
   return (
     <MapProvider>
-      <Router>
+      <Router {...(baseUrl ? { baseUrl } : {})}>
         <ErrorModal />
         <Notification />
-        <div className={`fcmap-flex md:fcmap-flex-row-reverse fcmap-flex-col fcmap-h-full fcmap-bg-white ${className || ''}`}>
+        <div
+          className={`fcmap-flex md:fcmap-flex-row-reverse fcmap-flex-col fcmap-h-full fcmap-bg-white ${
+            className || ''
+          }`}
+        >
           <Route path="/">
             <Map mapboxToken={mapboxToken} />
           </Route>
