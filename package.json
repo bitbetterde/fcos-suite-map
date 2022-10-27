@@ -1,6 +1,6 @@
 {
   "name": "@fchh/fabcity-map",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/fabcity-map.mjs",
   "scripts": {
     "dev": "vite",
