@@ -28,7 +28,7 @@ const FabCityMap: React.FC<Props> = ({ data, mapboxToken, className, baseUrl }) 
 
   return (
     <MapProvider>
-      <Router {...(baseUrl ? { baseUrl } : {})}>
+      <Router {...(baseUrl ? { basename: baseUrl } : {})}>
         <ErrorModal />
         <Notification />
         <div
