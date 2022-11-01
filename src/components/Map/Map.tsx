@@ -1,9 +1,10 @@
 import type React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useStore, useFilteredPoiData } from '../../hooks';
 import ReactMapGl, { Marker, useMap, AttributionControl } from 'react-map-gl';
 import { useHistory } from 'react-router-dom';
 import MapLayerControl from './MapLayerControl';
+import { calcBoundsFromCoordinates } from '../../util/geo';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 interface Props {
@@ -33,9 +34,18 @@ const Map: React.FC<Props> = ({ mapboxToken }) => {
   const { data: filteredData } = useFilteredPoiData();
   const DEFAULT_CENTER: [number, number] = [9.986701, 53.550359];
   const { fcmap } = useMap();
+  const [bounds, setBounds] = useState<[[number, number], [number, number]]>();
+
+  useEffect(() => {
+    const newBounds = calcBoundsFromCoordinates(data?.map((poi) => [poi.lng, poi.lat]) || [DEFAULT_CENTER]);
+    setBounds(newBounds);
+  }, [JSON.stringify(data)]);
 
   useEffect(() => {
     if (selectedPoi) fcmap?.easeTo({ center: [selectedPoi.lng, selectedPoi.lat], zoom: 14, duration: 1500 });
+    else {
+      bounds && fcmap?.fitBounds(bounds, { padding: 50, maxZoom: 16 });
+    }
   }, [selectedPoi]);
 
   return (

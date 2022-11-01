@@ -18,7 +18,7 @@ const MapLayerControl: React.FC = () => {
   };
 
   return (
-    <div className="fcmap-border-2 fcmap-border-black fcmap-w-52 fcmap-border-opacity-20 fcmap-rounded-lg fcmap-absolute fcmap-right-0 fcmap-bottom-0 fcmap-mb-4 fcmap-mr-4 fcmap-bg-white fcmap-p-4 fcmap-z-10">
+    <div className="fcmap-border fcmap-border-grey-900 fcmap-w-52 fcmap-absolute fcmap-right-0 fcmap-bottom-0 fcmap-mb-4 fcmap-mr-4 fcmap-bg-white fcmap-p-4 fcmap-z-10">
       <div className={`fcmap-flex fcmap-justify-between fcmap-cursor-pointer ${isOpen ? 'fcmap-mb-2' : ''}`} onClick={() => setIsOpen(!isOpen)}>
         <h3 className="fcmap-text-base fcmap-font-semibold fcmap-text-gray-900">Kategorien:</h3>
         <DownIcon
