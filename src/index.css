@@ -33,10 +33,6 @@ code {
     max-width: 500px;
     max-height: initial;
   }
-
-  .leaflet-control-container {
-    display: initial;
-  }
 }
 
 .input-chevron {
