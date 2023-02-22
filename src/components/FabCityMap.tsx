@@ -16,9 +16,10 @@ interface Props {
   mapboxToken: string;
   className?: string;
   baseUrl?: string;
+  mapStyle?: string;
 }
 
-const FabCityMap: React.FC<Props> = ({ data, mapboxToken, className, baseUrl }) => {
+const FabCityMap: React.FC<Props> = ({ data, mapboxToken, className, baseUrl, mapStyle }) => {
   const selectedPoi = useStore((state) => state.selectedPoi);
   const setPoiData = useStore((state) => state.setPoiData);
 
@@ -37,7 +38,7 @@ const FabCityMap: React.FC<Props> = ({ data, mapboxToken, className, baseUrl }) 
           }`}
         >
           <Route path="/">
-            <Map mapboxToken={mapboxToken} />
+            <Map mapboxToken={mapboxToken} mapStyle={mapStyle} />
           </Route>
           <Route path="/poi/:poiId">{({ match }) => <PoiLoader poiId={match?.params?.poiId as string} />}</Route>
           <Route exact path="/">

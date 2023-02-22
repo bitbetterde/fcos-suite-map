@@ -9,6 +9,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 interface Props {
   mapboxToken: string;
+  mapStyle?: string;
 }
 
 interface MarkerProps {
@@ -26,7 +27,7 @@ const MarkerSvg: React.FC<MarkerProps> = ({ className }) => {
   );
 };
 
-const Map: React.FC<Props> = ({ mapboxToken }) => {
+const Map: React.FC<Props> = ({ mapboxToken, mapStyle }) => {
   const history = useHistory();
   const data = useStore((state) => state.poiData);
   const selectedPoi = useStore((state) => state.selectedPoi);
@@ -56,7 +57,7 @@ const Map: React.FC<Props> = ({ mapboxToken }) => {
         zoom: 10,
       }}
       style={{ width: '100%', height: '100%' }}
-      mapStyle="mapbox://styles/mapbox/streets-v11"
+      mapStyle={mapStyle ?? 'mapbox://styles/mapbox/light-v11'}
       mapboxAccessToken={mapboxToken}
       maxPitch={0}
       id="fcmap"
