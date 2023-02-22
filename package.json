@@ -1,6 +1,6 @@
 {
   "name": "@fchh/fcos-suite-map",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "dist/fcos-suite-map.mjs",
   "scripts": {
     "dev": "vite",
