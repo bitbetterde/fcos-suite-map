@@ -1,7 +1,7 @@
 {
-  "name": "@fchh/fabcity-map",
+  "name": "@fchh/fcos-suite-map",
   "version": "0.0.7",
-  "main": "dist/fabcity-map.mjs",
+  "main": "dist/fcos-suite-map.mjs",
   "scripts": {
     "dev": "vite",
     "build": "rm -rf dist && vite build",

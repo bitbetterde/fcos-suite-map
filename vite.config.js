@@ -6,8 +6,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/components/FabCityMap.tsx'),
-      name: 'fabcity-map',
-      fileName: 'fabcity-map',
+      name: 'fcos-suite-map',
+      fileName: 'fcos-suite-map',
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
