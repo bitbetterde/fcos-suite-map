@@ -43,11 +43,15 @@ const Map: React.FC<Props> = ({ mapboxToken, mapStyle }) => {
   }, [JSON.stringify(data)]);
 
   useEffect(() => {
-    if (selectedPoi) fcmap?.easeTo({ center: [selectedPoi.lng, selectedPoi.lat], zoom: 14, duration: 1500 });
-    else {
-      bounds && fcmap?.fitBounds(bounds, { padding: 50, maxZoom: 16 });
+    if (fcmap) {
+      if (selectedPoi) {
+        fcmap?.easeTo({ center: [selectedPoi.lng, selectedPoi.lat], zoom: 14, duration: 1500 });
+      } else if (!selectedPoi && bounds) {
+        fcmap?.fitBounds(bounds, { padding: 50, maxZoom: 16 });
+      }
     }
-  }, [selectedPoi]);
+  }, [selectedPoi, bounds, fcmap]);
+
 
   return (
     <ReactMapGl

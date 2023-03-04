@@ -12,7 +12,7 @@ const exampleData = [
     address: 'Musterstraße. 123, 20457 Hamburg',
     lat: 53.541955879117,
     lng: 10.010503310879,
-    image: 'https://map-api.fabcity.hamburg/uploads/images/dKAtCcP6DDY83nFkS1SUXBzXLd0e9dhCnxFh29jS.jpg',
+    image: 'https://picsum.photos/id/1033/800/600',
     category: 'Fab Lab / Offene Werkstatt',
     relationStatus: 'Vereinsmitglied Fab City Hamburg e.V.',
     tags: [
@@ -33,7 +33,7 @@ const exampleData = [
     address: 'Bürgerhaus Wilhelmsburg, Mengestraße 20, 21107 Hamburg',
     lat: 53.500543446403,
     lng: 9.9962177938385,
-    image: 'https://map-api.fabcity.hamburg/uploads/images/FkXmcxFHqgoUCPpxktz8rAcq8p6O9c5YQRnnG2W8.jpg',
+    image: 'https://picsum.photos/id/1013/800/600',
     category: 'Fab Lab / Offene Werkstatt',
     relationStatus: 'Vereinsmitglied Fab City Hamburg e.V.',
     tags: [
@@ -52,7 +52,7 @@ const exampleData = [
     address: 'Bachstraße 98, 22083 Hamburg',
     lat: 53.579789405468,
     lng: 10.02200822904,
-    image: 'https://map-api.fabcity.hamburg/uploads/images/AE1Ig73qHanJFKu9ZTRxsw70yMHTgGRflURXfKQO.jpg',
+    image: 'https://picsum.photos/id/15/800/600',
     category: 'Fab Lab / Offene Werkstatt',
     relationStatus: 'Vereinsmitglied Fab City Hamburg e.V.',
     tags: [
@@ -73,7 +73,7 @@ const exampleData = [
     address: 'Eschelsweg 4, 22767 Hamburg',
     lat: 53.549864003284,
     lng: 9.9464665686577,
-    image: 'https://map-api.fabcity.hamburg/uploads/images/ipM4GoMnXzP1Pc63nL6H1e7sEIZY83f7ZK8RMhuV.jpg',
+    image: 'https://picsum.photos/id/790/800/600',
     category: 'Fab Lab / Offene Werkstatt',
     relationStatus: 'Vereinsmitglied Fab City Hamburg e.V.',
     tags: [
@@ -95,7 +95,7 @@ const exampleData = [
     address: 'Stockmeyerstr. 43, Halle 4K, Eingang von der Wasserseite, 20457 Hamburg',
     lat: 53.541994386894,
     lng: 10.010334958155,
-    image: 'https://map-api.fabcity.hamburg/uploads/images/sFtxfseZAC1PNur5zfQeZriJ6OExkAtqqpDxP9Mv.jpg',
+    image: 'https://picsum.photos/id/862/800/600',
     category: 'Fab Lab / Offene Werkstatt',
     relationStatus: 'Vereinsmitglied Fab City Hamburg e.V.',
     tags: [
@@ -113,7 +113,7 @@ const exampleData = [
     address: 'Lange Reihe 89, 20099 Hamburg',
     lat: 53.558563745016,
     lng: 10.012549674438,
-    image: 'https://map-api.fabcity.hamburg/uploads/images/FG9f7HYGkYwaX8NDemer11GP7u8llIsvtKHeUcKN.jpg',
+    image: 'https://picsum.photos/id/123/800/600',
     category: 'Handwerksbetrieb',
     relationStatus: 'Vereinsmitglied Fab City Hamburg e.V.',
     tags: [
@@ -131,7 +131,7 @@ const exampleData = [
     address: 'Hongkongstraße 5, 20457 Hamburg',
     lat: 53.542208035899,
     lng: 10.001291735134,
-    image: 'https://map-api.fabcity.hamburg/uploads/images/kq1N6EnvZXNSNlXvvO3YgcoAvUf4A6DUHXvFvFyI.jpg',
+    image: 'https://picsum.photos/id/19/800/600',
     category: 'Bildungs- und Veranstaltungsort',
     relationStatus: 'Vereinsmitglied Fab City Hamburg e.V.',
     tags: [{ id: '8', displayName: 'Workshops', color: 'hsl(229,60%,80%)' }],
@@ -145,7 +145,7 @@ const exampleData = [
     address: 'Karlshöhe 60, 22175 Hamburg',
     lat: 53.63006349047,
     lng: 10.110588334093,
-    image: 'https://map-api.fabcity.hamburg/uploads/images/IQdyJ1knlSxXDT1CrzT7uZQmqgmZgfTxRhsatN5r.jpg',
+    image: 'https://picsum.photos/id/26/800/600',
     category: 'Bildungs- und Veranstaltungsort',
     relationStatus: 'Vereinsmitglied Fab City Hamburg e.V.',
     tags: [
@@ -162,7 +162,7 @@ const exampleData = [
     address: 'Holstenhofweg 85, 22043 Hamburg',
     lat: 53.567516952488,
     lng: 10.113037061205,
-    image: 'https://map-api.fabcity.hamburg/uploads/images/SKFzkd6OYwomC640B9ZxdRDtyRAUArQLwVN1xjuo.jpg',
+    image: 'https://picsum.photos/id/86/800/600',
     category: 'Fab Lab / Offene Werkstatt',
     relationStatus: 'Vereinsmitglied Fab City Hamburg e.V.',
     tags: [
@@ -184,7 +184,7 @@ const exampleData = [
     address: 'Stockmeyerstr. 43, Halle 4K, 20457 Hamburg',
     lat: 53.541914624826,
     lng: 10.010271399351,
-    image: 'https://map-api.fabcity.hamburg/uploads/images/boFp8pUb7GjZZvp4JSzOY72oKwnUxklgw0BoowTk.jpg',
+    image: 'https://picsum.photos/id/190/800/600',
     category: 'Digital-handwerkliche Produktionsstätte',
     relationStatus: 'Vereinsmitglied Fab City Hamburg e.V.',
     tags: [

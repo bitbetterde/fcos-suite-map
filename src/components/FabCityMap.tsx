@@ -38,9 +38,13 @@ const FabCityMap: React.FC<Props> = ({ data, mapboxToken, className, baseUrl, ma
           }`}
         >
           <Route path="/">
+            {/* This route will always match, so the Map is always visible */}
             <Map mapboxToken={mapboxToken} mapStyle={mapStyle} />
           </Route>
-          <Route path="/poi/:poiId">{({ match }) => <PoiLoader poiId={match?.params?.poiId as string} />}</Route>
+          <Route path="/poi/:poiId">
+            {/* This route loads individual POIs */}
+            {({ match }) => <PoiLoader poiId={match?.params?.poiId as string} />}
+          </Route>
           <Route exact path="/">
             <PoiLoader poiId={null} />
           </Route>

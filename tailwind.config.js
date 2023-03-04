@@ -5,6 +5,7 @@ module.exports = {
   content: ['./src/**/*.{html,js,jsx,tsx,md,mdx,astro}'],
   prefix: 'fcmap-',
   plugins: [
+    /* eslint-disable */
     require('@tailwindcss/forms')({
       strategy: 'class',
     }),
