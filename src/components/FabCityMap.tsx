@@ -33,7 +33,7 @@ const FabCityMap: React.FC<Props> = ({ data, mapboxToken, className, baseUrl, ma
         <ErrorModal />
         <Notification />
         <div
-          className={`fcmap-flex md:fcmap-flex-row-reverse fcmap-flex-col fcmap-h-full fcmap-bg-white ${
+          className={`fcmap-relative fcmap-h-full fcmap-bg-white fcmap-overflow-hidden ${
             className || ''
           }`}
         >

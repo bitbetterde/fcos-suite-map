@@ -16,7 +16,7 @@ const ListElement: React.FC<Props> = ({ value, hovered, ...restProps }) => {
         {...restProps}
         className={`fcmap-border fcmap-border-grey-900 fcmap-border-opacity-40 ${
           hovered ? 'fcmap-border-opacity-100' : ''
-        } fcmap-cursor-pointer fcmap-mx-4 fcmap-my-2`}
+        } fcmap-cursor-pointer`}
       >
         <div className="fcmap-p-3">
           <h2 className="fcmap-tracking-widest fcmap-text-xs fcmap-uppercase fcmap-title-font fcmap-font-medium fcmap-text-gray-400 fcmap-mb-1">

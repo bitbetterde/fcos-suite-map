@@ -32,10 +32,13 @@ const Map: React.FC<Props> = ({ mapboxToken, mapStyle }) => {
   const data = useStore((state) => state.poiData);
   const selectedPoi = useStore((state) => state.selectedPoi);
   const hoveredPoi = useStore((state) => state.hoveredPoi);
+  const isSidebarHidden = useStore((state) => state.isSidebarHidden);
   const { data: filteredData } = useFilteredPoiData();
   const DEFAULT_CENTER: [number, number] = [9.986701, 53.550359];
   const { fcmap } = useMap();
   const [bounds, setBounds] = useState<[[number, number], [number, number]]>();
+  const DEFAULT_MAP_PADDING = 50;
+  const OVERLAY_WIDTH_PADDING = 300;
 
   useEffect(() => {
     const newBounds = calcBoundsFromCoordinates(data?.map((poi) => [poi.lng, poi.lat]) || [DEFAULT_CENTER]);
@@ -45,13 +48,29 @@ const Map: React.FC<Props> = ({ mapboxToken, mapStyle }) => {
   useEffect(() => {
     if (fcmap) {
       if (selectedPoi) {
-        fcmap?.easeTo({ center: [selectedPoi.lng, selectedPoi.lat], zoom: 14, duration: 1500 });
+        fcmap?.easeTo({
+          center: [selectedPoi.lng, selectedPoi.lat],
+          zoom: 14,
+          duration: 1500,
+          ...(!isSidebarHidden ? { padding: { right: OVERLAY_WIDTH_PADDING, left: 0, top: 0, bottom: 0 } } : {}),
+        });
       } else if (!selectedPoi && bounds) {
-        fcmap?.fitBounds(bounds, { padding: 50, maxZoom: 16 });
+        fcmap?.fitBounds(bounds, {
+          ...(!isSidebarHidden
+            ? {
+                padding: {
+                  right: DEFAULT_MAP_PADDING + OVERLAY_WIDTH_PADDING,
+                  left: DEFAULT_MAP_PADDING,
+                  top: DEFAULT_MAP_PADDING,
+                  bottom: DEFAULT_MAP_PADDING,
+                },
+              }
+            : {}),
+          maxZoom: 16,
+        });
       }
     }
-  }, [selectedPoi, bounds, fcmap]);
-
+  }, [selectedPoi, bounds, fcmap, isSidebarHidden]);
 
   return (
     <ReactMapGl
@@ -67,7 +86,7 @@ const Map: React.FC<Props> = ({ mapboxToken, mapStyle }) => {
       id="fcmap"
       attributionControl={false}
     >
-      <AttributionControl position="top-right" />
+      <AttributionControl position="top-left" />
       <MapLayerControl />
       {selectedPoi ? (
         <Marker key={selectedPoi.id} longitude={selectedPoi.lng} latitude={selectedPoi.lat} anchor="bottom">
