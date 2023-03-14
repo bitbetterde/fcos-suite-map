@@ -20,19 +20,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.sidebar {
-  flex-basis: 40%;
-  overflow-y: auto;
-  flex-shrink: 0;
-}
-
-@screen md {
-  .sidebar {
-    flex-basis: 30vw;
-    min-width: 300px;
-    max-width: 500px;
-    max-height: initial;
-  }
+.sidebar-height {
+  max-height: calc(100% - 2 * theme(spacing.5));
 }
 
 .input-chevron {
@@ -43,4 +32,11 @@ code {
   padding-right: 2.5rem;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
+}
+
+.mapboxgl-ctrl-logo {
+  position: absolute;
+  left: 50vw;
+  bottom: 0;
+  transform: translateX(-50%);
 }

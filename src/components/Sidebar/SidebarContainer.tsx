@@ -1,12 +1,12 @@
 interface Props {
   className?: string;
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const SidebarContainer: React.FC<Props> = ({ className, children }) => {
   return (
     <aside
-      className={`sidebar fcmap-box-border fcmap-flex fcmap-flex-col fcmap-border-t-2 md:fcmap-border-r md:fcmap-border-t-0 fcmap-border-grey-900 ${
+      className={`fcmap-absolute fcmap-right-0 fcmap-m-5 sidebar-height fcmap-min-h-min fcmap-w-[336px] fcmap-shadow-lg fcmap-bg-white fcmap-box-border fcmap-flex fcmap-flex-col ${
         className ?? ''
       }`}
     >

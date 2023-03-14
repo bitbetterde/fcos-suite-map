@@ -8,6 +8,7 @@ import type { Tag } from '../../types/PointOfInterest';
 import { FilterOutline as FilterIcon } from 'heroicons-react';
 import { useHistory } from 'react-router-dom';
 import Select from '../Select';
+import MinimizeButton from './MinimizeButton';
 
 const SidebarListView: React.FC = () => {
   const tagsToSelectOptions = (tags?: Tag[]) => tags?.map((tag) => ({ label: tag.displayName, value: tag }));
@@ -18,6 +19,8 @@ const SidebarListView: React.FC = () => {
   const hoveredPoi = useStore((state) => state.hoveredPoi);
   const setHoveredPoi = useStore((state) => state.setHoveredPoi);
   const [filterInputIsOpen, setFilterInputIsOpen] = useState(false);
+  const isSidebarHidden = useStore((state) => state.isSidebarHidden);
+  const setIsSidebarHidden = useStore((state) => state.setIsSidebarHidden);
 
   const tags =
     data &&
@@ -28,16 +31,29 @@ const SidebarListView: React.FC = () => {
   const options = tagsToSelectOptions(tags);
 
   return (
-    <SidebarContainer>
-      <div className="fcmap-flex-col fcmap-m-4 fcmap-mb-2 fcmap-pb-2 fcmap-border-black fcmap-border-opacity-20 fcmap-border-b-2">
-        <div className="fcmap-flex fcmap-justify-between fcmap-items-center">
-          <h1 className="fcmap-text-xl fcmap-font-medium fcmap-title-font fcmap-text-gray-900">{filteredData?.length} Orte:</h1>
-          <FilterIcon
-            onClick={() => setFilterInputIsOpen(!filterInputIsOpen)}
-            className="fcmap-text-black fcmap-text-opacity-20 hover:fcmap-text-opacity-60 fcmap-w-5 fcmap-h-5 fcmap-cursor-pointer"
+    <SidebarContainer
+      className={`fcmap-overflow-hidden fcmap-transition-[top] fcmap-duration-700 fcmap-ease-in-out ${
+        isSidebarHidden ? 'fcmap-top-[calc(100%-98px)]' : 'fcmap-top-0'
+      }`}
+    >
+      <div className="fcmap-flex fcmap-flex-col fcmap-m-4 fcmap-mb-2 fcmap-pb-2 fcmap-border-black fcmap-border-opacity-20 fcmap-border-b-2 fcmap-gap-2">
+        <div className="fcmap-flex fcmap-justify-end">
+          <MinimizeButton
+            isMinimized={isSidebarHidden}
+            onClick={() => {
+              setIsSidebarHidden(!isSidebarHidden);
+            }}
           />
         </div>
-
+        <div className="fcmap-flex fcmap-justify-between fcmap-items-center">
+          <h1 className="fcmap-text-xl fcmap-font-medium fcmap-title-font fcmap-text-gray-900">
+            {filteredData?.length} Orte:
+          </h1>
+          <FilterIcon
+            onClick={() => setFilterInputIsOpen(!filterInputIsOpen)}
+            className="fcmap-text-gray-400 fcmap-w-5 fcmap-h-5 fcmap-cursor-pointer"
+          />
+        </div>
         {filterInputIsOpen && (
           <div className="fcmap-py-2">
             <Select
@@ -49,19 +65,20 @@ const SidebarListView: React.FC = () => {
           </div>
         )}
       </div>
-
-      {filteredData?.map((poi) => (
-        <ListElement
-          key={poi.id}
-          onMouseEnter={() => setHoveredPoi(poi)}
-          onMouseLeave={() => setHoveredPoi(null)}
-          onClick={() => {
-            history.push(`/poi/${String(poi.id)}`);
-          }}
-          value={poi}
-          hovered={hoveredPoi?.id === poi.id}
-        />
-      ))}
+      <div className="fcmap-overflow-y-auto fcmap-flex fcmap-flex-col fcmap-gap-2 fcmap-m-4 fcmap-mr-2 fcmap-pr-2">
+        {filteredData?.map((poi) => (
+          <ListElement
+            key={poi.id}
+            onMouseEnter={() => setHoveredPoi(poi)}
+            onMouseLeave={() => setHoveredPoi(null)}
+            onClick={() => {
+              history.push(`/poi/${String(poi.id)}`);
+            }}
+            value={poi}
+            hovered={hoveredPoi?.id === poi.id}
+          />
+        ))}
+      </div>
     </SidebarContainer>
   );
 };

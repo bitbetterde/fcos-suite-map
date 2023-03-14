@@ -15,7 +15,7 @@ const SidebarSingleView: React.FC = () => {
   const history = useHistory();
 
   return (
-    <SidebarContainer className={`fcmap-relative fcmap-p-0`}>
+    <SidebarContainer className={`fcmap-top-0 fcmap-p-0 fcmap-overflow-y-auto md:fcmap-mt-9 md:fcmap-mb-4`}>
       <div className={`${selectedPoi?.image ? '' : 'fcmap-pl-5 fcmap-pt-5 '}`}>
         <CloseButton
           absolute
@@ -35,7 +35,9 @@ const SidebarSingleView: React.FC = () => {
         <h2 className="fcmap-tracking-widest fcmap-uppercase fcmap-text-xs fcmap-title-font fcmap-font-medium fcmap-text-gray-400 fcmap-mb-1">
           {selectedPoi?.category}
         </h2>
-        <h1 className="fcmap-title-font fcmap-text-lg fcmap-font-medium fcmap-text-gray-900 fcmap-mb-3">{selectedPoi?.name}</h1>
+        <h1 className="fcmap-title-font fcmap-text-lg fcmap-font-medium fcmap-text-gray-900 fcmap-mb-3">
+          {selectedPoi?.name}
+        </h1>
         <p className="fcmap-leading-relaxed fcmap-mb-6">{selectedPoi?.description}</p>
         {selectedPoi?.website && (
           <div className={'fcmap-flex fcmap-items-center'}>

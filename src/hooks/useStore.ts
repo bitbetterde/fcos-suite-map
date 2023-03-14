@@ -19,6 +19,8 @@ interface Store {
   setFilterTags: (tags: Tag[]) => void;
   filterCategories: string[];
   setFilterCategories: (categories: string[]) => void;
+  isSidebarHidden: boolean;
+  setIsSidebarHidden: (value: boolean) => void;
 }
 
 export const useStore = create<Store>()(
@@ -56,6 +58,10 @@ export const useStore = create<Store>()(
     filterCategories: [],
     setFilterCategories: (categories) => {
       set({ filterCategories: categories });
+    },
+    isSidebarHidden: false,
+    setIsSidebarHidden: (value) => {
+      set({ isSidebarHidden: value });
     },
   })),
 );

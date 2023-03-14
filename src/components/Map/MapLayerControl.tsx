@@ -18,11 +18,16 @@ const MapLayerControl: React.FC = () => {
   };
 
   return (
-    <div className="fcmap-border fcmap-border-grey-900 fcmap-w-52 fcmap-absolute fcmap-right-0 fcmap-bottom-0 fcmap-mb-4 fcmap-mr-4 fcmap-bg-white fcmap-p-4 fcmap-z-10">
-      <div className={`fcmap-flex fcmap-justify-between fcmap-cursor-pointer ${isOpen ? 'fcmap-mb-2' : ''}`} onClick={() => setIsOpen(!isOpen)}>
+    <div className="fcmap-shadow-lg fcmap-w-52 fcmap-absolute fcmap-left-5 fcmap-bottom-0 fcmap-mb-5 fcmap-mr-4 fcmap-bg-white fcmap-p-4 fcmap-z-10">
+      <div
+        className={`fcmap-flex fcmap-justify-between fcmap-cursor-pointer ${isOpen ? 'fcmap-mb-2' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <h3 className="fcmap-text-base fcmap-font-semibold fcmap-text-gray-900">Kategorien:</h3>
         <DownIcon
-          className={`fcmap-w-6 fcmap-h-6 fcmap-text-gray-400 fcmap-transform fcmap-transition fcmap-duration-300 ${isOpen ? 'fcmap-rotate-180' : 'fcmap-rotate-0'}`}
+          className={`fcmap-w-6 fcmap-h-6 fcmap-text-gray-400 fcmap-transform fcmap-transition fcmap-duration-300 ${
+            isOpen ? 'fcmap-rotate-180' : 'fcmap-rotate-0'
+          }`}
         />
       </div>
       {isOpen &&
