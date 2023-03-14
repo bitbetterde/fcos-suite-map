@@ -46,9 +46,7 @@ const SidebarListView: React.FC = () => {
           />
         </div>
         <div className="fcmap-flex fcmap-justify-between fcmap-items-center">
-          <h1 className="fcmap-text-xl fcmap-font-medium fcmap-title-font fcmap-text-gray-900">
-            {filteredData?.length} Orte:
-          </h1>
+          <h1 className="fcmap-text-lg fcmap-font-medium fcmap-font-plex fcmap-text-gray-900">Orte:</h1>
           <FilterIcon
             onClick={() => setFilterInputIsOpen(!filterInputIsOpen)}
             className="fcmap-text-gray-400 fcmap-w-5 fcmap-h-5 fcmap-cursor-pointer"
