@@ -18,11 +18,12 @@ const ListElement: React.FC<Props> = ({ value, hovered, ...restProps }) => {
           hovered ? 'fcmap-border-opacity-100' : ''
         } fcmap-cursor-pointer`}
       >
-        <div className="fcmap-p-3">
-          <h2 className="fcmap-tracking-widest fcmap-text-xs fcmap-uppercase fcmap-title-font fcmap-font-medium fcmap-text-gray-400 fcmap-mb-1">
+        <img src={value.image} alt="POI photo" className="fcmap-w-[75px] fcmap-h-[75px]" />
+        <div className="fcmap-flex-col fcmap-gap-1">
+          <h1 className="fcmap-title-font fcmap-text-base fcmap-font-bold fcmap-text-gray-900">{value.name}</h1>
+          <h2 className="fcmap-text-sm fcmap-title-font fcmap-font-normal fcmap-text-gray-500 fcmap-mb-1">
             {value.category}
           </h2>
-          <h1 className="fcmap-title-font fcmap-text-lg fcmap-font-medium fcmap-text-gray-900">{value.name}</h1>
         </div>
       </div>
     )
