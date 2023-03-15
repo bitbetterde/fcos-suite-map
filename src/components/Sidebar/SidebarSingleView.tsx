@@ -16,52 +16,48 @@ const SidebarSingleView: React.FC = () => {
 
   return (
     <SidebarContainer className={`fcmap-top-0 fcmap-p-0 fcmap-overflow-y-auto md:fcmap-mt-9 md:fcmap-mb-4`}>
-      <div className={`${selectedPoi?.image ? '' : 'fcmap-pl-5 fcmap-pt-5 '}`}>
+      <div className="fcmap-flex fcmap-justify-between fcmap-items-center fcmap-px-4 fcmap-py-6">
+        <h1 className="fcmap-text-lg fcmap-font-medium fcmap-font-plex fcmap-text-gray-900">Profil</h1>
         <CloseButton
-          absolute
           onClick={() => {
             history.push('/');
           }}
         />
       </div>
+      <div className={`${selectedPoi?.image ? '' : 'fcmap-pl-5 fcmap-pt-5 '}`}></div>
       {selectedPoi?.image && (
         <img
-          className="lg:fcmap-h-48 md:fcmap-h-36 fcmap-w-full fcmap-object-cover fcmap-object-center"
+          className="fcmap-h-40 fcmap-w-full fcmap-object-cover fcmap-object-center"
           src={selectedPoi?.image}
           alt={selectedPoi?.name}
         />
       )}
-      <div className="fcmap-p-6">
-        <h2 className="fcmap-tracking-widest fcmap-uppercase fcmap-text-xs fcmap-title-font fcmap-font-medium fcmap-text-gray-400 fcmap-mb-1">
-          {selectedPoi?.category}
-        </h2>
-        <h1 className="fcmap-title-font fcmap-text-lg fcmap-font-medium fcmap-text-gray-900 fcmap-mb-3">
+      <div className="fcmap-px-4 fcmap-pt-6 fcmap-pb-5">
+        <h1 className="fcmap-font-karla fcmap-text-xl fcmap-leading-6 fcmap-font-bold fcmap-text-gray-900">
           {selectedPoi?.name}
         </h1>
-        <p className="fcmap-leading-relaxed fcmap-mb-6">{selectedPoi?.description}</p>
+        <h2 className="fcmap-text-sm fcmap-font-plex fcmap-font-normal fcmap-text-gray-500">{selectedPoi?.category}</h2>
+      </div>
+      <div className="fcmap-px-7 fcmap-pb-14 fcmap-font-plex">
+        <h3 className="fcmap-text-sm fcmap-font-medium fcmap-text-gray-500 fcmap-mb-1">Info</h3>
+        <p className="fcmap-leading-relaxed fcmap-mb-8">{selectedPoi?.description}</p>
+        {selectedPoi?.address && (
+          <div className={'fcmap-flex-col fcmap-items-center fcmap-mb-8'}>
+            <h3 className="fcmap-text-sm fcmap-font-medium fcmap-text-gray-500 fcmap-mb-1">Location</h3>
+            <div className="fcmap-text-sm fcmap-font-normal fcmap-text-gray-900">{selectedPoi?.address}</div>
+          </div>
+        )}
         {selectedPoi?.website && (
-          <div className={'fcmap-flex fcmap-items-center'}>
-            <HomeIcon size={18} className={'fcmap-text-gray-500 fcmap-mr-2'} />
+          <div className={'fcmap-flex-col fcmap-items-center fcmap-mb-8'}>
+            <h3 className="fcmap-text-sm fcmap-font-medium fcmap-text-gray-500 fcmap-mb-1">Website</h3>
             <a
               target="_blank"
               rel="noopener noreferrer"
-              className={'fcmap-text-sm fcmap-text-gray-500 hover:fcmap-underline'}
+              className={'fcmap-text-sm fcmap-font-normal  fcmap-text-gray-900 hover:fcmap-underline'}
               href={selectedPoi?.website}
             >
               {strippedUrl}
             </a>
-          </div>
-        )}
-        {selectedPoi?.address && (
-          <div className={'fcmap-flex fcmap-items-center fcmap-mt-3'}>
-            <AddressIcon size={18} className={'fcmap-text-gray-500 fcmap-mr-2'} />
-            <div className="fcmap-text-sm fcmap-text-gray-500">{selectedPoi?.address}</div>
-          </div>
-        )}
-        {selectedPoi?.relationStatus && (
-          <div className={'fcmap-flex fcmap-items-center fcmap-mt-3'}>
-            <RealtionStatusIcon size={18} className={'fcmap-text-gray-500 fcmap-mr-2'} />
-            <div className="fcmap-text-sm fcmap-text-gray-500">{selectedPoi?.relationStatus}</div>
           </div>
         )}
         {!!selectedPoi?.tags?.length && (

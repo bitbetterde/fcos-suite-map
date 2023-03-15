@@ -14,11 +14,12 @@ interface Props {
 
 interface MarkerProps {
   className: string;
+  [x: string]: unknown;
 }
 
-const MarkerSvg: React.FC<MarkerProps> = ({ className }) => {
+const MarkerSvg: React.FC<MarkerProps> = ({ className, ...props }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" className={className}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" className={className} {...props}>
       <path
         fill="currentColor"
         d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"
@@ -32,6 +33,7 @@ const Map: React.FC<Props> = ({ mapboxToken, mapStyle }) => {
   const data = useStore((state) => state.poiData);
   const selectedPoi = useStore((state) => state.selectedPoi);
   const hoveredPoi = useStore((state) => state.hoveredPoi);
+  const setHoveredPoi = useStore((state) => state.setHoveredPoi);
   const isSidebarHidden = useStore((state) => state.isSidebarHidden);
   const { data: filteredData } = useFilteredPoiData();
   const DEFAULT_CENTER: [number, number] = [9.986701, 53.550359];
@@ -109,6 +111,8 @@ const Map: React.FC<Props> = ({ mapboxToken, mapStyle }) => {
                 className={`fcmap-transition fcmap-ease-in-out fcmap-w-8 fcmap-h-8 hover:fcmap-scale-125 fcmap-opacity-70 hover:fcmap-opacity-100 hover:fcmap-cursor-pointer fcmap-text-fabcity-red ${
                   isHovered ? 'fcmap-scale-125 fcmap-opacity-100' : ''
                 }`}
+                onMouseEnter={() => setHoveredPoi(poi)}
+                onMouseLeave={() => setHoveredPoi(null)}
               />
             </Marker>
           );
