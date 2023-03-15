@@ -36,7 +36,7 @@ const SidebarListView: React.FC = () => {
         isSidebarHidden ? 'fcmap-top-[calc(100%-98px)]' : 'fcmap-top-0'
       }`}
     >
-      <div className="fcmap-flex fcmap-flex-col fcmap-m-4 fcmap-mb-2 fcmap-pb-2 fcmap-border-black fcmap-border-opacity-20 fcmap-border-b-2 fcmap-gap-2">
+      <div className="fcmap-flex fcmap-flex-col fcmap-m-4 fcmap-mb-2 fcmap-pb-2 fcmap-gap-2">
         <div className="fcmap-flex fcmap-justify-end">
           <MinimizeButton
             isMinimized={isSidebarHidden}
@@ -46,7 +46,7 @@ const SidebarListView: React.FC = () => {
           />
         </div>
         <div className="fcmap-flex fcmap-justify-between fcmap-items-center">
-          <h1 className="fcmap-text-xl fcmap-font-medium fcmap-title-font fcmap-text-gray-900">
+          <h1 className="fcmap-text-lg fcmap-font-medium fcmap-font-plex fcmap-text-gray-900">
             {filteredData?.length} Orte:
           </h1>
           <FilterIcon
@@ -65,7 +65,7 @@ const SidebarListView: React.FC = () => {
           </div>
         )}
       </div>
-      <div className="fcmap-overflow-y-auto fcmap-flex fcmap-flex-col fcmap-gap-2 fcmap-m-4 fcmap-mr-2 fcmap-pr-2">
+      <div className="fcmap-overflow-y-auto fcmap-flex fcmap-flex-col fcmap-gap-6 fcmap-m-4 fcmap-mr-2 fcmap-pr-2">
         {filteredData?.map((poi) => (
           <ListElement
             key={poi.id}

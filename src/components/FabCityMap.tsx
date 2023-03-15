@@ -32,11 +32,7 @@ const FabCityMap: React.FC<Props> = ({ data, mapboxToken, className, baseUrl, ma
       <Router {...(baseUrl ? { basename: baseUrl } : {})}>
         <ErrorModal />
         <Notification />
-        <div
-          className={`fcmap-relative fcmap-h-full fcmap-bg-white fcmap-overflow-hidden ${
-            className || ''
-          }`}
-        >
+        <div className={`fcmap-relative fcmap-h-full fcmap-bg-white fcmap-overflow-hidden ${className || ''}`}>
           <Route path="/">
             {/* This route will always match, so the Map is always visible */}
             <Map mapboxToken={mapboxToken} mapStyle={mapStyle} />
