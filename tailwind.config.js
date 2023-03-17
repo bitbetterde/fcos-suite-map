@@ -5,7 +5,7 @@ const {
 } = require("tailwindcss/lib/util/flattenColorPalette");
 module.exports = {
   corePlugins: {
-    preflight: true,
+    preflight: false,
   },
   content: ['./src/**/*.{html,js,jsx,tsx,md,mdx,astro}'],
   prefix: 'fcmap-',
