@@ -60,10 +60,3 @@ code {
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
-
-.mapboxgl-ctrl-logo {
-  position: absolute;
-  left: 50vw;
-  bottom: 0;
-  transform: translateX(-50%);
-}

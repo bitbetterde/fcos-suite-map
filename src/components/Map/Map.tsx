@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { useStore, useFilteredPoiData } from '../../hooks';
 import ReactMapGl, { Marker, useMap, AttributionControl } from 'react-map-gl';
 import { useHistory } from 'react-router-dom';
-import MapLayerControl from './MapLayerControl';
 import { calcBoundsFromCoordinates } from '../../util/geo';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { useWindowSize } from 'usehooks-ts';
 
 interface Props {
   mapboxToken: string;
@@ -35,12 +35,27 @@ const Map: React.FC<Props> = ({ mapboxToken, mapStyle }) => {
   const hoveredPoi = useStore((state) => state.hoveredPoi);
   const setHoveredPoi = useStore((state) => state.setHoveredPoi);
   const isSidebarHidden = useStore((state) => state.isSidebarHidden);
+  const isDesktop = useStore((state) => state.isDesktop);
+  const setIsDesktop = useStore((state) => state.setIsDesktop);
   const { data: filteredData } = useFilteredPoiData();
   const DEFAULT_CENTER: [number, number] = [9.986701, 53.550359];
   const { fcmap } = useMap();
   const [bounds, setBounds] = useState<[[number, number], [number, number]]>();
   const DEFAULT_MAP_PADDING = 50;
-  const OVERLAY_WIDTH_PADDING = 300;
+  const OVERLAY_WIDTH_PADDING = 330;
+  const window = useWindowSize();
+
+  const calculateMapPadding = (sidebarHidden: boolean, desktop: boolean) => {
+    if (desktop && !sidebarHidden) {
+      return {
+        right: DEFAULT_MAP_PADDING + OVERLAY_WIDTH_PADDING,
+        left: DEFAULT_MAP_PADDING,
+        top: DEFAULT_MAP_PADDING,
+        bottom: DEFAULT_MAP_PADDING,
+      };
+    }
+    return DEFAULT_MAP_PADDING;
+  };
 
   useEffect(() => {
     const newBounds = calcBoundsFromCoordinates(data?.map((poi) => [poi.lng, poi.lat]) || [DEFAULT_CENTER]);
@@ -50,29 +65,33 @@ const Map: React.FC<Props> = ({ mapboxToken, mapStyle }) => {
   useEffect(() => {
     if (fcmap) {
       if (selectedPoi) {
-        fcmap?.easeTo({
-          center: [selectedPoi.lng, selectedPoi.lat],
+        const options = {
+          center: [selectedPoi.lng, selectedPoi.lat] as [number, number],
           zoom: 14,
           duration: 1500,
-          ...(!isSidebarHidden ? { padding: { right: OVERLAY_WIDTH_PADDING, left: 0, top: 0, bottom: 0 } } : {}),
-        });
+          padding: calculateMapPadding(isSidebarHidden, isDesktop),
+        };
+        fcmap?.easeTo(options);
       } else if (!selectedPoi && bounds) {
-        fcmap?.fitBounds(bounds, {
-          ...(!isSidebarHidden
-            ? {
-                padding: {
-                  right: DEFAULT_MAP_PADDING + OVERLAY_WIDTH_PADDING,
-                  left: DEFAULT_MAP_PADDING,
-                  top: DEFAULT_MAP_PADDING,
-                  bottom: DEFAULT_MAP_PADDING,
-                },
-              }
-            : {}),
-          maxZoom: 16,
-        });
+        const options = {
+          padding: calculateMapPadding(isSidebarHidden, isDesktop),
+        };
+        fcmap?.fitBounds(bounds, options);
       }
     }
-  }, [selectedPoi, bounds, fcmap, isSidebarHidden]);
+  }, [selectedPoi, bounds, fcmap, isSidebarHidden, isDesktop]);
+
+  useEffect(() => {
+    let newValue;
+    if ((window?.width ?? 0) > 768) {
+      newValue = true;
+    } else {
+      newValue = false;
+    }
+    if (newValue !== isDesktop) {
+      setIsDesktop(newValue);
+    }
+  }, [window]);
 
   return (
     <ReactMapGl
@@ -89,7 +108,6 @@ const Map: React.FC<Props> = ({ mapboxToken, mapStyle }) => {
       attributionControl={false}
     >
       <AttributionControl position="top-left" />
-      <MapLayerControl />
       {selectedPoi ? (
         <Marker key={selectedPoi.id} longitude={selectedPoi.lng} latitude={selectedPoi.lat} anchor="bottom">
           <MarkerSvg className="fcmap-w-8 fcmap-h-8 fcmap-opacity-100 fcmap-scale-125 fcmap-text-fabcity-red" />
