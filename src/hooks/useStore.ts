@@ -1,7 +1,7 @@
 import type { Error } from 'src/types/Error';
 import type { PointOfInterest, Tag } from 'src/types/PointOfInterest';
 import type { Notification } from 'src/types/Notification';
-import create from 'zustand';
+import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 interface Store {
@@ -21,6 +21,8 @@ interface Store {
   setFilterCategories: (categories: string[]) => void;
   isSidebarHidden: boolean;
   setIsSidebarHidden: (value: boolean) => void;
+  isDesktop: boolean;
+  setIsDesktop: (value: boolean) => void;
 }
 
 export const useStore = create<Store>()(
@@ -60,8 +62,12 @@ export const useStore = create<Store>()(
       set({ filterCategories: categories });
     },
     isSidebarHidden: false,
-    setIsSidebarHidden: (value) => {
-      set({ isSidebarHidden: value });
+    setIsSidebarHidden: (isSidebarHidden) => {
+      set({ isSidebarHidden });
     },
+    isDesktop: false,
+    setIsDesktop: (isDesktop) => {
+      set({ isDesktop })
+    }
   })),
 );

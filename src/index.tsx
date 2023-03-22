@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import FabCityMap from './components/FabCityMap';
+import '@fchh/fcos-suite-ui/dist/style.css';
 
 const exampleData = [
   {
@@ -162,7 +163,7 @@ const exampleData = [
     address: 'Holstenhofweg 85, 22043 Hamburg',
     lat: 53.567516952488,
     lng: 10.113037061205,
-    image: 'https://picsum.photos/id/86/800/600',
+    image: 'https://picsum.photos/id/96/800/600',
     category: 'Fab Lab / Offene Werkstatt',
     relationStatus: 'Vereinsmitglied Fab City Hamburg e.V.',
     tags: [

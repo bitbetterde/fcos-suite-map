@@ -37,9 +37,13 @@
     "react-router-dom": "^5.2.0",
     "react-select": "^5.5.0",
     "tailwindcss": "^3.1.8",
+    "usehooks-ts": "^2.9.1",
     "zustand": "^4.1.2"
   },
   "devDependencies": {
+    "@carbon/icons-react": "^11.9.0",
+    "@fchh/fcos-suite-ui": "^0.1.13",
+    "@types/carbon__icons-react": "^11.15.0",
     "@types/mapbox-gl": "^2.7.6",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",

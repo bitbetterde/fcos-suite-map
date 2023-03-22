@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useStore } from '../../hooks';
 import ListElement from './ListElement';
-import SidebarContainer from './SidebarContainer';
 import { removeDuplicateObjects } from '../../util/array';
 import { useFilteredPoiData } from '../../hooks/useFilteredPoiData';
 import type { Tag } from '../../types/PointOfInterest';
@@ -31,12 +30,8 @@ const SidebarListView: React.FC = () => {
   const options = tagsToSelectOptions(tags);
 
   return (
-    <SidebarContainer
-      className={`fcmap-overflow-hidden fcmap-transition-[top] fcmap-duration-700 fcmap-ease-in-out ${
-        isSidebarHidden ? 'fcmap-top-[calc(100%-98px)]' : 'fcmap-top-0'
-      }`}
-    >
-      <div className="fcmap-flex fcmap-flex-col fcmap-m-4 fcmap-mb-2 fcmap-pb-2 fcmap-gap-2">
+    <>
+      <div className="fcmap-flex fcmap-flex-col fcmap-m-4 fcmap-mb-2 fcmap-pb-2 fcmap-gap-2 fcmap-pointer-events-auto">
         <div className="fcmap-flex fcmap-justify-end">
           <MinimizeButton
             isMinimized={isSidebarHidden}
@@ -79,7 +74,7 @@ const SidebarListView: React.FC = () => {
           />
         ))}
       </div>
-    </SidebarContainer>
+    </>
   );
 };
 

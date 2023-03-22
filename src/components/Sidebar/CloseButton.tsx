@@ -6,11 +6,9 @@ interface Props {
 
 const CloseButton: React.FC<Props> = ({ onClick }) => {
   return (
-    <CloseIcon
-      size={28}
-      className="fcmap-p-1 fcmap-text-gray-400 fcmap-inline-block fcmap-cursor-pointer"
-      onClick={onClick}
-    />
+    <div className="fcmap-p-1 fcmap-flex fcmap-items-center fcmap-justify-center">
+      <CloseIcon size={24} className="fcmap-text-gray-400 fcmap-inline-block fcmap-cursor-pointer" onClick={onClick} />
+    </div>
   );
 };
 
