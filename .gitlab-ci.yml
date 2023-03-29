@@ -14,7 +14,7 @@ build:
     - apk add --no-cache curl zip rsync
   script:
     - npm ci
-    - npm run build
+    - npm run build:deployment
   artifacts:
     name: "$CI_COMMIT_REF_SLUG"
     expire_in: 1 day
