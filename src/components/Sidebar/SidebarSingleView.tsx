@@ -1,8 +1,9 @@
 import { useStore } from '../../hooks';
-import Tag from '../Tag';
 import CloseButton from './CloseButton';
 import MinimizeButton from './MinimizeButton';
 import { useHistory } from 'react-router-dom';
+import { Pill } from '@fchh/fcos-suite-ui';
+import SidebarHeader from './SidebarHeader';
 
 const SidebarSingleView: React.FC = () => {
   const selectedPoi = useStore((state) => state.selectedPoi);
@@ -13,11 +14,10 @@ const SidebarSingleView: React.FC = () => {
 
   return (
     <>
-      <div className="fcmap-flex fcmap-justify-between fcmap-items-center fcmap-px-4 fcmap-py-6">
+      <SidebarHeader>
         <h1 className="fcmap-text-lg fcmap-font-medium fcmap-font-plex fcmap-text-gray-900">Profil</h1>
-        <div className="fcmap-flex fcmap-pointer-events-auto">
+        <div className="fcmap-flex">
           <MinimizeButton
-            className="fcmap-p-1"
             isMinimized={isSidebarHidden}
             onClick={() => {
               setIsSidebarHidden(!isSidebarHidden);
@@ -29,7 +29,7 @@ const SidebarSingleView: React.FC = () => {
             }}
           />
         </div>
-      </div>
+      </SidebarHeader>
       <div className={`${selectedPoi?.image ? '' : 'fcmap-pl-5 fcmap-pt-5 '}`}></div>
       {selectedPoi?.image && (
         <img
@@ -69,9 +69,14 @@ const SidebarSingleView: React.FC = () => {
         {!!selectedPoi?.tags?.length && (
           <div className={'fcmap-flex fcmap-items-center fcmap-mt-3 fcmap-flex-wrap'}>
             {selectedPoi?.tags.map((tag) => (
-              <Tag key={tag.id} color={tag.color}>
-                {tag.displayName}
-              </Tag>
+              <Pill
+                key={tag.id}
+                size="lg"
+                title={tag.displayName}
+                customBgColor={tag.color}
+                rounded
+                className="fcmap-text-indigo-800 fcmap-px-2 fcmap-py-0.5 fcmap-m-0.5 fcmap-mr-1.5 "
+              />
             ))}
           </div>
         )}
