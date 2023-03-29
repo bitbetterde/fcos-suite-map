@@ -74,6 +74,7 @@ const Map: React.FC<Props> = ({ mapboxToken, mapStyle }) => {
         fcmap?.easeTo(options);
       } else if (!selectedPoi && bounds) {
         const options = {
+          duration: 1000,
           padding: calculateMapPadding(isSidebarHidden, isDesktop),
         };
         fcmap?.fitBounds(bounds, options);

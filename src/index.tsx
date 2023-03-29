@@ -95,7 +95,7 @@ const exampleData = [
     website: 'http://www.fabcity.hamburg',
     address: 'Stockmeyerstr. 43, Halle 4K, Eingang von der Wasserseite, 20457 Hamburg',
     lat: 53.541994386894,
-    lng: 10.010334958155,
+    lng: 10.210334958155,
     image: 'https://picsum.photos/id/862/800/600',
     category: 'Fab Lab / Offene Werkstatt',
     relationStatus: 'Vereinsmitglied Fab City Hamburg e.V.',

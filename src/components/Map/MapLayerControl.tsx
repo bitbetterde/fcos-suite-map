@@ -18,7 +18,7 @@ const MapLayerControl: React.FC = () => {
   };
 
   return (
-    <div className="fcmap-flex fcmap-items-start fcmap-justify-center md:fcmap-justify-end fcmap-flex-wrap fcmap-gap-[9px] fcmap-pointer-events-auto">
+    <div className="fcmap-order-2 md:fcmap-order-1 fcmap-flex fcmap-items-start fcmap-justify-center md:fcmap-justify-end fcmap-flex-wrap fcmap-gap-[9px] fcmap-pointer-events-auto">
       {layers.map((layer) => {
         return (
           <Pill

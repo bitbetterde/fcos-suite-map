@@ -7,7 +7,7 @@ interface Props {
 const SidebarContainer: React.FC<Props> = ({ className, children, clickable = true }) => {
   return (
     <aside
-      className={`fcmap-relative fcmap-w-full md:fcmap-w-[336px] fcmap-h-full md:fcmap-h-auto fcmap-overflow-y-hidden fcmap-z-10 fcmap-shadow-lg ${
+      className={`fcmap-w-full md:fcmap-w-[336px] fcmap-h-auto fcmap-overflow-y-hidden fcmap-z-10 fcmap-shadow-lg ${
         clickable ? 'fcmap-pointer-events-auto' : 'fcmap-pointer-events-none'
       } ${className ?? ''}`}
     >

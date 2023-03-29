@@ -11,23 +11,20 @@ const Sidebar: React.FC<Props> = ({ className }) => {
   const selectedPoi = useStore((state) => state.selectedPoi);
   const isSidebarHidden = useStore((state) => state.isSidebarHidden);
 
-  const getPositionClasses = (isSidebarHidden: boolean, isSingleView: boolean) => {
-    if (isSidebarHidden && isSingleView) {
-      return '-fcmap-bottom-[calc(100%-70px)]';
-    } else if (isSidebarHidden && !isSingleView) {
-      return '-fcmap-bottom-[calc(100%-150px)] md:fcmap-top-[calc(100vh-108px)]';
-    } else if (!isSidebarHidden) {
-      return 'fcmap-bottom-0 md:fcmap-top-0';
+  const getPositionClasses = (isSidebarHidden: boolean) => {
+    if (isSidebarHidden) {
+      return 'fcmap-absolute fcmap-right-0 fcmap-translate-y-full fcmap-bottom-[55px]';
+    } else {
+      return 'fcmap-absolute fcmap-right-0 fcmap-translate-y-full fcmap-bottom-[100%]';
     }
   };
 
   return (
     <SidebarContainer
-      className={`fcmap-absolute fcmap-overflow-hidden fcmap-transition-[bottom] md:fcmap-transition-[top] fcmap-duration-700 fcmap-ease-in-out ${getPositionClasses(
+      className={`fcmap-overflow-hidden fcmap-transition-all fcmap-duration-700 fcmap-ease-in-out ${getPositionClasses(
         isSidebarHidden,
-        Boolean(selectedPoi),
       )} ${className || ''}`}
-      clickable={!isSidebarHidden}
+      clickable={true}
     >
       {selectedPoi ? <SidebarSingleView /> : <SidebarListView />}
     </SidebarContainer>
