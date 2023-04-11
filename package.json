@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "rm -rf dist && vite build",
-    "build:deployment": "rm -rf dist && npx vite build --config vite-deployment.config.js --base=$CI_PROJECT_NAME/$CI_COMMIT_REF_SLUG",
+    "build:deployment": "rm -rf dist && npx vite build --config vite-deployment.config.js --base=/$CI_PROJECT_NAME/$CI_COMMIT_REF_SLUG",
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "prettier:lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
