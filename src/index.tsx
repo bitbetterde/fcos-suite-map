@@ -199,7 +199,7 @@ const exampleData = [
 const container = document.getElementById('app');
 const root = createRoot(container!);
 
-const MAPBOX_TOKEN = import.meta.env.VITE_PUBLIC_MAPBOX_TOKEN;
+const MAPBOX_TOKEN = import.meta.env.PUBLIC_MAPBOX_TOKEN;
 const MAP_STYLE = import.meta.env.VITE_MAP_STYLE;
 
 root.render(
