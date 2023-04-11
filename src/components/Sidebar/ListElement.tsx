@@ -16,7 +16,7 @@ const ListElement: React.FC<Props> = ({ value, hovered, ...restProps }) => {
         {...restProps}
         className="fcmap-flex fcmap-justify-start fcmap-items-start fcmap-h-[75px] fcmap-gap-4 fcmap-cursor-pointer"
       >
-        <img src={value.image} alt={value.name} className="fcmap-h-full fcmap-aspect-square" />
+        <img src={value.image} alt={value.name} className="fcmap-h-full fcmap-aspect-square fcmap-object-cover" />
         <div className="fcmap-flex-col fcmap-gap-1">
           <h1
             className={`fcmap-font-plex fcmap-text-base fcmap-font-bold fcmap-multi-line-gray-900 hover:fcmap-multi-line-underline ${

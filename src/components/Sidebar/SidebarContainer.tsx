@@ -1,16 +1,21 @@
 interface Props {
   className?: string;
   children: React.ReactNode;
+  clickable?: boolean;
 }
 
-const SidebarContainer: React.FC<Props> = ({ className, children }) => {
+const SidebarContainer: React.FC<Props> = ({ className, children, clickable = true }) => {
   return (
     <aside
-      className={`fcmap-absolute fcmap-right-0 fcmap-m-5 sidebar-height fcmap-min-h-min fcmap-w-[336px] fcmap-shadow-lg fcmap-bg-white fcmap-box-border fcmap-flex fcmap-flex-col ${
-        className ?? ''
-      }`}
+      className={`fcmap-w-full md:fcmap-w-[336px] fcmap-h-full fcmap-overflow-y-auto fcmap-z-10  ${
+        clickable ? 'fcmap-pointer-events-auto' : 'fcmap-pointer-events-none'
+      } ${className ?? ''}`}
     >
-      {children}
+      <div
+        className={`fcmap-shadow-lg fcmap-w-full fcmap-max-h-full md:sidebar-height fcmap-min-h-min fcmap-bg-white fcmap-box-border fcmap-flex fcmap-flex-col`}
+      >
+        {children}
+      </div>
     </aside>
   );
 };
