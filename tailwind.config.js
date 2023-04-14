@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require("tailwindcss/plugin");
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
+const plugin = require('tailwindcss/plugin');
+const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette');
 module.exports = {
   corePlugins: {
     preflight: false,
@@ -16,8 +14,8 @@ module.exports = {
     }),
     plugin(function ({ matchUtilities, addUtilities, theme }) {
       const baseStyles = {
-        width: '100%',
-        display: 'initial',
+        width: 'calc(100%)',
+        // display: 'initial',
         'background-repeat': 'no-repeat',
         'background-size': '0% 100%',
         'padding-bottom': '2px',
@@ -28,7 +26,7 @@ module.exports = {
           'multi-line': (value) => ({
             ...baseStyles,
             'background-image': `linear-gradient(transparent calc(100% - 1.5px), ${value} 1.5px)`,
-          })
+          }),
         },
         { values: flattenColorPalette(theme('colors')) },
       );
