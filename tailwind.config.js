@@ -1,7 +1,9 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require('tailwindcss/plugin');
-const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette');
-module.exports = {
+import plugin from 'tailwindcss/plugin';
+import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette';
+import formsPlugin from '@tailwindcss/forms';
+
+export default {
   corePlugins: {
     preflight: false,
   },
@@ -9,7 +11,7 @@ module.exports = {
   prefix: 'fcmap-',
   plugins: [
     /* eslint-disable */
-    require('@tailwindcss/forms')({
+    formsPlugin({
       strategy: 'class',
     }),
     plugin(function ({ matchUtilities, addUtilities, theme }) {
@@ -42,8 +44,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        plex: ['IBM Plex Sans', 'sans-serif'],
-        karla: ['Karla', 'sans-serif'],
+        plex: ["var(--plex-font, 'IBM Plex Sans')", 'sans-serif'],
+        karla: ["var(--karla-font, 'Karla')", 'sans-serif'],
+        inter: ["var(--inter-font, 'Inter')", 'sans-serif'],
       },
       colors: {
         'fabcity-red': '#ee2f45',

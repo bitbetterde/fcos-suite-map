@@ -5,11 +5,12 @@ import ErrorModal from './ErrorModal';
 import Notification from './Notification';
 import Map from './Map/Map';
 import PoiLoader from './PoiLoader';
-import { MapProvider } from 'react-map-gl';
+import { MapProvider } from 'react-map-gl/mapbox';
 import MapLayerControl from './Map/MapLayerControl';
 import FilterSelect from './FilterSelect';
 import type { PointOfInterest } from 'src/types/PointOfInterest';
 import Sidebar from './Sidebar/Sidebar';
+import "@fchh/fcos-suite-ui/style.css"
 import '../index.css';
 
 interface Props {

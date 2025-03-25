@@ -1,12 +1,13 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import FabCityMap from './components/FabCityMap';
-import '@fchh/fcos-suite-ui/dist/style.css';
+import '@fontsource/inter';
+import '@fontsource/ibm-plex-sans';
 
 const exampleData = [
   {
     id: '1',
-    name: 'Naboo is not a very long name so let\'s make it longer to see edge case behavior',
+    name: "Naboo is not a very long name so let's make it longer to see edge case behavior",
     description:
       "The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother's keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I lay My vengeance upon thee.",
     website: 'http://www.fabcity.hamburg',
@@ -204,7 +205,7 @@ const MAPBOX_TOKEN = import.meta.env.VITE_PUBLIC_MAPBOX_TOKEN;
 const MAP_STYLE = import.meta.env.VITE_MAP_STYLE;
 
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <FabCityMap data={exampleData} mapboxToken={MAPBOX_TOKEN} mapStyle={MAP_STYLE} />
-  </React.StrictMode>,
+  </StrictMode>,
 );

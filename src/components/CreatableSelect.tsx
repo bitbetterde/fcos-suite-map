@@ -1,8 +1,8 @@
 import type { Theme } from 'react-select';
-import type { NamedProps, StylesConfig } from 'react-select';
+import type { Props, StylesConfig } from 'react-select';
 import Creatable from 'react-select/creatable';
 
-const CreatableSelect = <OptionType, isMulti extends boolean>(props: NamedProps<OptionType, isMulti>): JSX.Element => {
+const CreatableSelect = <OptionType, isMulti extends boolean>(props: Props<OptionType, isMulti>): JSX.Element => {
   const customStyles: StylesConfig<OptionType, isMulti> = {
     control: (provided) => ({
       ...provided,

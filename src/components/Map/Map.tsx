@@ -1,7 +1,7 @@
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import { useStore, useFilteredPoiData } from '../../hooks';
-import ReactMapGl, { Marker, useMap, AttributionControl } from 'react-map-gl';
+import ReactMapGl, { Marker, useMap, AttributionControl } from 'react-map-gl/mapbox';
 import { useHistory } from 'react-router-dom';
 import { calcBoundsFromCoordinates } from '../../util/geo';
 import 'mapbox-gl/dist/mapbox-gl.css';
