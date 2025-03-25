@@ -1,4 +1,3 @@
-
 import { useStore } from './useStore';
 import type { Tag } from '../types/PointOfInterest';
 import type { PointOfInterest } from 'src/types/PointOfInterest';

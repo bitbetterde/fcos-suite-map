@@ -67,7 +67,7 @@ export const useStore = create<Store>()(
     },
     isDesktop: false,
     setIsDesktop: (isDesktop) => {
-      set({ isDesktop })
-    }
+      set({ isDesktop });
+    },
   })),
 );

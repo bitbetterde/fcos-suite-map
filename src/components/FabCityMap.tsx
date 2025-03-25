@@ -10,7 +10,7 @@ import MapLayerControl from './Map/MapLayerControl';
 import FilterSelect from './FilterSelect';
 import type { PointOfInterest } from 'src/types/PointOfInterest';
 import Sidebar from './Sidebar/Sidebar';
-import "@fchh/fcos-suite-ui/style.css"
+import '@fchh/fcos-suite-ui/style.css';
 import '../index.css';
 
 interface Props {
