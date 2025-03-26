@@ -20,7 +20,7 @@ export const useFilteredPoiData = (): poiFilteredData => {
   const filterCategories = useStore((store) => store.filterCategories);
   const setFilterCategories = useStore((state) => state.setFilterCategories);
 
-  let filteredData = data;
+  let filteredData = data || undefined;
   if (filterTags?.length) {
     filteredData = filteredData?.filter(
       (poi) => !filterTags.filter((fTag) => !poi.tags.find((tag) => tag.id === fTag.id)).length,
