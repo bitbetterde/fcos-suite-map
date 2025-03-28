@@ -19,9 +19,17 @@ interface Props {
   className?: string;
   baseUrl?: string;
   mapStyle?: string;
+  poiRoutePrefix?: string;
 }
 
-const FabCityMap: React.FC<Props> = ({ data, mapboxToken, className, baseUrl, mapStyle }: Props) => {
+const FabCityMap: React.FC<Props> = ({
+  data,
+  mapboxToken,
+  className,
+  baseUrl,
+  mapStyle,
+  poiRoutePrefix = '/poi',
+}: Props) => {
   const setPoiData = useStore((state) => state.setPoiData);
   useEffect(() => {
     setPoiData(data);
@@ -37,7 +45,7 @@ const FabCityMap: React.FC<Props> = ({ data, mapboxToken, className, baseUrl, ma
             {/* This route will always match, so the Map is always visible */}
             <Map mapboxToken={mapboxToken} mapStyle={mapStyle} />
           </Route>
-          <Route path="/poi/:poiId">
+          <Route path={`${poiRoutePrefix || ""}/:poiId`}>
             {/* This route loads individual POIs */}
             {({ match }) => <PoiLoader poiId={match?.params?.poiId as string} />}
           </Route>

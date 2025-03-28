@@ -202,10 +202,11 @@ const container = document.getElementById('app');
 const root = createRoot(container!);
 
 const MAPBOX_TOKEN = import.meta.env.VITE_PUBLIC_MAPBOX_TOKEN;
+const POI_ROUTE_PREFIX = import.meta.env.VITE_PUBLIC_POI_ROUTE_PREFIX;
 const MAP_STYLE = import.meta.env.VITE_MAP_STYLE;
 
 root.render(
   <StrictMode>
-    <FabCityMap data={exampleData} mapboxToken={MAPBOX_TOKEN} mapStyle={MAP_STYLE} />
+    <FabCityMap data={exampleData} mapboxToken={MAPBOX_TOKEN} mapStyle={MAP_STYLE} poiRoutePrefix={POI_ROUTE_PREFIX} />
   </StrictMode>,
 );
