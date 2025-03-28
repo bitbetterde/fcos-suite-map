@@ -1,7 +1,7 @@
 import type { SyntheticEvent } from 'react';
 import type { PointOfInterest } from 'src/types/PointOfInterest';
 
-interface Props {
+interface ListElementProps {
   value: PointOfInterest;
   hovered?: boolean;
   onMouseEnter: (event: SyntheticEvent) => void;
@@ -9,7 +9,7 @@ interface Props {
   onClick: (event: SyntheticEvent) => void;
 }
 
-const ListElement: React.FC<Props> = ({ value, hovered, ...restProps }) => {
+const ListElement: React.FC<ListElementProps> = ({ value, hovered, ...restProps }) => {
   return (
     value && (
       <div

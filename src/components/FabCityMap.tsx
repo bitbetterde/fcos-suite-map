@@ -13,7 +13,7 @@ import Sidebar from './Sidebar/Sidebar';
 import '@fchh/fcos-suite-ui/style.css';
 import '../index.css';
 
-interface Props {
+interface FabCityMapProps {
   data: PointOfInterest[] | null;
   mapboxToken: string;
   className?: string;
@@ -22,7 +22,7 @@ interface Props {
   poiRoutePrefix?: string;
 }
 
-const FabCityMap: React.FC<Props> = ({
+const FabCityMap: React.FC<FabCityMapProps> = ({
   data,
   mapboxToken,
   className,
@@ -43,7 +43,7 @@ const FabCityMap: React.FC<Props> = ({
         <div className={`fcmap-h-full fcmap-bg-white fcmap-overflow-hidden ${className || ''}`}>
           <Route path="/">
             {/* This route will always match, so the Map is always visible */}
-            <Map mapboxToken={mapboxToken} mapStyle={mapStyle} />
+            <Map poiRoutePrefix={poiRoutePrefix} mapboxToken={mapboxToken} mapStyle={mapStyle} />
           </Route>
           <Route path={`${poiRoutePrefix || ""}/:poiId`}>
             {/* This route loads individual POIs */}
@@ -62,7 +62,7 @@ const FabCityMap: React.FC<Props> = ({
             <Switch>
               <Route>
                 <div className="fcmap-relative fcmap-h-full fcmap-w-full">
-                  <Sidebar />
+                  <Sidebar poiRoutePrefix={poiRoutePrefix} />
                 </div>
               </Route>
             </Switch>

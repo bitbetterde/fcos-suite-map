@@ -1,10 +1,10 @@
-interface Props {
+interface ModalProps {
   title: string;
   text: string;
   icon?: JSX.Element;
 }
 
-const Modal: React.FC<Props> = ({ title, text, icon }) => {
+const Modal: React.FC<ModalProps> = ({ title, text, icon }) => {
   return (
     <div
       role="dialog"

@@ -3,11 +3,12 @@ import SidebarListView from './SidebarListView';
 import SidebarSingleView from './SidebarSingleView';
 import SidebarContainer from './SidebarContainer';
 
-interface Props {
+interface SidebarProps {
   className?: string;
+  poiRoutePrefix?: string;
 }
 
-const Sidebar: React.FC<Props> = ({ className }) => {
+const Sidebar: React.FC<SidebarProps> = ({ className, poiRoutePrefix }) => {
   const selectedPoi = useStore((state) => state.selectedPoi);
   const isSidebarHidden = useStore((state) => state.isSidebarHidden);
 
@@ -26,7 +27,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
       )} ${className || ''}`}
       clickable={true}
     >
-      {selectedPoi ? <SidebarSingleView /> : <SidebarListView />}
+      {selectedPoi ? <SidebarSingleView /> : <SidebarListView poiRoutePrefix={poiRoutePrefix} />}
     </SidebarContainer>
   );
 };

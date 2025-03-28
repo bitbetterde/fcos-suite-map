@@ -1,12 +1,13 @@
 import type { SyntheticEvent } from 'react';
 import { ChevronDown } from 'heroicons-react';
-interface Props {
+
+interface MinimizeButtonProps {
   onClick?: (event: SyntheticEvent) => void;
   isMinimized?: boolean;
   className?: string;
 }
 
-const MinimizeButton: React.FC<Props> = ({ onClick, isMinimized = false, className }) => {
+const MinimizeButton: React.FC<MinimizeButtonProps> = ({ onClick, isMinimized = false, className }) => {
   return (
     <button
       type="button"

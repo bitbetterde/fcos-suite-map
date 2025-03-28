@@ -7,9 +7,10 @@ import { calcBoundsFromCoordinates } from '../../util/geo';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useWindowSize } from 'usehooks-ts';
 
-interface Props {
+interface MapProps {
   mapboxToken: string;
   mapStyle?: string;
+  poiRoutePrefix?: string;
 }
 
 interface MarkerProps {
@@ -17,7 +18,7 @@ interface MarkerProps {
   [x: string]: unknown;
 }
 
-const MarkerSvg: React.FC<MarkerProps> = ({ className, ...props }) => {
+const MarkerSvg: React.FC<MarkerProps> = ({ className, poiRoutePrefix, ...props }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" className={className} {...props}>
       <path
@@ -28,7 +29,7 @@ const MarkerSvg: React.FC<MarkerProps> = ({ className, ...props }) => {
   );
 };
 
-const Map: React.FC<Props> = ({ mapboxToken, mapStyle }) => {
+const Map: React.FC<MapProps> = ({ mapboxToken, mapStyle, poiRoutePrefix }) => {
   const history = useHistory();
   const data = useStore((state) => state.poiData);
   const selectedPoi = useStore((state) => state.selectedPoi);
@@ -123,7 +124,7 @@ const Map: React.FC<Props> = ({ mapboxToken, mapStyle }) => {
               latitude={poi.lat}
               anchor="bottom"
               onClick={() => {
-                history.push(`/poi/${String(poi.id)}`);
+                history.push(`${poiRoutePrefix || ''}/${String(poi.id)}`);
               }}
             >
               <MarkerSvg

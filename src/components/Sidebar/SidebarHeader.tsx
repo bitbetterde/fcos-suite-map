@@ -1,9 +1,9 @@
-interface Props {
+interface SidebarHeaderProps {
   className?: string;
   children: React.ReactNode;
 }
 
-const SidebarHeader: React.FC<Props> = ({ className, children }) => {
+const SidebarHeader: React.FC<SidebarHeaderProps> = ({ className, children }) => {
   return (
     <div
       className={
