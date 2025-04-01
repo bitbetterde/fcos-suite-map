@@ -11,6 +11,7 @@ interface MapProps {
   mapboxToken: string;
   mapStyle?: string;
   poiRoutePrefix?: string;
+  defaultCenter?: [number, number];
 }
 
 interface MarkerProps {
@@ -18,7 +19,7 @@ interface MarkerProps {
   [x: string]: unknown;
 }
 
-const MarkerSvg: React.FC<MarkerProps> = ({ className, poiRoutePrefix, ...props }) => {
+const MarkerSvg: React.FC<MarkerProps> = ({ className, ...props }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" className={className} {...props}>
       <path
@@ -29,7 +30,7 @@ const MarkerSvg: React.FC<MarkerProps> = ({ className, poiRoutePrefix, ...props 
   );
 };
 
-const Map: React.FC<MapProps> = ({ mapboxToken, mapStyle, poiRoutePrefix }) => {
+const Map: React.FC<MapProps> = ({ mapboxToken, mapStyle, poiRoutePrefix, defaultCenter = [9.986701, 53.550359] }) => {
   const history = useHistory();
   const data = useStore((state) => state.poiData);
   const selectedPoi = useStore((state) => state.selectedPoi);
@@ -38,8 +39,8 @@ const Map: React.FC<MapProps> = ({ mapboxToken, mapStyle, poiRoutePrefix }) => {
   const isSidebarHidden = useStore((state) => state.isSidebarHidden);
   const isDesktop = useStore((state) => state.isDesktop);
   const setIsDesktop = useStore((state) => state.setIsDesktop);
+  const categoryColorMapping = useStore((state) => state.categoryColorMapping);
   const { data: filteredData } = useFilteredPoiData();
-  const DEFAULT_CENTER: [number, number] = [9.986701, 53.550359];
   const { fcmap } = useMap();
   const [bounds, setBounds] = useState<[[number, number], [number, number]]>();
   const DEFAULT_MAP_PADDING = 50;
@@ -59,7 +60,7 @@ const Map: React.FC<MapProps> = ({ mapboxToken, mapStyle, poiRoutePrefix }) => {
   };
 
   useEffect(() => {
-    const newBounds = calcBoundsFromCoordinates(data?.map((poi) => [poi.lng, poi.lat]) || [DEFAULT_CENTER]);
+    const newBounds = calcBoundsFromCoordinates(data?.map((poi) => [poi.lng, poi.lat]) || [defaultCenter]);
     setBounds(newBounds);
   }, [JSON.stringify(data)]);
 
@@ -95,11 +96,13 @@ const Map: React.FC<MapProps> = ({ mapboxToken, mapStyle, poiRoutePrefix }) => {
     }
   }, [window]);
 
+  const customMarkerColor = selectedPoi && categoryColorMapping?.[selectedPoi.category];
+
   return (
     <ReactMapGl
       initialViewState={{
-        latitude: DEFAULT_CENTER[1],
-        longitude: DEFAULT_CENTER[0],
+        latitude: defaultCenter[1],
+        longitude: defaultCenter[0],
         zoom: 10,
       }}
       style={{ width: '100%', height: '100%' }}
@@ -112,11 +115,12 @@ const Map: React.FC<MapProps> = ({ mapboxToken, mapStyle, poiRoutePrefix }) => {
       <AttributionControl position="top-left" />
       {selectedPoi ? (
         <Marker key={selectedPoi.id} longitude={selectedPoi.lng} latitude={selectedPoi.lat} anchor="bottom">
-          <MarkerSvg className="fcmap-w-8 fcmap-h-8 fcmap-opacity-100 fcmap-scale-125 fcmap-text-fabcity-red" />
+          <MarkerSvg className="fcmap-w-8 fcmap-h-8 fcmap-opacity-100 fcmap-scale-125 fcmap-text-fabcity-red" {...(customMarkerColor ? { style: { color: customMarkerColor } } : {})} />
         </Marker>
       ) : (
         (filteredData || data)?.map((poi) => {
           const isHovered = hoveredPoi?.id === poi.id;
+          const customMarkerColor = categoryColorMapping?.[poi.category];
           return (
             <Marker
               key={poi.id}
@@ -131,6 +135,7 @@ const Map: React.FC<MapProps> = ({ mapboxToken, mapStyle, poiRoutePrefix }) => {
                 className={`fcmap-transition fcmap-ease-in-out fcmap-w-8 fcmap-h-8 hover:fcmap-scale-125 fcmap-opacity-70 hover:fcmap-opacity-100 hover:fcmap-cursor-pointer fcmap-text-fabcity-red ${
                   isHovered ? 'fcmap-scale-125 fcmap-opacity-100' : ''
                 }`}
+                {...(customMarkerColor ? { style: { color: customMarkerColor } } : {})}
                 onMouseEnter={() => setHoveredPoi(poi)}
                 onMouseLeave={() => setHoveredPoi(null)}
               />

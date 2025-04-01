@@ -20,10 +20,15 @@ interface FabCityMapProps {
   baseUrl?: string;
   mapStyle?: string;
   poiRoutePrefix?: string;
+  categoryColorMapping?: Record<string, string>;
+  tagColorMapping?: Record<string, string>;
+  defaultCenter?: [number, number];
 }
 
 const FabCityMap: React.FC<FabCityMapProps> = ({
   data,
+  categoryColorMapping,
+  tagColorMapping,
   mapboxToken,
   className,
   baseUrl,
@@ -31,8 +36,19 @@ const FabCityMap: React.FC<FabCityMapProps> = ({
   poiRoutePrefix = '/poi',
 }) => {
   const setPoiData = useStore((state) => state.setPoiData);
+  const setCategoryColorMapping = useStore((state) => state.setCategoryColorMapping);
+  const setTagColorMapping = useStore((state) => state.setTagColorMapping);
+
   useEffect(() => {
-    setPoiData(data);
+    if (data) {
+      setPoiData(data);
+    }
+    if (categoryColorMapping) {
+      setCategoryColorMapping(categoryColorMapping);
+    }
+    if (tagColorMapping) {
+      setTagColorMapping(tagColorMapping);
+    }
   }, []);
 
   return (
@@ -42,7 +58,7 @@ const FabCityMap: React.FC<FabCityMapProps> = ({
         <Notification />
         <div className={`fcmap-h-full fcmap-bg-white fcmap-overflow-hidden ${className || ''}`}>
           <Route path="/">
-            {/* This route will always match, so the Map is always visible */}
+            {/* This route will always match, so the actual Map is always visible */}
             <Map poiRoutePrefix={poiRoutePrefix} mapboxToken={mapboxToken} mapStyle={mapStyle} />
           </Route>
           <Route path={`${poiRoutePrefix || ''}/:poiId`}>

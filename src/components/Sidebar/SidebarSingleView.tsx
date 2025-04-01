@@ -1,4 +1,4 @@
-import { useStore } from '../../hooks';
+import { useFilteredPoiData, useStore } from '../../hooks';
 import CloseButton from './CloseButton';
 import MinimizeButton from './MinimizeButton';
 import { useHistory } from 'react-router-dom';
@@ -7,10 +7,14 @@ import SidebarHeader from './SidebarHeader';
 
 const SidebarSingleView: React.FC = () => {
   const selectedPoi = useStore((state) => state.selectedPoi);
+  const setSelectedPoi = useStore((state) => state.setSelectedPoi);
+  const tagColorMapping = useStore((state) => state.tagColorMapping);
   const strippedUrl = selectedPoi?.website?.replace(/(^\w+:|^)\/\//, '');
   const history = useHistory();
   const isSidebarHidden = useStore((state) => state.isSidebarHidden);
   const setIsSidebarHidden = useStore((state) => state.setIsSidebarHidden);
+  const { setFilterTags } = useFilteredPoiData();
+  
 
   return (
     <>
@@ -59,7 +63,7 @@ const SidebarSingleView: React.FC = () => {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              className={'fcmap-text-sm fcmap-font-normal  fcmap-text-gray-900 hover:fcmap-underline'}
+              className={'fcmap-text-sm fcmap-font-normal fcmap-text-gray-900 hover:fcmap-underline'}
               href={selectedPoi?.website}
             >
               {strippedUrl}
@@ -68,14 +72,19 @@ const SidebarSingleView: React.FC = () => {
         )}
         {!!selectedPoi?.tags?.length && (
           <div className={'fcmap-flex fcmap-items-center fcmap-mt-3 fcmap-flex-wrap'}>
-            {selectedPoi?.tags.map((tag) => (
+            {selectedPoi?.tags?.map((tag, i) => (
               <Pill
-                key={tag.id}
+                key={'tag' + i}
                 size="lg"
-                title={tag.displayName}
-                customBgColor={tag.color}
+                title={tag}
+                customBgColor={tagColorMapping?.[tag] || 'hsl(229,60%,80%)'}
                 rounded
-                className="fcmap-text-indigo-800 fcmap-px-2 fcmap-py-0.5 fcmap-m-0.5 fcmap-mr-1.5 "
+                className="fcmap-text-indigo-800 fcmap-px-2 fcmap-py-0.5 fcmap-m-0.5 fcmap-mr-1.5"
+                onClick={() => {
+                  setFilterTags([tag]);
+                  setSelectedPoi(null);
+                  history.push('/');
+                }}
               />
             ))}
           </div>

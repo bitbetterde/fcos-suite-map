@@ -3,18 +3,22 @@ import type { Theme } from 'react-select';
 import { Search as SearchIcon, OfficeBuilding as BuildingIcon, X as CloseIcon } from 'heroicons-react';
 import { Pill } from '@fchh/fcos-suite-ui';
 import { useStore, useFilteredPoiData } from '../hooks';
-import { removeDuplicateObjects } from '../util/array';
-import type { Tag as TagType } from '../types/PointOfInterest';
 
 interface SelectOption {
   label: string;
-  value: TagType;
+  value: string;
 }
 
 const CustomOption = ({ children, data, ...rest }: any) => {
   return (
     <components.Option {...rest}>
-      <Pill size="lg" title={children} rounded className="fcmap-text-indigo-800" customBgColor={data.value.color} />
+      <Pill
+        size="lg"
+        title={children}
+        rounded
+        className="fcmap-text-indigo-800"
+        customBgColor={data.color || 'hsl(229,60%,80%)'}
+      />
     </components.Option>
   );
 };
@@ -47,7 +51,7 @@ const CustomMultiValue = ({ children, data, getValue, setValue, ...rest }: any) 
           const newValue = oldValue.filter((item) => !(data.value.id === item.value.id));
           setValue(newValue);
         }}
-        customBgColor={data.value.color}
+        customBgColor={data.color || 'hsl(229,60%,80%)'}
       />
     </components.MultiValueContainer>
   );
@@ -55,19 +59,16 @@ const CustomMultiValue = ({ children, data, getValue, setValue, ...rest }: any) 
 
 const FilterSelect = (): JSX.Element => {
   const { filterTags, setFilterTags } = useFilteredPoiData();
+  const tagColorMapping = useStore((state) => state.tagColorMapping);
 
-  const tagsToSelectOptions = (tags?: TagType[] | null): SelectOption[] =>
-    tags?.map((tag) => ({ label: tag.displayName, value: tag })) || [];
+  const tagsToSelectOptions = (tags?: string[] | null): SelectOption[] =>
+    tags?.map((tag) => ({ label: tag, value: tag, color: tagColorMapping?.[tag] || 'hsl(229,60%,80%)' })) || [];
 
-  const tagsData = useStore((state) => state.poiData);
+  const poiData = useStore((state) => state.poiData);
 
-  const tags =
-    tagsData &&
-    removeDuplicateObjects(
-      tagsData?.flatMap((poi) => poi.tags),
-      'id',
-    );
-  const options = tagsToSelectOptions(tags);
+  const uniqueTags = new Set(poiData?.flatMap((poi) => poi.tags));
+
+  const options = tagsToSelectOptions([...uniqueTags]);
 
   return (
     <ReactSelect
