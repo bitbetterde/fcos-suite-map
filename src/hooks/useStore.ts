@@ -1,10 +1,14 @@
 import type { Error } from 'src/types/Error';
-import type { PointOfInterest, Tag } from 'src/types/PointOfInterest';
+import type { PointOfInterest } from 'src/types/PointOfInterest';
 import type { Notification } from 'src/types/Notification';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 interface Store {
+  categoryColorMapping: Record<string, string> | null;
+  setCategoryColorMapping: (data: Record<string, string> | null) => void;
+  tagColorMapping: Record<string, string> | null;
+  setTagColorMapping: (data: Record<string, string> | null) => void;
   poiData: PointOfInterest[] | null;
   setPoiData: (data: PointOfInterest[] | null) => void;
   selectedPoi: PointOfInterest | null;
@@ -15,8 +19,8 @@ interface Store {
   setError: (error: Error | null) => void;
   notification: Notification | null;
   setNotification: (notification: Notification | null) => void;
-  filterTags: Tag[];
-  setFilterTags: (tags: Tag[]) => void;
+  filterTags: string[];
+  setFilterTags: (tags: string[]) => void;
   filterCategories: string[];
   setFilterCategories: (categories: string[]) => void;
   isSidebarHidden: boolean;
@@ -27,6 +31,14 @@ interface Store {
 
 export const useStore = create<Store>()(
   devtools((set) => ({
+    categoryColorMapping: null,
+    setCategoryColorMapping: (data) => {
+      set({ categoryColorMapping: data });
+    },
+    tagColorMapping: null,
+    setTagColorMapping: (data) => {
+      set({ tagColorMapping: data });
+    },
     poiData: null,
     setPoiData: (data) => {
       set({
@@ -67,7 +79,7 @@ export const useStore = create<Store>()(
     },
     isDesktop: false,
     setIsDesktop: (isDesktop) => {
-      set({ isDesktop })
-    }
+      set({ isDesktop });
+    },
   })),
 );

@@ -6,26 +6,10 @@ export interface PointOfInterestBase {
   address: string;
   website: string;
   category: string;
-  relationStatus: string;
 }
+
 export interface PointOfInterest extends PointOfInterestBase {
   id: string;
   image?: string;
-  tags: Tag[];
-}
-
-export interface PointOfInterestFormData extends PointOfInterestBase {
-  email: string;
-  image: File | null;
-  tags: number[];
-}
-
-export interface Tag {
-  id: string;
-  displayName: string;
-  color: string;
-}
-
-export interface PointsOfInterestDTO {
-  pois: PointOfInterest[];
+  tags: string[];
 }

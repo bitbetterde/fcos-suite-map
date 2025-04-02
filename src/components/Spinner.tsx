@@ -1,4 +1,3 @@
-
 const Spinner: React.FC = () => {
   return (
     <svg
