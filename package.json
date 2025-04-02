@@ -13,7 +13,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "rm -rf dist && vite build",
+    "build": "rm -rf dist && NODE_ENV=production vite build",
     "build:deployment": "rm -rf dist && npx vite build --config vite-deployment.config.js --base=/$CI_PROJECT_NAME/$CI_COMMIT_REF_SLUG",
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
@@ -39,6 +39,7 @@
     "react-dom": ">=18.3.0"
   },
   "dependencies": {
+    "@carbon/icons-react": "^11.57.0",
     "@fchh/fcos-suite-ui": "^1.1.0",
     "@fontsource/ibm-plex-sans": "^5.2.5",
     "@fontsource/inter": "^5.2.5",
@@ -54,7 +55,6 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
-    "@carbon/icons-react": "^11.57.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.23.0",
     "@types/mapbox-gl": "^3.4.1",
