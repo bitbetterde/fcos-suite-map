@@ -39,17 +39,19 @@
     "react-dom": ">=18.3.0"
   },
   "dependencies": {
-    "@fchh/fcos-suite-ui": "^1.0.0",
+    "@fchh/fcos-suite-ui": "^1.1.0",
     "@fontsource/ibm-plex-sans": "^5.2.5",
     "@fontsource/inter": "^5.2.5",
     "@tailwindcss/forms": "^0.5.10",
     "clsx": "^2.1.1",
     "heroicons-react": "^1.4.1",
+    "mapbox-gl": "^3.11.0",
     "react-map-gl": "^8.0.1",
     "react-router-dom": "^5.2.0",
     "react-select": "^5.10.1",
     "tailwindcss": "^3.4",
-    "usehooks-ts": "^3.1.1"
+    "usehooks-ts": "^3.1.1",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@carbon/icons-react": "^11.57.0",
@@ -68,7 +70,6 @@
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-react": "^7.37.4",
     "globals": "^16.0.0",
-    "mapbox-gl": "^3.10.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "react": "^18.3.1",
@@ -76,7 +77,6 @@
     "react-select": "^5.10.1",
     "typescript": "^5.8.2",
     "vite": "^6.2.3",
-    "vite-plugin-dts": "^4.5.3",
-    "zustand": "^5.0.3"
+    "vite-plugin-dts": "^4.5.3"
   }
 }

@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts'
+import { devDependencies } from "./package.json";
 
 export default defineConfig({
   build: {
@@ -12,11 +13,11 @@ export default defineConfig({
       formats: ['es'],
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: [...Object.keys(devDependencies), "react", "react/jsx-runtime"],
       output: {
         globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
+          react: "React",
+          "react-dom": "ReactDOM",
         },
       },
     },
