@@ -1,11 +1,12 @@
 import type { SyntheticEvent } from 'react';
 import { X as CloseIcon } from 'heroicons-react';
-interface Props {
+
+interface CloseButtonProps {
   onClick: (event: SyntheticEvent) => void;
   className?: string;
 }
 
-const CloseButton: React.FC<Props> = ({ onClick, className }) => {
+const CloseButton: React.FC<CloseButtonProps> = ({ onClick, className }) => {
   return (
     <div
       className={

@@ -1,10 +1,10 @@
-interface Props {
+interface SidebarContainerProps {
   className?: string;
   children: React.ReactNode;
   clickable?: boolean;
 }
 
-const SidebarContainer: React.FC<Props> = ({ className, children, clickable = true }) => {
+const SidebarContainer: React.FC<SidebarContainerProps> = ({ className, children, clickable = true }) => {
   return (
     <aside
       className={`fcmap-w-full md:fcmap-w-[336px] fcmap-h-full fcmap-overflow-y-auto fcmap-z-10  ${

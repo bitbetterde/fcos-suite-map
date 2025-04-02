@@ -1,6 +1,4 @@
-
 import { useStore } from './useStore';
-import type { Tag } from '../types/PointOfInterest';
 import type { PointOfInterest } from 'src/types/PointOfInterest';
 
 export interface poiData {
@@ -8,8 +6,8 @@ export interface poiData {
 }
 
 export interface poiFilteredData extends poiData {
-  filterTags: Tag[] | null;
-  setFilterTags: (tags: Tag[]) => void;
+  filterTags: string[] | null;
+  setFilterTags: (tags: string[]) => void;
   filterCategories: string[];
   setFilterCategories: (categories: string[]) => void;
 }
@@ -21,12 +19,13 @@ export const useFilteredPoiData = (): poiFilteredData => {
   const filterCategories = useStore((store) => store.filterCategories);
   const setFilterCategories = useStore((state) => state.setFilterCategories);
 
-  let filteredData = data;
+  let filteredData = data || undefined;
   if (filterTags?.length) {
     filteredData = filteredData?.filter(
-      (poi) => !filterTags.filter((fTag) => !poi.tags.find((tag) => tag.id === fTag.id)).length,
+      (poi) => !filterTags.filter((fTag) => !poi.tags.find((tag) => tag === fTag)).length,
     );
   }
+
   if (filterCategories?.length) {
     filteredData = filteredData?.filter((poi) => !!filterCategories.find((category) => poi.category === category));
   }

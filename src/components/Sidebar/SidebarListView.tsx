@@ -5,7 +5,11 @@ import { useHistory } from 'react-router-dom';
 import MinimizeButton from './MinimizeButton';
 import SidebarHeader from './SidebarHeader';
 
-const SidebarListView: React.FC = () => {
+interface SidebarListViewProps {
+  poiRoutePrefix?: string;
+}
+
+const SidebarListView: React.FC<SidebarListViewProps> = ({ poiRoutePrefix }) => {
   const history = useHistory();
   const { data: filteredData } = useFilteredPoiData();
   const hoveredPoi = useStore((state) => state.hoveredPoi);
@@ -35,7 +39,7 @@ const SidebarListView: React.FC = () => {
             onMouseEnter={() => setHoveredPoi(poi)}
             onMouseLeave={() => setHoveredPoi(null)}
             onClick={() => {
-              history.push(`/poi/${String(poi.id)}`);
+              history.push(`${poiRoutePrefix || ''}/${String(poi.id)}`);
             }}
             value={poi}
             hovered={hoveredPoi?.id === poi.id}

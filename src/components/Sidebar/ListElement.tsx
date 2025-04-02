@@ -1,7 +1,7 @@
 import type { SyntheticEvent } from 'react';
 import type { PointOfInterest } from 'src/types/PointOfInterest';
 
-interface Props {
+interface ListElementProps {
   value: PointOfInterest;
   hovered?: boolean;
   onMouseEnter: (event: SyntheticEvent) => void;
@@ -9,7 +9,7 @@ interface Props {
   onClick: (event: SyntheticEvent) => void;
 }
 
-const ListElement: React.FC<Props> = ({ value, hovered, ...restProps }) => {
+const ListElement: React.FC<ListElementProps> = ({ value, hovered, ...restProps }) => {
   return (
     value && (
       <div
@@ -18,9 +18,7 @@ const ListElement: React.FC<Props> = ({ value, hovered, ...restProps }) => {
       >
         <img src={value.image} alt={value.name} className="fcmap-h-full fcmap-aspect-square fcmap-object-cover" />
         <div className="fcmap-flex-col fcmap-gap-1 fcmap-overflow-hidden">
-          <h1
-            className={`fcmap-line-clamp-2 fcmap-font-plex fcmap-text-base fcmap-font-bold fcmap-text-gray-900`}
-          >
+          <h1 className={`fcmap-line-clamp-2 fcmap-font-plex fcmap-text-base fcmap-font-bold fcmap-text-gray-900`}>
             <span
               className={`${
                 hovered ? 'fcmap-multi-line-underline' : ''
