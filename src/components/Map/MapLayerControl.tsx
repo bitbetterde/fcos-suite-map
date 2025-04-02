@@ -5,10 +5,11 @@ import { Pill } from '@fchh/fcos-suite-ui';
 const MapLayerControl: React.FC = () => {
   const data = useStore((state) => state.poiData);
   const { filterCategories, setFilterCategories } = useFilteredPoiData();
-  const layers = Array.from(new Set(data?.map((poi) => poi.category)));
+  const layers = Array.from(new Set(data?.map((poi) => poi.category.trim()).filter(Boolean)));
 
   const onChangePills = (layer: string) => {
     const isFilterActive = filterCategories.includes(layer);
+
     if (isFilterActive) {
       const updatedFilters = filterCategories.filter((filter) => filter !== layer);
       setFilterCategories(updatedFilters);
@@ -19,7 +20,7 @@ const MapLayerControl: React.FC = () => {
 
   return (
     <div className="fcmap-order-2 md:fcmap-order-1 fcmap-flex fcmap-items-start fcmap-justify-center md:fcmap-justify-end fcmap-flex-wrap fcmap-gap-[9px] fcmap-pointer-events-auto">
-      {layers.map((layer) => {
+      {layers?.map((layer) => {
         return (
           <Pill
             key={layer}
