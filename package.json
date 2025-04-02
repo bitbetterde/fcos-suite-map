@@ -1,6 +1,6 @@
 {
   "name": "@fchh/fcos-suite-map",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "./dist/fcos-suite-map.js",
   "files": [
     "dist/**/*",
